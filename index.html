@@ -6,837 +6,991 @@
   <title>Makeup by Sherry B — South Asian Bridal Artist · Atlanta</title>
   <meta name="description" content="Atlanta's premier South Asian bridal makeup artist. Traditional, fusion, and modern bridal artistry for the bride who wants to feel completely herself." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet" />
   <style>
 
-/* ─── RESET & ROOT ─────────────────────────────────────────────── */
+/* ── RESET ─────────────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-:root {
-  --ink:    #0e0b09;
-  --deep:   #1a1410;
-  --mid:    #2c2219;
-  --gold:   #c8a96a;
-  --gold2:  #e8c98a;
-  --rose:   #b87272;
-  --ivory:  #f5efe6;
-  --cream:  #ede5d8;
-  --warm:   #d4c4b0;
-  --text:   #f0e8dc;
-  --muted:  rgba(240,232,220,0.5);
-  --serif:  'Cormorant Garamond', Georgia, serif;
-  --sans:   'Inter', system-ui, sans-serif;
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  background: #faf8f5;
+  color: #1a1a1a;
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
 }
-html { scroll-behavior: smooth; }
-body { background: var(--ink); color: var(--text); font-family: var(--sans); overflow-x: hidden; }
-img { display: block; width: 100%; }
 a { text-decoration: none; color: inherit; }
+img { display: block; width: 100%; object-fit: cover; }
 
-/* ─── CURSOR DOT ───────────────────────────────────────────────── */
-.cursor {
-  position: fixed; width: 8px; height: 8px; border-radius: 50%;
-  background: var(--gold); pointer-events: none; z-index: 9999;
-  transform: translate(-50%,-50%); transition: transform 0.1s, opacity 0.3s;
-  mix-blend-mode: difference;
-}
-
-/* ─── NAV ──────────────────────────────────────────────────────── */
+/* ── NAV ───────────────────────────────────────────────────────── */
 nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   display: flex; align-items: center; justify-content: space-between;
-  padding: 2rem 4rem;
-  transition: background 0.5s, padding 0.4s;
+  padding: 28px 48px;
+  transition: background 0.4s, padding 0.4s;
 }
-nav.scrolled {
-  background: rgba(14,11,9,0.92); backdrop-filter: blur(20px);
-  padding: 1.2rem 4rem; border-bottom: 1px solid rgba(200,169,106,0.12);
+nav.stuck {
+  background: rgba(250,248,245,0.95);
+  backdrop-filter: blur(12px);
+  padding: 18px 48px;
+  border-bottom: 1px solid #ece8e1;
 }
 .nav-logo {
-  font-family: var(--serif); font-size: 1.1rem; font-weight: 300;
-  letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #1a1a1a;
 }
-.nav-links { display: flex; gap: 3rem; list-style: none; }
-.nav-links a {
-  font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase;
-  font-weight: 400; color: var(--muted); transition: color 0.3s;
+.nav-center {
+  display: flex; gap: 48px; list-style: none;
+  position: absolute; left: 50%; transform: translateX(-50%);
 }
-.nav-links a:hover { color: var(--gold); }
-.nav-book {
-  font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase;
-  font-weight: 400; color: var(--gold); border-bottom: 1px solid rgba(200,169,106,0.4);
-  padding-bottom: 1px; transition: color 0.3s, border-color 0.3s;
+.nav-center a {
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 400;
+  color: #888;
+  transition: color 0.25s;
 }
-.nav-book:hover { color: var(--gold2); border-color: var(--gold2); }
+.nav-center a:hover { color: #1a1a1a; }
+.nav-right {
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 400;
+  color: #1a1a1a;
+  border-bottom: 1px solid #1a1a1a;
+  padding-bottom: 2px;
+  transition: color 0.25s, border-color 0.25s;
+}
+.nav-right:hover { color: #b5896a; border-color: #b5896a; }
 
-/* ─── HERO ─────────────────────────────────────────────────────── */
+/* ── HERO ──────────────────────────────────────────────────────── */
 .hero {
-  position: relative; height: 100vh; min-height: 700px;
-  display: flex; align-items: flex-end;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.hero-img {
+  position: relative;
+  background: #e8e0d6;
   overflow: hidden;
 }
-.hero-bg {
+.hero-img-inner {
   position: absolute; inset: 0;
-  background: linear-gradient(160deg, #1e1208 0%, #0e0b09 40%, #1a0f14 100%);
-}
-/* Decorative texture overlay */
-.hero-bg::before {
-  content: '';
-  position: absolute; inset: 0;
-  background-image:
-    radial-gradient(ellipse 60% 80% at 70% 50%, rgba(180,120,60,0.08) 0%, transparent 70%),
-    radial-gradient(ellipse 40% 60% at 30% 30%, rgba(184,114,114,0.06) 0%, transparent 60%);
-}
-.hero-photo {
-  position: absolute; inset: 0; display: flex; align-items: center; justify-content: flex-end;
-}
-.hero-photo-placeholder {
-  width: 52%; height: 100%;
-  background: linear-gradient(170deg, #2a1a10 0%, #1a100c 50%, #251315 100%);
-  position: relative; overflow: hidden;
-}
-.hero-photo-placeholder::before {
-  content: '';
-  position: absolute; inset: 0;
-  background: linear-gradient(to left, transparent 0%, var(--ink) 100%);
-  z-index: 1;
-}
-.hero-photo-placeholder::after {
-  content: 'Your portrait here';
-  position: absolute; inset: 0; z-index: 0;
+  background: linear-gradient(160deg, #ddd4c8 0%, #c8bdb0 40%, #d4c4b8 100%);
   display: flex; align-items: center; justify-content: center;
-  font-family: var(--serif); font-size: 0.9rem; letter-spacing: 0.2em;
-  color: rgba(200,169,106,0.2); text-transform: uppercase;
 }
-.hero-content {
-  position: relative; z-index: 10;
-  padding: 0 4rem 7rem 4rem; max-width: 680px;
+.hero-img-placeholder {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(26,26,26,0.2);
 }
-.hero-kicker {
-  font-size: 0.65rem; letter-spacing: 0.35em; text-transform: uppercase;
-  color: var(--gold); font-weight: 400; margin-bottom: 2rem;
-  display: flex; align-items: center; gap: 1.2rem;
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 64px 80px 72px;
+  background: #faf8f5;
 }
-.hero-kicker::before { content: ''; display: block; width: 40px; height: 1px; background: var(--gold); opacity: 0.6; }
-.hero h1 {
-  font-family: var(--serif);
-  font-size: clamp(3.5rem, 7vw, 6.5rem);
-  font-weight: 300; line-height: 1.0; letter-spacing: -0.01em;
-  color: var(--ivory); margin-bottom: 2rem;
+.hero-location {
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #b5896a;
+  font-weight: 400;
+  margin-bottom: 28px;
 }
-.hero h1 em { font-style: italic; color: var(--gold); display: block; }
+.hero-h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3.5rem, 5.5vw, 6rem);
+  font-weight: 300;
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+  color: #1a1a1a;
+  margin-bottom: 36px;
+}
+.hero-h1 em {
+  font-style: italic;
+  display: block;
+}
 .hero-sub {
-  font-size: 0.88rem; font-weight: 300; color: var(--muted);
-  line-height: 1.9; letter-spacing: 0.02em; max-width: 400px; margin-bottom: 3rem;
+  font-size: 0.82rem;
+  line-height: 1.9;
+  color: #888;
+  max-width: 340px;
+  margin-bottom: 48px;
+  font-weight: 300;
 }
-.hero-actions { display: flex; gap: 1.5rem; align-items: center; }
-.btn-primary {
-  font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 400;
-  padding: 1rem 2.8rem; background: var(--gold); color: var(--ink);
-  transition: background 0.3s; font-family: var(--sans);
+.hero-cta {
+  display: flex;
+  gap: 32px;
+  align-items: center;
 }
-.btn-primary:hover { background: var(--gold2); }
-.btn-ghost {
-  font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 400;
-  color: var(--muted); transition: color 0.3s; font-family: var(--sans);
-  display: flex; align-items: center; gap: 0.8rem;
+.btn-dark {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 400;
+  padding: 14px 36px;
+  background: #1a1a1a;
+  color: #faf8f5;
+  transition: background 0.25s;
 }
-.btn-ghost::after { content: '→'; color: var(--gold); }
-.btn-ghost:hover { color: var(--text); }
-.hero-scroll-hint {
-  position: absolute; bottom: 2.5rem; right: 4rem; z-index: 10;
-  font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase;
-  color: var(--muted); writing-mode: vertical-rl;
-  display: flex; align-items: center; gap: 1rem;
+.btn-dark:hover { background: #b5896a; }
+.btn-text {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 400;
+  color: #888;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: color 0.25s;
 }
-.hero-scroll-hint::after {
-  content: ''; display: block; width: 1px; height: 50px;
-  background: linear-gradient(to bottom, var(--gold), transparent);
-  animation: scrollLine 2s ease-in-out infinite;
+.btn-text::after { content: '→'; color: #b5896a; }
+.btn-text:hover { color: #1a1a1a; }
+.hero-scroll {
+  margin-top: auto;
+  padding-top: 48px;
+  font-size: 0.6rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #ccc;
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
-@keyframes scrollLine {
-  0%, 100% { opacity: 0.3; transform: scaleY(1); }
-  50%       { opacity: 1;   transform: scaleY(0.5); }
+.hero-scroll::after {
+  content: '';
+  display: block;
+  height: 1px;
+  width: 48px;
+  background: #ccc;
 }
 
-/* ─── MARQUEE ──────────────────────────────────────────────────── */
-.marquee-strip {
-  border-top: 1px solid rgba(200,169,106,0.15);
-  border-bottom: 1px solid rgba(200,169,106,0.15);
-  overflow: hidden; padding: 1.1rem 0; background: var(--deep);
+/* ── TICKER ────────────────────────────────────────────────────── */
+.ticker {
+  border-top: 1px solid #ece8e1;
+  border-bottom: 1px solid #ece8e1;
+  overflow: hidden;
+  padding: 14px 0;
+  background: #faf8f5;
 }
-.marquee-track {
-  display: flex; gap: 0; white-space: nowrap;
-  animation: marquee 30s linear infinite;
+.ticker-track {
+  display: flex;
+  white-space: nowrap;
+  animation: tick 35s linear infinite;
 }
-.marquee-item {
-  display: inline-flex; align-items: center; gap: 2.5rem;
-  padding: 0 2.5rem;
-  font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase;
-  color: var(--muted); font-weight: 400;
+.ticker-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 28px;
+  padding: 0 28px;
+  font-size: 0.62rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #aaa;
+  font-weight: 400;
 }
-.marquee-item .sep { color: var(--gold); font-size: 0.6rem; }
-@keyframes marquee {
+.ticker-dot { color: #b5896a; font-size: 0.4rem; }
+@keyframes tick {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
 }
 
-/* ─── SECTION UTILITIES ────────────────────────────────────────── */
-.eyebrow {
-  font-size: 0.62rem; letter-spacing: 0.35em; text-transform: uppercase;
-  color: var(--gold); font-weight: 400; margin-bottom: 1.5rem;
-  display: flex; align-items: center; gap: 1rem;
+/* ── FULL-BLEED IMAGE ──────────────────────────────────────────── */
+.full-image {
+  width: 100%;
+  height: 85vh;
+  background: #ddd4c8;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.eyebrow::before { content: '—'; color: var(--gold); opacity: 0.6; }
-.section-title {
-  font-family: var(--serif);
-  font-size: clamp(2.4rem, 4.5vw, 4rem);
-  font-weight: 300; line-height: 1.1; letter-spacing: -0.01em;
-  color: var(--ivory);
+.full-image-inner {
+  position: absolute; inset: 0;
+  background: linear-gradient(145deg, #d8ccbf 0%, #c4b8a8 50%, #cfc0b0 100%);
 }
-.section-title em { font-style: italic; color: var(--gold); }
+.full-image-caption {
+  position: absolute;
+  bottom: 48px; right: 64px;
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(26,26,26,0.45);
+  font-weight: 400;
+}
+.full-image-text {
+  position: absolute;
+  bottom: 48px; left: 64px;
+}
+.full-image-text h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.5rem, 5vw, 5rem);
+  font-weight: 300;
+  font-style: italic;
+  color: #faf8f5;
+  line-height: 1.1;
+  text-shadow: 0 2px 40px rgba(0,0,0,0.15);
+}
 
-/* ─── ABOUT ────────────────────────────────────────────────────── */
-.about { background: var(--ink); padding: 10rem 0; overflow: hidden; }
-.about-inner {
-  display: grid; grid-template-columns: 1fr 1fr; max-width: 1400px; margin: 0 auto;
+/* ── ABOUT ─────────────────────────────────────────────────────── */
+.about {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
-.about-visual {
-  position: relative; min-height: 700px;
-  background: linear-gradient(135deg, #2a1a10 0%, #1e1210 60%, #25141a 100%);
+.about-img {
+  height: 680px;
+  background: #e0d8ce;
+  position: relative;
   overflow: hidden;
 }
-.about-visual::after {
-  content: 'Portrait'; position: absolute; inset: 0;
+.about-img-inner {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, #ddd4c5 0%, #c8bfb2 100%);
   display: flex; align-items: center; justify-content: center;
-  font-family: var(--serif); font-size: 0.85rem; letter-spacing: 0.3em;
-  text-transform: uppercase; color: rgba(200,169,106,0.15);
 }
-.about-visual-accent {
-  position: absolute; right: -1px; top: 15%; bottom: 15%;
-  width: 1px; background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+.about-img-ph {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.75rem; letter-spacing: 0.3em;
+  text-transform: uppercase; color: rgba(26,26,26,0.18);
 }
 .about-text {
-  padding: 5rem 5rem 5rem 6rem;
-  display: flex; flex-direction: column; justify-content: center;
+  background: #faf8f5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 80px 80px 80px 88px;
 }
+.label {
+  font-size: 0.62rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #b5896a;
+  font-weight: 400;
+  margin-bottom: 24px;
+}
+.about-text h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 3.5vw, 3.2rem);
+  font-weight: 300;
+  line-height: 1.15;
+  color: #1a1a1a;
+  margin-bottom: 32px;
+}
+.about-text h2 em { font-style: italic; }
 .about-text p {
-  font-family: var(--serif); font-size: 1.2rem; font-weight: 300; font-style: italic;
-  line-height: 1.85; color: rgba(240,232,220,0.7); margin-bottom: 2rem;
+  font-size: 0.88rem;
+  line-height: 1.95;
+  color: #888;
+  font-weight: 300;
+  margin-bottom: 20px;
+  max-width: 420px;
 }
-.about-text p strong { font-style: normal; font-weight: 400; color: var(--ivory); }
-.about-text .about-body {
-  font-family: var(--sans); font-size: 0.88rem; font-style: normal; font-weight: 300;
-  line-height: 1.9; color: var(--muted); margin-bottom: 0;
-}
-.about-signature {
-  margin-top: 3rem; padding-top: 2.5rem;
-  border-top: 1px solid rgba(200,169,106,0.2);
-  display: flex; align-items: center; gap: 1.5rem;
-}
-.sig-line { flex: 1; height: 1px; background: rgba(200,169,106,0.15); }
-.sig-text {
-  font-family: var(--serif); font-size: 1.4rem; font-style: italic;
-  color: var(--gold); letter-spacing: 0.05em;
+.about-text p strong { color: #1a1a1a; font-weight: 400; }
+.sig {
+  margin-top: 36px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem;
+  font-style: italic;
+  font-weight: 300;
+  color: #b5896a;
 }
 
-/* ─── PHILOSOPHY ───────────────────────────────────────────────── */
-.philosophy {
-  background: var(--deep); padding: 8rem 4rem;
-  display: grid; grid-template-columns: 1fr 2fr; gap: 6rem;
-  max-width: 1400px; margin: 0 auto;
-}
-.philosophy-quote {
-  font-family: var(--serif);
-  font-size: clamp(1.8rem, 3vw, 2.8rem);
-  font-weight: 300; font-style: italic;
-  line-height: 1.3; color: var(--ivory);
-}
-.philosophy-quote em { color: var(--gold); font-style: italic; }
-.philosophy-right { display: flex; flex-direction: column; justify-content: center; gap: 2.5rem; }
-.philosophy-stat {
-  padding-bottom: 2.5rem;
-  border-bottom: 1px solid rgba(200,169,106,0.12);
-}
-.philosophy-stat:last-child { border-bottom: none; padding-bottom: 0; }
-.philosophy-stat-num {
-  font-family: var(--serif); font-size: 3rem; font-weight: 300;
-  color: var(--gold); line-height: 1; margin-bottom: 0.5rem;
-}
-.philosophy-stat-label {
-  font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;
-  color: var(--muted); font-weight: 300;
-}
-
-/* ─── SERVICES ─────────────────────────────────────────────────── */
-.services { background: var(--ink); padding: 10rem 4rem; }
-.services-header { max-width: 1400px; margin: 0 auto 6rem; }
-.services-list { max-width: 1400px; margin: 0 auto; }
-.service-row {
-  display: grid; grid-template-columns: 80px 1fr 1fr 160px;
-  align-items: start; gap: 3rem;
-  padding: 3.5rem 0;
-  border-bottom: 1px solid rgba(200,169,106,0.1);
-  cursor: default;
-  transition: background 0.3s;
-}
-.service-row:first-child { border-top: 1px solid rgba(200,169,106,0.1); }
-.service-row:hover { background: rgba(200,169,106,0.03); }
-.service-index {
-  font-family: var(--serif); font-size: 0.85rem; font-weight: 300;
-  color: rgba(200,169,106,0.3); padding-top: 0.3rem; letter-spacing: 0.1em;
-}
-.service-name {
-  font-family: var(--serif); font-size: 1.6rem; font-weight: 300;
-  color: var(--ivory); letter-spacing: 0.02em; line-height: 1.2;
-}
-.service-name em { font-style: italic; color: var(--gold); }
-.service-desc {
-  font-size: 0.85rem; font-weight: 300; color: var(--muted);
-  line-height: 1.8; padding-top: 0.3rem;
-}
-.service-tag {
-  font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase;
-  color: var(--gold); border: 1px solid rgba(200,169,106,0.25);
-  padding: 0.4rem 0.9rem; width: fit-content; margin-top: 0.3rem;
-  font-weight: 400; align-self: start;
-}
-
-/* ─── GALLERY ──────────────────────────────────────────────────── */
-.gallery { background: var(--deep); padding: 10rem 4rem; }
-.gallery-header { max-width: 1400px; margin: 0 auto 5rem; display: flex; align-items: flex-end; justify-content: space-between; }
-.gallery-link {
-  font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase;
-  color: var(--gold); font-weight: 400; display: flex; align-items: center; gap: 0.8rem;
-  border-bottom: 1px solid rgba(200,169,106,0.3); padding-bottom: 1px;
-  transition: color 0.3s, border-color 0.3s; margin-bottom: 0.5rem;
-}
-.gallery-link:hover { color: var(--gold2); border-color: var(--gold2); }
-.gallery-mosaic {
-  max-width: 1400px; margin: 0 auto;
+/* ── STATS BAR ─────────────────────────────────────────────────── */
+.stats {
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: 280px 280px;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid #ece8e1;
+  border-bottom: 1px solid #ece8e1;
+}
+.stat {
+  padding: 56px 0;
+  text-align: center;
+  border-right: 1px solid #ece8e1;
+}
+.stat:last-child { border-right: none; }
+.stat-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3.5rem;
+  font-weight: 300;
+  color: #1a1a1a;
+  line-height: 1;
+  margin-bottom: 10px;
+}
+.stat-label {
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #aaa;
+  font-weight: 400;
+}
+
+/* ── SERVICES ──────────────────────────────────────────────────── */
+.services {
+  padding: 120px 80px;
+  background: #faf8f5;
+}
+.services-top {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 80px;
+}
+.services-top h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.5rem, 4vw, 4rem);
+  font-weight: 300;
+  color: #1a1a1a;
+  line-height: 1.1;
+}
+.services-top h2 em { font-style: italic; }
+.services-sub {
+  font-size: 0.82rem;
+  color: #aaa;
+  line-height: 1.8;
+  max-width: 280px;
+  font-weight: 300;
+  padding-bottom: 6px;
+}
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+.svc {
+  background: #f3efe8;
+  padding: 52px 44px;
+  transition: background 0.3s;
+  cursor: default;
+}
+.svc:hover { background: #ece6dc; }
+.svc-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: #1a1a1a;
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+.svc-name em { font-style: italic; }
+.svc-desc {
+  font-size: 0.8rem;
+  color: #999;
+  line-height: 1.85;
+  font-weight: 300;
+}
+.svc-line {
+  width: 28px; height: 1px;
+  background: #b5896a;
+  margin-bottom: 24px;
+}
+
+/* ── GALLERY ───────────────────────────────────────────────────── */
+.gallery { background: #faf8f5; padding: 120px 80px; }
+.gallery-top {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 48px;
+}
+.gallery-top h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.5rem, 4vw, 4rem);
+  font-weight: 300;
+  color: #1a1a1a;
+  line-height: 1.1;
+}
+.gallery-top h2 em { font-style: italic; }
+.gallery-ig {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 400;
+  color: #888;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 2px;
+  transition: color 0.25s, border-color 0.25s;
+}
+.gallery-ig:hover { color: #b5896a; border-color: #b5896a; }
+.gallery-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-rows: 420px 280px;
   gap: 3px;
 }
-.g-cell {
-  background: var(--mid); overflow: hidden; position: relative;
-  transition: filter 0.4s;
+.g {
+  background: #e0d8ce;
+  overflow: hidden;
+  position: relative;
 }
-.g-cell:hover { filter: brightness(1.08); }
-.g-cell-1 { grid-column: 1 / 6; grid-row: 1 / 3; }
-.g-cell-2 { grid-column: 6 / 9; grid-row: 1 / 2; }
-.g-cell-3 { grid-column: 9 / 13; grid-row: 1 / 2; }
-.g-cell-4 { grid-column: 6 / 10; grid-row: 2 / 3; }
-.g-cell-5 { grid-column: 10 / 13; grid-row: 2 / 3; }
-.g-cell-inner {
+.g-1 { grid-column: 1; grid-row: 1/3; }
+.g-2 { grid-column: 2; grid-row: 1; }
+.g-3 { grid-column: 3; grid-row: 1; }
+.g-4 { grid-column: 2; grid-row: 2; }
+.g-5 { grid-column: 3; grid-row: 2; }
+.g-inner {
   position: absolute; inset: 0;
   display: flex; align-items: center; justify-content: center;
-  background: linear-gradient(135deg, var(--mid) 0%, var(--deep) 100%);
 }
-.g-cell-label {
-  font-family: var(--serif); font-size: 0.85rem; letter-spacing: 0.2em;
-  text-transform: uppercase; color: rgba(200,169,106,0.18); font-weight: 300;
+.g:nth-child(1) .g-inner { background: linear-gradient(160deg, #ddd4c5, #c8bfb2); }
+.g:nth-child(2) .g-inner { background: linear-gradient(140deg, #d8cfc5, #c4bcb0); }
+.g:nth-child(3) .g-inner { background: linear-gradient(170deg, #d4cabe, #c0b8ac); }
+.g:nth-child(4) .g-inner { background: linear-gradient(130deg, #cec5bb, #bcb4a8); }
+.g:nth-child(5) .g-inner { background: linear-gradient(150deg, #d8d0c4, #c8c0b4); }
+.g-label {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(26,26,26,0.2);
 }
-.g-cell-overlay {
+.g-hover {
   position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(14,11,9,0.7) 0%, transparent 60%);
-  opacity: 0; transition: opacity 0.4s;
-  display: flex; align-items: flex-end; padding: 1.5rem;
+  background: rgba(26,26,26,0.32);
+  opacity: 0;
+  transition: opacity 0.35s;
+  display: flex; align-items: flex-end;
+  padding: 24px 28px;
 }
-.g-cell:hover .g-cell-overlay { opacity: 1; }
-.g-cell-overlay-text {
-  font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
-  color: var(--gold); font-weight: 400;
+.g:hover .g-hover { opacity: 1; }
+.g-hover-label {
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(250,248,245,0.9);
+  font-weight: 400;
 }
 
-/* ─── TESTIMONIALS ─────────────────────────────────────────────── */
-.testimonials { background: var(--ink); padding: 10rem 4rem; }
-.testimonials-inner { max-width: 1400px; margin: 0 auto; }
-.testimonials-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4rem; margin-top: 6rem; }
-.testi {
-  display: flex; flex-direction: column; gap: 2rem;
-  padding-top: 2.5rem; border-top: 1px solid rgba(200,169,106,0.15);
+/* ── QUOTE ─────────────────────────────────────────────────────── */
+.pull-quote {
+  padding: 100px 80px;
+  background: #1a1a1a;
+  text-align: center;
 }
-.testi-quote {
-  font-family: var(--serif); font-size: 1.2rem; font-weight: 300; font-style: italic;
-  color: var(--ivory); line-height: 1.7; flex: 1;
+.pull-quote blockquote {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.8rem, 3.5vw, 3rem);
+  font-weight: 300;
+  font-style: italic;
+  color: #f5efe8;
+  line-height: 1.45;
+  max-width: 900px;
+  margin: 0 auto 32px;
 }
-.testi-quote::before { content: '\201C'; color: var(--gold); font-size: 2rem; line-height: 0; vertical-align: -0.5rem; margin-right: 0.2rem; }
-.testi-quote::after  { content: '\201D'; color: var(--gold); font-size: 2rem; line-height: 0; vertical-align: -0.5rem; margin-left:  0.2rem; }
-.testi-author { display: flex; flex-direction: column; gap: 0.3rem; }
-.testi-name { font-size: 0.78rem; font-weight: 400; color: var(--text); letter-spacing: 0.05em; }
-.testi-detail { font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); font-weight: 300; }
+.pull-quote blockquote em { color: #d4a87c; }
+.pull-quote cite {
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #666;
+  font-style: normal;
+  font-weight: 400;
+}
 
-/* ─── CONTACT ──────────────────────────────────────────────────── */
-.contact { background: var(--deep); padding: 10rem 4rem; }
-.contact-inner { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 8rem; align-items: start; }
-.contact-left-sub {
-  font-family: var(--serif); font-size: 1.1rem; font-style: italic; font-weight: 300;
-  color: var(--muted); line-height: 1.7; margin-top: 2rem; max-width: 360px;
+/* ── TESTIMONIALS ──────────────────────────────────────────────── */
+.testimonials {
+  padding: 120px 80px;
+  background: #faf8f5;
 }
-.contact-meta { margin-top: 4rem; display: flex; flex-direction: column; gap: 1.5rem; }
-.contact-meta-item {
-  display: flex; gap: 1.5rem; align-items: flex-start;
-  font-size: 0.82rem; color: var(--muted); font-weight: 300; line-height: 1.5;
+.testimonials h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 3.5vw, 3.5rem);
+  font-weight: 300;
+  color: #1a1a1a;
+  margin-bottom: 64px;
+  line-height: 1.1;
 }
-.contact-meta-label {
-  font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase;
-  color: var(--gold); width: 80px; flex-shrink: 0; padding-top: 0.15rem; font-weight: 400;
+.testimonials h2 em { font-style: italic; }
+.testi-list { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 64px; }
+.testi { border-top: 1px solid #ece8e1; padding-top: 36px; }
+.testi-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem;
+  font-style: italic;
+  font-weight: 300;
+  color: #444;
+  line-height: 1.75;
+  margin-bottom: 28px;
 }
-.contact-form { display: flex; flex-direction: column; gap: 0; }
-.form-field {
-  border-bottom: 1px solid rgba(200,169,106,0.15); padding: 2rem 0;
-  display: flex; flex-direction: column; gap: 0.6rem;
+.testi-name { font-size: 0.75rem; font-weight: 400; color: #1a1a1a; letter-spacing: 0.05em; margin-bottom: 4px; }
+.testi-detail { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: #aaa; font-weight: 300; }
+
+/* ── CONTACT ───────────────────────────────────────────────────── */
+.contact { display: grid; grid-template-columns: 1fr 1fr; }
+.contact-img {
+  background: #e4ddd4;
+  min-height: 700px;
+  position: relative;
+  overflow: hidden;
+}
+.contact-img-inner {
+  position: absolute; inset: 0;
+  background: linear-gradient(145deg, #ddd5c8 0%, #c8bfb0 100%);
+  display: flex; align-items: center; justify-content: center;
+}
+.contact-img-ph {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.72rem; letter-spacing: 0.28em;
+  text-transform: uppercase; color: rgba(26,26,26,0.18);
+}
+.contact-form-wrap {
+  background: #faf8f5;
+  padding: 88px 88px 88px 80px;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.contact-form-wrap h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 3vw, 3rem);
+  font-weight: 300;
+  color: #1a1a1a;
+  line-height: 1.15;
+  margin-bottom: 12px;
+}
+.contact-form-wrap h2 em { font-style: italic; }
+.contact-sub {
+  font-size: 0.82rem;
+  color: #aaa;
+  margin-bottom: 48px;
+  font-weight: 300;
+  line-height: 1.7;
+}
+.cform { display: flex; flex-direction: column; }
+.cf-row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.cf-field {
+  display: flex; flex-direction: column;
+  border-bottom: 1px solid #ddd8d0;
+  padding: 18px 0;
+  margin-bottom: 0;
   transition: border-color 0.3s;
 }
-.form-field:focus-within { border-color: rgba(200,169,106,0.5); }
-.form-field label {
-  font-size: 0.58rem; letter-spacing: 0.3em; text-transform: uppercase;
-  color: var(--gold); font-weight: 400;
+.cf-field:focus-within { border-color: #b5896a; }
+.cf-field label {
+  font-size: 0.58rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #b5896a;
+  font-weight: 400;
+  margin-bottom: 8px;
 }
-.form-field input,
-.form-field select,
-.form-field textarea {
-  background: transparent; border: none; outline: none;
-  font-family: var(--serif); font-size: 1.05rem; font-weight: 300;
-  color: var(--ivory); padding: 0; line-height: 1.5; resize: none;
-  font-style: italic;
+.cf-field input,
+.cf-field select,
+.cf-field textarea {
+  background: transparent;
+  border: none; outline: none;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: #1a1a1a;
+  resize: none;
 }
-.form-field input::placeholder,
-.form-field textarea::placeholder { color: rgba(240,232,220,0.2); }
-.form-field select { color: rgba(240,232,220,0.5); cursor: pointer; }
-.form-field select option { background: var(--deep); color: var(--ivory); font-family: sans-serif; font-style: normal; }
-.form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
-.form-submit { margin-top: 3rem; display: flex; align-items: center; gap: 2rem; }
-.btn-submit {
-  font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; font-weight: 400;
-  padding: 1.1rem 3rem; background: var(--gold); color: var(--ink);
-  border: none; cursor: pointer; font-family: var(--sans);
-  transition: background 0.3s;
+.cf-field input::placeholder,
+.cf-field textarea::placeholder { color: #ccc; }
+.cf-field select { color: #999; cursor: pointer; }
+.cf-field select option { background: #faf8f5; }
+.cf-submit {
+  margin-top: 40px;
+  display: flex; align-items: center; gap: 24px;
 }
-.btn-submit:hover { background: var(--gold2); }
-.form-note { font-size: 0.72rem; color: var(--muted); font-weight: 300; letter-spacing: 0.05em; }
-.form-success {
-  display: none; padding: 4rem 0;
-  border-top: 1px solid rgba(200,169,106,0.2);
+.submit-btn {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 400;
+  padding: 15px 44px;
+  background: #1a1a1a;
+  color: #faf8f5;
+  border: none;
+  cursor: pointer;
+  transition: background 0.25s;
 }
-.form-success-inner { display: flex; flex-direction: column; gap: 1rem; }
-.form-success h3 {
-  font-family: var(--serif); font-size: 2rem; font-weight: 300; font-style: italic;
-  color: var(--gold);
+.submit-btn:hover { background: #b5896a; }
+.submit-note { font-size: 0.72rem; color: #bbb; font-weight: 300; }
+.cf-success {
+  display: none; padding: 40px 0;
 }
-.form-success p { font-size: 0.85rem; color: var(--muted); font-weight: 300; line-height: 1.8; }
+.cf-success h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.8rem; font-weight: 300; font-style: italic;
+  color: #b5896a; margin-bottom: 10px;
+}
+.cf-success p { font-size: 0.82rem; color: #aaa; line-height: 1.8; font-weight: 300; }
 
-/* ─── FOOTER ───────────────────────────────────────────────────── */
+/* ── FOOTER ────────────────────────────────────────────────────── */
 footer {
-  background: var(--ink); padding: 3rem 4rem;
-  border-top: 1px solid rgba(200,169,106,0.1);
-  display: flex; align-items: center; justify-content: space-between;
+  background: #1a1a1a;
+  padding: 40px 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
-.footer-logo {
-  font-family: var(--serif); font-size: 1rem; font-weight: 300;
-  letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold);
+.f-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.95rem;
+  font-weight: 300;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #f5efe8;
 }
-footer p { font-size: 0.68rem; letter-spacing: 0.12em; color: var(--muted); font-weight: 300; }
-.footer-links { display: flex; gap: 2.5rem; }
-.footer-links a {
-  font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase;
-  color: var(--muted); font-weight: 300; transition: color 0.3s;
+footer p { font-size: 0.65rem; letter-spacing: 0.12em; color: #555; font-weight: 300; }
+.f-links { display: flex; gap: 32px; }
+.f-links a {
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #555;
+  font-weight: 300;
+  transition: color 0.25s;
 }
-.footer-links a:hover { color: var(--gold); }
+.f-links a:hover { color: #b5896a; }
 
-/* ─── REVEAL ANIMATIONS ─────────────────────────────────────────── */
-.r {
-  opacity: 0; transform: translateY(28px);
-  transition: opacity 0.85s cubic-bezier(0.22,1,0.36,1), transform 0.85s cubic-bezier(0.22,1,0.36,1);
+/* ── REVEAL ────────────────────────────────────────────────────── */
+.rv {
+  opacity: 0; transform: translateY(24px);
+  transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1);
 }
-.r.r-delay-1 { transition-delay: 0.1s; }
-.r.r-delay-2 { transition-delay: 0.2s; }
-.r.r-delay-3 { transition-delay: 0.35s; }
-.r.visible { opacity: 1; transform: translateY(0); }
+.rv.d1 { transition-delay: 0.1s; }
+.rv.d2 { transition-delay: 0.22s; }
+.rv.d3 { transition-delay: 0.36s; }
+.rv.on { opacity: 1; transform: none; }
 
-/* ─── RESPONSIVE ────────────────────────────────────────────────── */
+/* ── RESPONSIVE ────────────────────────────────────────────────── */
 @media (max-width: 960px) {
-  nav { padding: 1.5rem 2rem; }
-  nav.scrolled { padding: 1rem 2rem; }
-  .nav-links { display: none; }
-  .hero-photo { display: none; }
-  .hero-content { padding: 0 2rem 6rem; max-width: 100%; }
-  .hero h1 { font-size: clamp(3rem, 10vw, 5rem); }
-  .about-inner { grid-template-columns: 1fr; }
-  .about-visual { min-height: 340px; }
-  .about-text { padding: 3rem 2rem; }
-  .philosophy { grid-template-columns: 1fr; padding: 5rem 2rem; }
-  .services { padding: 6rem 2rem; }
-  .service-row { grid-template-columns: 40px 1fr; gap: 1.5rem; padding: 2rem 0; }
-  .service-desc { display: none; }
-  .service-tag { display: none; }
-  .gallery { padding: 6rem 2rem; }
-  .gallery-header { flex-direction: column; align-items: flex-start; gap: 2rem; }
-  .gallery-mosaic { grid-template-columns: 1fr 1fr; grid-template-rows: 200px 200px 200px; }
-  .g-cell-1 { grid-column: 1/2; grid-row: 1/2; }
-  .g-cell-2 { grid-column: 2/3; grid-row: 1/2; }
-  .g-cell-3 { grid-column: 1/2; grid-row: 2/3; }
-  .g-cell-4 { grid-column: 2/3; grid-row: 2/3; }
-  .g-cell-5 { grid-column: 1/3; grid-row: 3/4; }
-  .testimonials { padding: 6rem 2rem; }
-  .testimonials-grid { grid-template-columns: 1fr; gap: 3rem; }
-  .contact { padding: 6rem 2rem; }
-  .contact-inner { grid-template-columns: 1fr; gap: 4rem; }
-  .form-row-2 { grid-template-columns: 1fr; gap: 0; }
-  footer { flex-direction: column; gap: 1.5rem; text-align: center; padding: 2rem; }
+  nav { padding: 20px 24px; }
+  nav.stuck { padding: 14px 24px; }
+  .nav-center { display: none; }
+  .hero { grid-template-columns: 1fr; height: auto; }
+  .hero-img { height: 60vw; min-height: 280px; }
+  .hero-text { padding: 48px 32px 64px; }
+  .full-image { height: 55vw; min-height: 260px; }
+  .full-image-text { left: 32px; bottom: 32px; }
+  .full-image-caption { right: 32px; bottom: 32px; }
+  .about { grid-template-columns: 1fr; }
+  .about-img { height: 70vw; }
+  .about-text { padding: 56px 32px; }
+  .stats { grid-template-columns: 1fr; }
+  .stat { border-right: none; border-bottom: 1px solid #ece8e1; padding: 40px 0; }
+  .stat:last-child { border-bottom: none; }
+  .services { padding: 72px 32px; }
+  .services-top { flex-direction: column; align-items: flex-start; gap: 20px; }
+  .services-grid { grid-template-columns: 1fr; }
+  .gallery { padding: 72px 32px; }
+  .gallery-top { flex-direction: column; align-items: flex-start; gap: 20px; }
+  .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: 220px 220px 220px; }
+  .g-1 { grid-column: 1/3; grid-row: 1; }
+  .g-2 { grid-column: 1; grid-row: 2; }
+  .g-3 { grid-column: 2; grid-row: 2; }
+  .g-4 { grid-column: 1; grid-row: 3; }
+  .g-5 { grid-column: 2; grid-row: 3; }
+  .pull-quote { padding: 72px 32px; }
+  .testimonials { padding: 72px 32px; }
+  .testi-list { grid-template-columns: 1fr; gap: 40px; }
+  .contact { grid-template-columns: 1fr; }
+  .contact-img { min-height: 55vw; }
+  .contact-form-wrap { padding: 56px 32px; }
+  .cf-row { grid-template-columns: 1fr; gap: 0; }
+  footer { flex-direction: column; gap: 20px; text-align: center; padding: 32px 24px; }
 }
   </style>
 </head>
 <body>
 
-<div class="cursor" id="cursor"></div>
-
 <!-- NAV -->
 <nav id="nav">
   <div class="nav-logo">Sherry B</div>
-  <ul class="nav-links">
-    <li><a href="#about">Story</a></li>
+  <ul class="nav-center">
+    <li><a href="#about">About</a></li>
     <li><a href="#services">Services</a></li>
-    <li><a href="#gallery">Work</a></li>
+    <li><a href="#gallery">Gallery</a></li>
     <li><a href="#contact">Book</a></li>
   </ul>
-  <a href="#contact" class="nav-book">Begin Here</a>
+  <a href="#contact" class="nav-right">Inquire</a>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-photo">
-    <div class="hero-photo-placeholder"></div>
-  </div>
-  <div class="hero-content">
-    <div class="hero-kicker">Atlanta · South Asian Bridal Artistry</div>
-    <h1>
-      Made to be<br/>looked at.<br/>
-      <em>Made to feel<br/>like you.</em>
-    </h1>
-    <p class="hero-sub">
-      For the South Asian bride who refuses to look like everyone else's wedding. Traditional. Fusion. Always yours.
-    </p>
-    <div class="hero-actions">
-      <a href="#contact" class="btn-primary">Book a Consultation</a>
-      <a href="#gallery" class="btn-ghost">View the Work</a>
+  <div class="hero-img">
+    <div class="hero-img-inner">
+      <span class="hero-img-placeholder">Bridal Portrait</span>
     </div>
   </div>
-  <div class="hero-scroll-hint">Scroll</div>
+  <div class="hero-text">
+    <div class="hero-location">Atlanta · South Asian Bridal Artistry</div>
+    <h1 class="hero-h1">
+      The art of<br/>
+      <em>your face,<br/>your story.</em>
+    </h1>
+    <p class="hero-sub">
+      Specializing in South Asian bridal artistry — traditional, fusion, and everything in between. For the bride who wants to look like herself, elevated.
+    </p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn-dark">Book a Consultation</a>
+      <a href="#gallery" class="btn-text">View the Work</a>
+    </div>
+    <div class="hero-scroll">Scroll</div>
+  </div>
 </section>
 
-<!-- MARQUEE -->
-<div class="marquee-strip">
-  <div class="marquee-track">
-    <span class="marquee-item">South Asian Bridal <span class="sep">◆</span></span>
-    <span class="marquee-item">Traditional Looks <span class="sep">◆</span></span>
-    <span class="marquee-item">Fusion Artistry <span class="sep">◆</span></span>
-    <span class="marquee-item">Atlanta Georgia <span class="sep">◆</span></span>
-    <span class="marquee-item">Destination Weddings <span class="sep">◆</span></span>
-    <span class="marquee-item">Mehndi & Sangeet <span class="sep">◆</span></span>
-    <span class="marquee-item">Airbrush Available <span class="sep">◆</span></span>
-    <span class="marquee-item">Pakistani · Indian · Bengali <span class="sep">◆</span></span>
-    <span class="marquee-item">South Asian Bridal <span class="sep">◆</span></span>
-    <span class="marquee-item">Traditional Looks <span class="sep">◆</span></span>
-    <span class="marquee-item">Fusion Artistry <span class="sep">◆</span></span>
-    <span class="marquee-item">Atlanta Georgia <span class="sep">◆</span></span>
-    <span class="marquee-item">Destination Weddings <span class="sep">◆</span></span>
-    <span class="marquee-item">Mehndi & Sangeet <span class="sep">◆</span></span>
-    <span class="marquee-item">Airbrush Available <span class="sep">◆</span></span>
-    <span class="marquee-item">Pakistani · Indian · Bengali <span class="sep">◆</span></span>
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span class="ticker-item">South Asian Bridal <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">Atlanta, Georgia <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">Traditional Artistry <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">Fusion Looks <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">Destination Weddings <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">Mehndi &amp; Sangeet <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">Pakistani · Indian · Bengali <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">Airbrush Available <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">South Asian Bridal <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">Atlanta, Georgia <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">Traditional Artistry <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">Fusion Looks <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">Destination Weddings <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">Mehndi &amp; Sangeet <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">Pakistani · Indian · Bengali <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">Airbrush Available <span class="ticker-dot">◆</span></span>
   </div>
 </div>
 
 <!-- ABOUT -->
 <section class="about" id="about">
-  <div class="about-inner">
-    <div class="about-visual">
-      <div class="about-visual-accent"></div>
+  <div class="about-img">
+    <div class="about-img-inner">
+      <span class="about-img-ph">Artist Portrait</span>
     </div>
-    <div class="about-text">
-      <div class="eyebrow r">The Artist</div>
-      <h2 class="section-title r r-delay-1" style="margin-bottom: 2.5rem;">
-        Beauty rooted in<br/><em>culture. Elevated<br/>by craft.</em>
-      </h2>
-      <p class="r r-delay-2">
-        I'm Sherry B. I grew up surrounded by South Asian celebrations — the weight of a lehenga, the scent of rose water, the way a bride's eyes should look when she sees herself for the first time.
-        <strong>That's not something you learn. That's something you carry.</strong>
-      </p>
-      <p class="about-body r r-delay-3">
-        Based in Atlanta, I specialize in bridal artistry for South Asian women who want a look that honors their heritage and reflects who they actually are. Not a formula. Not a template. A face that belongs to the person wearing it — just elevated.
-      </p>
-      <div class="about-signature r">
-        <div class="sig-line"></div>
-        <div class="sig-text">Sherry B</div>
-      </div>
-    </div>
+  </div>
+  <div class="about-text">
+    <div class="label rv">The Artist</div>
+    <h2 class="rv d1">Beauty that<br/><em>belongs to you.</em></h2>
+    <p class="rv d2">I'm Sherry B. I grew up immersed in South Asian celebrations — the weight of a lehenga, the warmth of gold, the way a bride's face should carry every emotion of the day without flinching.</p>
+    <p class="rv d2">Based in Atlanta, I specialize in bridal artistry for South Asian women who want a look that <strong>honors where they come from</strong> and reflects exactly who they are. Traditional. Fusion. Always personal.</p>
+    <div class="sig rv d3">Sherry B</div>
   </div>
 </section>
 
-<!-- PHILOSOPHY -->
-<div style="background: var(--deep);">
-  <div class="philosophy">
-    <div class="philosophy-quote r">
-      "Every bride deserves a look that photographs true<br/>to her skin — and <em>true to her soul.</em>"
-    </div>
-    <div class="philosophy-right">
-      <div class="philosophy-stat r">
-        <div class="philosophy-stat-num">200+</div>
-        <div class="philosophy-stat-label">South Asian Brides</div>
-      </div>
-      <div class="philosophy-stat r r-delay-1">
-        <div class="philosophy-stat-num">10+</div>
-        <div class="philosophy-stat-label">Years of Bridal Artistry</div>
-      </div>
-      <div class="philosophy-stat r r-delay-2">
-        <div class="philosophy-stat-num">5 ★</div>
-        <div class="philosophy-stat-label">Rated in Atlanta & Beyond</div>
-      </div>
-    </div>
+<!-- STATS -->
+<div class="stats">
+  <div class="stat rv">
+    <div class="stat-num">200+</div>
+    <div class="stat-label">Brides Served</div>
   </div>
+  <div class="stat rv d1">
+    <div class="stat-num">10+</div>
+    <div class="stat-label">Years of Artistry</div>
+  </div>
+  <div class="stat rv d2">
+    <div class="stat-num">5 ★</div>
+    <div class="stat-label">Rated in Atlanta</div>
+  </div>
+</div>
+
+<!-- FULL BLEED -->
+<div class="full-image">
+  <div class="full-image-inner"></div>
+  <div class="full-image-text">
+    <h2>"Every bride deserves<br/>to feel like herself —<br/><em>just elevated."</em></h2>
+  </div>
+  <div class="full-image-caption">Atlanta · 2024</div>
 </div>
 
 <!-- SERVICES -->
 <section class="services" id="services">
-  <div class="services-header">
-    <div class="eyebrow r">What I Offer</div>
-    <h2 class="section-title r r-delay-1">Services</h2>
+  <div class="services-top">
+    <h2 class="rv">Services<br/><em>offered</em></h2>
+    <p class="services-sub rv d1">Every look is built from a consultation. Every face is treated as its own brief.</p>
   </div>
-  <div class="services-list">
-    <div class="service-row r">
-      <div class="service-index">01</div>
-      <div class="service-name">Full <em>Bridal</em></div>
-      <div class="service-desc">Your wedding day look — built from a consultation, refined in a trial, and executed flawlessly on the morning it matters most. Airbrush and traditional application available.</div>
-      <div class="service-tag">Signature</div>
+  <div class="services-grid">
+    <div class="svc rv">
+      <div class="svc-line"></div>
+      <div class="svc-name">Full <em>Bridal</em></div>
+      <p class="svc-desc">Consultation, trial, and wedding day execution. Your complete look — built over time, perfected on the day.</p>
     </div>
-    <div class="service-row r">
-      <div class="service-index">02</div>
-      <div class="service-name">Mehndi &amp; <em>Sangeet</em></div>
-      <div class="service-desc">Vibrant, joyful looks for the events before the wedding. Coordinated with your bridal look so the full story is cohesive across every celebration.</div>
-      <div class="service-tag">Pre-Wedding</div>
+    <div class="svc rv d1">
+      <div class="svc-line"></div>
+      <div class="svc-name">Mehndi &amp; <em>Sangeet</em></div>
+      <p class="svc-desc">Vibrant, coordinated looks for the events leading up to your wedding. Joyful, intentional, photograph-ready.</p>
     </div>
-    <div class="service-row r">
-      <div class="service-index">03</div>
-      <div class="service-name"><em>Traditional</em> Artistry</div>
-      <div class="service-desc">Full traditional South Asian bridal looks — rich pigments, precise eye work, and finishes that hold and photograph across every lighting condition, indoors and out.</div>
-      <div class="service-tag">Heritage</div>
+    <div class="svc rv d2">
+      <div class="svc-line"></div>
+      <div class="svc-name"><em>Traditional</em> Artistry</div>
+      <p class="svc-desc">Rich pigments, precise eye work, and finishes that hold across every lighting condition. Pakistani, Indian, Bengali, and more.</p>
     </div>
-    <div class="service-row r">
-      <div class="service-index">04</div>
-      <div class="service-name">Fusion &amp; <em>Contemporary</em></div>
-      <div class="service-desc">East-meets-West looks that feel current, never costume. For the bride who wants to honor her culture while moving forward with her own aesthetic.</div>
-      <div class="service-tag">Modern</div>
+    <div class="svc rv">
+      <div class="svc-line"></div>
+      <div class="svc-name">Fusion &amp; <em>Contemporary</em></div>
+      <p class="svc-desc">East-meets-West looks that feel current, never costume. For the bride who moves between two worlds naturally.</p>
     </div>
-    <div class="service-row r">
-      <div class="service-index">05</div>
-      <div class="service-name">Bridal <em>Party</em></div>
-      <div class="service-desc">Cohesive, intentional looks for the people standing beside you. Elevated without overshadowing. Every person looks like the best version of themselves.</div>
-      <div class="service-tag">Collective</div>
+    <div class="svc rv d1">
+      <div class="svc-line"></div>
+      <div class="svc-name">Bridal <em>Party</em></div>
+      <p class="svc-desc">Everyone beside you looks intentional. Cohesive without being matching. Elevated without overshadowing.</p>
     </div>
-    <div class="service-row r">
-      <div class="service-index">06</div>
-      <div class="service-name"><em>Destination</em> Weddings</div>
-      <div class="service-desc">Atlanta-based, available everywhere. I travel domestically and internationally for weddings that happen in extraordinary places. Travel fee applies.</div>
-      <div class="service-tag">Travel</div>
+    <div class="svc rv d2">
+      <div class="svc-line"></div>
+      <div class="svc-name"><em>Destination</em> Weddings</div>
+      <p class="svc-desc">Atlanta-based. Available everywhere. I travel for weddings that happen in extraordinary places.</p>
     </div>
   </div>
 </section>
 
 <!-- GALLERY -->
 <section class="gallery" id="gallery">
-  <div class="gallery-header">
-    <div>
-      <div class="eyebrow r">The Work</div>
-      <h2 class="section-title r r-delay-1">Portfolio</h2>
-    </div>
-    <a href="https://instagram.com" target="_blank" class="gallery-link r">View on Instagram</a>
+  <div class="gallery-top">
+    <h2 class="rv">Selected<br/><em>Work</em></h2>
+    <a href="https://instagram.com" target="_blank" class="gallery-ig rv">Follow on Instagram</a>
   </div>
-  <div class="gallery-mosaic">
-    <div class="g-cell g-cell-1">
-      <div class="g-cell-inner"><span class="g-cell-label">Featured</span></div>
-      <div class="g-cell-overlay"><span class="g-cell-overlay-text">Full Bridal</span></div>
+  <div class="gallery-grid">
+    <div class="g g-1">
+      <div class="g-inner"><span class="g-label">Featured</span></div>
+      <div class="g-hover"><span class="g-hover-label">Full Bridal</span></div>
     </div>
-    <div class="g-cell g-cell-2">
-      <div class="g-cell-inner"><span class="g-cell-label">Traditional</span></div>
-      <div class="g-cell-overlay"><span class="g-cell-overlay-text">Traditional</span></div>
+    <div class="g g-2">
+      <div class="g-inner"><span class="g-label">Traditional</span></div>
+      <div class="g-hover"><span class="g-hover-label">Traditional</span></div>
     </div>
-    <div class="g-cell g-cell-3">
-      <div class="g-cell-inner"><span class="g-cell-label">Fusion</span></div>
-      <div class="g-cell-overlay"><span class="g-cell-overlay-text">Fusion</span></div>
+    <div class="g g-3">
+      <div class="g-inner"><span class="g-label">Fusion</span></div>
+      <div class="g-hover"><span class="g-hover-label">Fusion</span></div>
     </div>
-    <div class="g-cell g-cell-4">
-      <div class="g-cell-inner"><span class="g-cell-label">Mehndi</span></div>
-      <div class="g-cell-overlay"><span class="g-cell-overlay-text">Mehndi Night</span></div>
+    <div class="g g-4">
+      <div class="g-inner"><span class="g-label">Mehndi</span></div>
+      <div class="g-hover"><span class="g-hover-label">Mehndi Night</span></div>
     </div>
-    <div class="g-cell g-cell-5">
-      <div class="g-cell-inner"><span class="g-cell-label">Bridal Party</span></div>
-      <div class="g-cell-overlay"><span class="g-cell-overlay-text">Bridal Party</span></div>
+    <div class="g g-5">
+      <div class="g-inner"><span class="g-label">Bridal Party</span></div>
+      <div class="g-hover"><span class="g-hover-label">Bridal Party</span></div>
     </div>
   </div>
 </section>
 
+<!-- PULL QUOTE -->
+<div class="pull-quote">
+  <blockquote>"I don't apply a formula. I build a look that belongs to <em>the person wearing it.</em>"</blockquote>
+  <cite>— Sherry B, Makeup Artist · Atlanta</cite>
+</div>
+
 <!-- TESTIMONIALS -->
-<section class="testimonials" id="testimonials">
-  <div class="testimonials-inner">
-    <div class="eyebrow r">Kind Words</div>
-    <h2 class="section-title r r-delay-1">What brides say</h2>
-    <div class="testimonials-grid">
-      <div class="testi r r-delay-1">
-        <p class="testi-quote">Sherry understood exactly what I wanted — a look that was traditional but still felt like me. I cried when I saw myself in the mirror. She made my whole morning feel calm.</p>
-        <div class="testi-author">
-          <span class="testi-name">Priya M.</span>
-          <span class="testi-detail">Pakistani-American Bride · Atlanta</span>
-        </div>
-      </div>
-      <div class="testi r r-delay-2">
-        <p class="testi-quote">I had a very specific vision and she nailed it on the first try. Incredibly skilled — but also just a warm, grounding presence on a day that could easily become overwhelming.</p>
-        <div class="testi-author">
-          <span class="testi-name">Ananya K.</span>
-          <span class="testi-detail">Indian-American Bride · Atlanta</span>
-        </div>
-      </div>
-      <div class="testi r r-delay-3">
-        <p class="testi-quote">I flew Sherry in for my destination wedding. She did my bridal look, my Mehndi look, and my mother's — everything was perfect. Our photos are genuinely stunning.</p>
-        <div class="testi-author">
-          <span class="testi-name">Sara A.</span>
-          <span class="testi-detail">Bride · Cancún Destination Wedding</span>
-        </div>
-      </div>
+<section class="testimonials">
+  <h2 class="rv">What brides<br/><em>are saying</em></h2>
+  <div class="testi-list">
+    <div class="testi rv d1">
+      <p class="testi-text">"Sherry understood exactly what I wanted — a look that was traditional but still felt like me. I cried when I saw myself. She made my whole morning feel calm."</p>
+      <div class="testi-name">Priya M.</div>
+      <div class="testi-detail">Pakistani-American Bride · Atlanta</div>
+    </div>
+    <div class="testi rv d2">
+      <p class="testi-text">"I had a very specific vision and she nailed it on the first try. Incredibly skilled — and just a warm, grounding presence on a day that could easily become overwhelming."</p>
+      <div class="testi-name">Ananya K.</div>
+      <div class="testi-detail">Indian-American Bride · Atlanta</div>
+    </div>
+    <div class="testi rv d3">
+      <p class="testi-text">"I flew Sherry in for my destination wedding. She did my bridal look, Mehndi look, and my mother's — everything was perfect. Our photos are genuinely stunning."</p>
+      <div class="testi-name">Sara A.</div>
+      <div class="testi-detail">Bride · Cancún Destination Wedding</div>
     </div>
   </div>
 </section>
 
 <!-- CONTACT -->
 <section class="contact" id="contact">
-  <div class="contact-inner">
-    <div>
-      <div class="eyebrow r">Let's Begin</div>
-      <h2 class="section-title r r-delay-1">
-        Tell me about<br/><em>your wedding.</em>
-      </h2>
-      <p class="contact-left-sub r r-delay-2">
-        I respond within 24 hours. If we're a good fit, we'll schedule a call. If we're not, I'll tell you honestly.
-      </p>
-      <div class="contact-meta r r-delay-3">
-        <div class="contact-meta-item">
-          <span class="contact-meta-label">Location</span>
-          <span>Atlanta, Georgia<br/>Available for travel worldwide</span>
-        </div>
-        <div class="contact-meta-item">
-          <span class="contact-meta-label">Email</span>
-          <span>hello@makeupbysherryb.com</span>
-        </div>
-        <div class="contact-meta-item">
-          <span class="contact-meta-label">Instagram</span>
-          <span>@makeupbysherryb</span>
-        </div>
-        <div class="contact-meta-item">
-          <span class="contact-meta-label">Booking</span>
-          <span>6–12 months advance<br/>recommended for peak dates</span>
-        </div>
-      </div>
+  <div class="contact-img">
+    <div class="contact-img-inner">
+      <span class="contact-img-ph">Bridal Portrait</span>
     </div>
-    <div>
-      <form action="https://formspree.io/f/xpwzgqob" method="POST" class="contact-form" id="contactForm">
-        <div class="form-row-2">
-          <div class="form-field">
-            <label>Your Name</label>
-            <input type="text" name="name" placeholder="Priya" required />
-          </div>
-          <div class="form-field">
-            <label>Email Address</label>
-            <input type="email" name="email" placeholder="priya@email.com" required />
-          </div>
+  </div>
+  <div class="contact-form-wrap">
+    <div class="label rv">Get in Touch</div>
+    <h2 class="rv d1">Tell me about<br/><em>your day.</em></h2>
+    <p class="contact-sub rv d2">I respond within 24 hours. Peak dates book 6–12 months in advance.</p>
+    <form action="https://formspree.io/f/xpwzgqob" method="POST" class="cform" id="contactForm">
+      <div class="cf-row">
+        <div class="cf-field">
+          <label>Your Name</label>
+          <input type="text" name="name" placeholder="Priya Sharma" required />
         </div>
-        <div class="form-row-2">
-          <div class="form-field">
-            <label>Wedding Date</label>
-            <input type="text" name="wedding_date" placeholder="November 2026" />
-          </div>
-          <div class="form-field">
-            <label>Service</label>
-            <select name="service">
-              <option value="">Select...</option>
-              <option>Full Bridal Package</option>
-              <option>Mehndi / Sangeet</option>
-              <option>Bridal Party</option>
-              <option>Destination Wedding</option>
-              <option>Other</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-field">
-          <label>Tell me about your wedding &amp; the look you're imagining</label>
-          <textarea name="message" rows="4" placeholder="Cultural background, location, aesthetic, who else needs makeup..."></textarea>
-        </div>
-        <div class="form-submit">
-          <button type="submit" class="btn-submit">Send Inquiry</button>
-          <span class="form-note">Response within 24 hours</span>
-        </div>
-      </form>
-      <div class="form-success" id="formSuccess">
-        <div class="form-success-inner">
-          <h3>Message received.</h3>
-          <p>Thank you for reaching out. I'll review your inquiry and be in touch within 24 hours. I look forward to hearing about your wedding.</p>
+        <div class="cf-field">
+          <label>Email</label>
+          <input type="email" name="email" placeholder="priya@email.com" required />
         </div>
       </div>
+      <div class="cf-row">
+        <div class="cf-field">
+          <label>Wedding Date</label>
+          <input type="text" name="date" placeholder="November 2026" />
+        </div>
+        <div class="cf-field">
+          <label>Service</label>
+          <select name="service">
+            <option value="">Select one</option>
+            <option>Full Bridal Package</option>
+            <option>Mehndi / Sangeet</option>
+            <option>Bridal Party</option>
+            <option>Destination Wedding</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </div>
+      <div class="cf-field">
+        <label>Tell me about your wedding</label>
+        <textarea name="message" rows="3" placeholder="Location, cultural background, the look you're imagining..."></textarea>
+      </div>
+      <div class="cf-submit">
+        <button type="submit" class="submit-btn">Send Inquiry</button>
+        <span class="submit-note">Response within 24 hours</span>
+      </div>
+    </form>
+    <div class="cf-success" id="cfSuccess">
+      <h3>Message received.</h3>
+      <p>Thank you for reaching out. I'll review your inquiry and be in touch within 24 hours.</p>
     </div>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo">Makeup by Sherry B</div>
-  <p>© 2026 · Atlanta, Georgia · All rights reserved</p>
-  <div class="footer-links">
-    <a href="#about">Story</a>
+  <div class="f-logo">Makeup by Sherry B</div>
+  <p>© 2026 · Atlanta, Georgia</p>
+  <div class="f-links">
+    <a href="#about">About</a>
     <a href="#services">Services</a>
-    <a href="#gallery">Work</a>
+    <a href="#gallery">Gallery</a>
     <a href="#contact">Book</a>
   </div>
 </footer>
 
 <script>
-  // Cursor
-  const cursor = document.getElementById('cursor');
-  document.addEventListener('mousemove', e => {
-    cursor.style.left = e.clientX + 'px';
-    cursor.style.top  = e.clientY + 'px';
-  });
-
-  // Nav scroll
+  // Sticky nav
   const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 80);
-  });
+  window.addEventListener('scroll', () => nav.classList.toggle('stuck', scrollY > 60));
 
-  // Reveal on scroll
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  // Reveal
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('on'); });
   }, { threshold: 0.08 });
-  document.querySelectorAll('.r').forEach(el => observer.observe(el));
+  document.querySelectorAll('.rv').forEach(el => io.observe(el));
 
-  // Contact form
+  // Form
   const form = document.getElementById('contactForm');
   form && form.addEventListener('submit', async e => {
     e.preventDefault();
-    const btn = form.querySelector('.btn-submit');
-    btn.textContent = 'Sending...';
-    btn.disabled = true;
+    const btn = form.querySelector('.submit-btn');
+    btn.textContent = 'Sending...'; btn.disabled = true;
     try {
-      const res = await fetch(form.action, {
-        method: 'POST', body: new FormData(form),
-        headers: { 'Accept': 'application/json' }
-      });
-      if (res.ok) {
-        form.style.display = 'none';
-        document.getElementById('formSuccess').style.display = 'block';
-      } else {
-        btn.textContent = 'Send Inquiry';
-        btn.disabled = false;
-        alert('Please email hello@makeupbysherryb.com directly.');
-      }
+      const r = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' }});
+      if (r.ok) { form.style.display = 'none'; document.getElementById('cfSuccess').style.display = 'block'; }
+      else { btn.textContent = 'Send Inquiry'; btn.disabled = false; }
     } catch { btn.textContent = 'Send Inquiry'; btn.disabled = false; }
   });
 </script>
