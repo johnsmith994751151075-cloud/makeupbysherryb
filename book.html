@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book Your Date — Makeup by Sherry B</title>
+  <meta name="description" content="Complete your bridal makeup booking and contract with Makeup by Sherry B, Atlanta's premier South Asian bridal artist." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <style>
+/* ── RESET ─────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  background: #FAFAF8;
+  color: #0F0F0F;
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+a { text-decoration: none; color: inherit; }
+
+/* ── NAV ───────────────────────────────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 24px 52px;
+  background: rgba(250,250,248,0.96);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid #E8E4DC;
+}
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #0F0F0F;
+}
+.nav-back {
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 400;
+  color: #999;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: color 0.25s;
+}
+.nav-back:hover { color: #C9A96E; }
+.nav-back-arrow {
+  width: 20px; height: 1px;
+  background: currentColor;
+  position: relative;
+}
+.nav-back-arrow::before {
+  content: '';
+  position: absolute;
+  left: 0; top: -3px;
+  width: 7px; height: 7px;
+  border-left: 1px solid currentColor;
+  border-bottom: 1px solid currentColor;
+  transform: rotate(45deg);
+}
+
+/* ── PAGE HEADER ───────────────────────────────────────────────── */
+.page-header {
+  padding: 140px 80px 64px;
+  background: #FAFAF8;
+  border-bottom: 1px solid #E8E4DC;
+}
+.page-header .label {
+  font-size: 0.6rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: #C9A96E;
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+.page-header h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.8rem, 5vw, 5rem);
+  font-weight: 300;
+  line-height: 1.05;
+  color: #0F0F0F;
+  margin-bottom: 20px;
+}
+.page-header h1 em { font-style: italic; }
+.page-header p {
+  font-size: 0.86rem;
+  color: #888;
+  line-height: 2;
+  max-width: 560px;
+  font-weight: 300;
+}
+
+/* ── MAIN LAYOUT ───────────────────────────────────────────────── */
+.book-wrap {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 64px 40px 100px;
+}
+
+/* ── SECTION TITLES ────────────────────────────────────────────── */
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.7rem;
+  font-weight: 300;
+  color: #0F0F0F;
+  margin-bottom: 8px;
+}
+.section-title em { font-style: italic; }
+.section-sub {
+  font-size: 0.78rem;
+  color: #bbb;
+  font-weight: 300;
+  margin-bottom: 36px;
+  letter-spacing: 0.04em;
+}
+.section-divider {
+  width: 40px;
+  height: 1px;
+  background: #C9A96E;
+  margin-bottom: 12px;
+}
+
+/* ── FORM FIELDS ───────────────────────────────────────────────── */
+.form-block {
+  margin-bottom: 56px;
+}
+.field-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 40px;
+}
+.field-grid.three {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+.field {
+  border-bottom: 1px solid #DDD8D0;
+  padding: 20px 0;
+  transition: border-color 0.3s;
+  margin-bottom: 4px;
+}
+.field:focus-within { border-color: #C9A96E; }
+.field label {
+  display: block;
+  font-size: 0.56rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #C9A96E;
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+.field input,
+.field textarea,
+.field select {
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: #0F0F0F;
+  width: 100%;
+  resize: none;
+}
+.field input::placeholder,
+.field textarea::placeholder { color: #ccc; }
+.field.full { grid-column: 1 / -1; }
+.field input[type="number"] {
+  -moz-appearance: textfield;
+}
+.field input[type="number"]::-webkit-outer-spin-button,
+.field input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; }
+
+/* ── CONTRACT TERMS ────────────────────────────────────────────── */
+.contract-block {
+  margin-bottom: 40px;
+}
+.contract-header {
+  background: #0F0F0F;
+  color: #FAFAF8;
+  padding: 28px 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.contract-header-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  font-weight: 300;
+  letter-spacing: 0.08em;
+}
+.contract-header-contact {
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  color: #C9A96E;
+  text-align: right;
+  font-weight: 400;
+}
+.contract-scroll-box {
+  border: 1px solid #E8E4DC;
+  border-top: none;
+  height: 360px;
+  overflow-y: auto;
+  padding: 36px 40px;
+  background: #F8F5F0;
+  scroll-behavior: smooth;
+}
+.contract-scroll-box::-webkit-scrollbar { width: 4px; }
+.contract-scroll-box::-webkit-scrollbar-track { background: transparent; }
+.contract-scroll-box::-webkit-scrollbar-thumb { background: #DDD8D0; border-radius: 2px; }
+.contract-section {
+  margin-bottom: 28px;
+}
+.contract-section-title {
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: #0F0F0F;
+  margin-bottom: 10px;
+}
+.contract-section p {
+  font-size: 0.82rem;
+  line-height: 1.9;
+  color: #555;
+  font-weight: 300;
+}
+.contract-scroll-hint {
+  font-size: 0.6rem;
+  color: #bbb;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-top: 12px;
+  text-align: center;
+  font-weight: 300;
+  transition: opacity 0.5s;
+}
+.contract-scroll-hint.hidden { opacity: 0; }
+
+/* ── SIGNATURE ─────────────────────────────────────────────────── */
+.signature-block {
+  margin-bottom: 40px;
+}
+.sig-label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.sig-label {
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #C9A96E;
+  font-weight: 400;
+}
+.sig-clear {
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #bbb;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  padding: 0;
+  transition: color 0.25s;
+}
+.sig-clear:hover { color: #0F0F0F; }
+#sig-canvas {
+  width: 100%;
+  height: 160px;
+  border: 1px solid #E8E4DC;
+  background: #fff;
+  display: block;
+  cursor: crosshair;
+  touch-action: none;
+}
+.sig-hint {
+  font-size: 0.62rem;
+  color: #ccc;
+  letter-spacing: 0.14em;
+  margin-top: 8px;
+  font-weight: 300;
+}
+.sig-date-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 20px;
+}
+.sig-date-label {
+  font-size: 0.6rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #bbb;
+  font-weight: 400;
+}
+.sig-date-val {
+  font-size: 0.88rem;
+  color: #0F0F0F;
+  font-weight: 300;
+}
+
+/* ── AGREE CHECKBOX ────────────────────────────────────────────── */
+.agree-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 48px;
+  padding: 28px 32px;
+  border: 1px solid #E8E4DC;
+  background: #F8F5F0;
+}
+.agree-row input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  margin-top: 2px;
+  accent-color: #C9A96E;
+  cursor: pointer;
+}
+.agree-row label {
+  font-size: 0.82rem;
+  color: #555;
+  line-height: 1.8;
+  font-weight: 300;
+  cursor: pointer;
+}
+.agree-row label strong { color: #0F0F0F; font-weight: 400; }
+
+/* ── SUBMIT ────────────────────────────────────────────────────── */
+.submit-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+}
+.submit-btn {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.66rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  font-weight: 400;
+  padding: 18px 56px;
+  background: #0F0F0F;
+  color: #FAFAF8;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+}
+.submit-btn:hover:not(:disabled) { background: #C9A96E; transform: translateY(-1px); }
+.submit-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+.submit-note {
+  font-size: 0.72rem;
+  color: #bbb;
+  font-weight: 300;
+  line-height: 1.7;
+  max-width: 480px;
+}
+
+/* ── STATUS MESSAGES ───────────────────────────────────────────── */
+#status-msg {
+  display: none;
+  padding: 28px 36px;
+  margin-top: 28px;
+  font-size: 0.86rem;
+  line-height: 1.8;
+  font-weight: 300;
+}
+#status-msg.success {
+  display: block;
+  background: #F0EDE4;
+  border-left: 3px solid #C9A96E;
+  color: #0F0F0F;
+}
+#status-msg.error {
+  display: block;
+  background: #FDF0EE;
+  border-left: 3px solid #C46B5A;
+  color: #0F0F0F;
+}
+#status-msg strong { display: block; margin-bottom: 6px; font-weight: 500; }
+
+/* ── DEPOSIT CALLOUT ───────────────────────────────────────────── */
+.deposit-callout {
+  background: #0F0F0F;
+  color: #FAFAF8;
+  padding: 36px 44px;
+  margin-bottom: 56px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+.deposit-callout-icon {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.6rem;
+  font-style: italic;
+  color: #C9A96E;
+  flex-shrink: 0;
+  line-height: 1;
+}
+.deposit-callout-text {
+  font-size: 0.82rem;
+  color: rgba(250,250,248,0.7);
+  line-height: 1.9;
+  font-weight: 300;
+}
+.deposit-callout-text strong { color: #C9A96E; font-weight: 400; }
+
+/* ── FOOTER ────────────────────────────────────────────────────── */
+footer {
+  background: #0F0F0F;
+  padding: 36px 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.footer-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.95rem;
+  font-weight: 400;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(250,250,248,0.7);
+}
+.footer-copy {
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  color: #444;
+  text-transform: uppercase;
+  font-weight: 300;
+}
+
+/* ── MOBILE ────────────────────────────────────────────────────── */
+@media (max-width: 760px) {
+  nav { padding: 18px 24px; }
+  .page-header { padding: 110px 24px 48px; }
+  .book-wrap { padding: 40px 24px 80px; }
+  .field-grid, .field-grid.three { grid-template-columns: 1fr; }
+  .field.full { grid-column: 1; }
+  .contract-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .deposit-callout { flex-direction: column; gap: 16px; }
+  footer { flex-direction: column; gap: 16px; padding: 28px 24px; text-align: center; }
+}
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-logo">Makeup by Sherry B</a>
+  <a href="/" class="nav-back">
+    <span class="nav-back-arrow"></span>
+    Back to Site
+  </a>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <p class="label">Bridal Booking & Contract</p>
+  <h1>Reserve your date.<br><em>Sign your contract.</em></h1>
+  <p>Complete the form below to lock in your wedding date. Your signature below constitutes a binding agreement. Please read all terms carefully before signing.</p>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="book-wrap">
+
+  <!-- DEPOSIT CALLOUT -->
+  <div class="deposit-callout">
+    <div class="deposit-callout-icon">$100</div>
+    <div class="deposit-callout-text">
+      A <strong>non-refundable $100 deposit</strong> is required to fully secure your date. After submitting this contract, please send your deposit via <strong>Zelle or Venmo to @makeupbysherryb</strong>. Your date is not held until both the signed contract and deposit are received.
+    </div>
+  </div>
+
+  <form id="booking-form" novalidate>
+
+    <!-- BRIDE INFO -->
+    <div class="form-block">
+      <div class="section-divider"></div>
+      <h2 class="section-title"><em>Bride's</em> Information</h2>
+      <p class="section-sub">Basic contact details for your contract file.</p>
+      <div class="field-grid">
+        <div class="field full">
+          <label for="brideName">Bride's Full Name *</label>
+          <input type="text" id="brideName" name="brideName" placeholder="Full legal name" required />
+        </div>
+        <div class="field full">
+          <label for="mailingAddress">Mailing Address *</label>
+          <input type="text" id="mailingAddress" name="mailingAddress" placeholder="Street, City, State, ZIP" required />
+        </div>
+        <div class="field">
+          <label for="phone">Phone Number *</label>
+          <input type="tel" id="phone" name="phone" placeholder="(404) 000-0000" required />
+        </div>
+        <div class="field">
+          <label for="email">Email Address *</label>
+          <input type="email" id="email" name="email" placeholder="you@email.com" required />
+        </div>
+      </div>
+    </div>
+
+    <!-- WEDDING DETAILS -->
+    <div class="form-block">
+      <div class="section-divider"></div>
+      <h2 class="section-title"><em>Wedding</em> Details</h2>
+      <p class="section-sub">Logistical information for your wedding day schedule.</p>
+      <div class="field-grid">
+        <div class="field">
+          <label for="weddingDate">Wedding Date *</label>
+          <input type="date" id="weddingDate" name="weddingDate" required />
+        </div>
+        <div class="field">
+          <label for="venue">Wedding Location / Venue Name *</label>
+          <input type="text" id="venue" name="venue" placeholder="Venue or location name" required />
+        </div>
+        <div class="field full">
+          <label for="venueAddress">Venue Address *</label>
+          <input type="text" id="venueAddress" name="venueAddress" placeholder="Full venue address" required />
+        </div>
+        <div class="field full">
+          <label for="gettingReadyAddress">"Getting Ready" Location Address *</label>
+          <input type="text" id="gettingReadyAddress" name="gettingReadyAddress" placeholder="Hotel, home, or getting ready venue address" required />
+        </div>
+        <div class="field">
+          <label for="ceremonyTime">Ceremony Start Time *</label>
+          <input type="time" id="ceremonyTime" name="ceremonyTime" required />
+        </div>
+        <div class="field">
+          <label for="receptionTime">Reception Start Time (desired finish) *</label>
+          <input type="time" id="receptionTime" name="receptionTime" required />
+        </div>
+      </div>
+    </div>
+
+    <!-- SERVICES -->
+    <div class="form-block">
+      <div class="section-divider"></div>
+      <h2 class="section-title"><em>Services</em> & Total</h2>
+      <p class="section-sub">List all recipients and services agreed upon.</p>
+      <div class="field-grid">
+        <div class="field full">
+          <label for="recipients">Wedding Day Makeup Recipients *</label>
+          <textarea id="recipients" name="recipients" rows="4" placeholder="e.g. Bride, Mother of Bride, 3 Bridesmaids — list all individuals receiving services" required></textarea>
+        </div>
+        <div class="field full">
+          <label for="services">Services Breakdown *</label>
+          <textarea id="services" name="services" rows="4" placeholder="e.g. Full Bridal Makeup $850, Bridesmaid x3 @ $150 each, Mother of Bride $175..." required></textarea>
+        </div>
+        <div class="field">
+          <label for="totalDue">Total Due ($) *</label>
+          <input type="number" id="totalDue" name="totalDue" placeholder="0.00" min="0" step="0.01" required />
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTRACT TERMS -->
+    <div class="form-block">
+      <div class="section-divider"></div>
+      <h2 class="section-title"><em>Contract</em> Terms</h2>
+      <p class="section-sub">Please scroll through and read the full contract before signing.</p>
+
+      <div class="contract-block">
+        <div class="contract-header">
+          <div class="contract-header-title">Bridal Makeup Contract — Makeup by Sherry B</div>
+          <div class="contract-header-contact">makeupbysherryb@gmail.com<br>(623) 521-0348</div>
+        </div>
+        <div class="contract-scroll-box" id="contract-scroll">
+          <div class="contract-section">
+            <div class="contract-section-title">Booking &amp; Deposit</div>
+            <p>A non-refundable deposit of $100.00 is required to secure your wedding date. This deposit will be applied toward your total balance. Your date is NOT held until the deposit is received and this contract is signed.</p>
+          </div>
+          <div class="contract-section">
+            <div class="contract-section-title">Payment</div>
+            <p>The remaining balance is due in full on or before the wedding day. Cash, Zelle, and Venmo are accepted (@makeupbysherryb). Personal checks are not accepted. Client is responsible for all balances, including those of any bridal party members who fail to provide payment.</p>
+          </div>
+          <div class="contract-section">
+            <div class="contract-section-title">Cancellation Policy</div>
+            <p>Cancellation 90+ days before event: Deposit forfeited, no additional charges. Cancellation 31–89 days before: Deposit forfeited + 25% of remaining balance. Cancellation 15–30 days before: Deposit forfeited + 50% of remaining balance. Cancellation within 14 days: Full balance due. No refunds for party members who miss appointments.</p>
+          </div>
+          <div class="contract-section">
+            <div class="contract-section-title">Rescheduling</div>
+            <p>One complimentary reschedule is permitted with 60+ days notice, subject to availability. Rescheduling requests within 30 days of the event will be treated as a cancellation under the cancellation policy above.</p>
+          </div>
+          <div class="contract-section">
+            <div class="contract-section-title">Late Start</div>
+            <p>A late start fee of $25.00 per 15-minute increment may be applied if the artist is unable to begin services on time due to delays caused by the client or client's party.</p>
+          </div>
+          <div class="contract-section">
+            <div class="contract-section-title">Travel &amp; Mileage</div>
+            <p>Travel fees apply for locations outside a 20-mile radius of Atlanta, GA. Mileage is calculated at the current IRS standard rate (round trip). Parking fees, tolls, and other travel-related costs are the client's responsibility.</p>
+          </div>
+          <div class="contract-section">
+            <div class="contract-section-title">Trials</div>
+            <p>Bridal trials are a separate service and are not included in the wedding day package unless explicitly stated in writing. Trial fees are non-refundable.</p>
+          </div>
+          <div class="contract-section">
+            <div class="contract-section-title">Photo Release</div>
+            <p>Client consents to Makeup by Sherry B using photographs and images of completed makeup looks for professional portfolio, social media, and marketing purposes, unless the client opts out in writing prior to the event date.</p>
+          </div>
+          <div class="contract-section">
+            <div class="contract-section-title">Liability</div>
+            <p>Makeup by Sherry B is not liable for allergic reactions to any products used. It is the client's responsibility to disclose all known allergies and skin sensitivities prior to the appointment. Makeup by Sherry B is not liable for failure to perform due to circumstances beyond reasonable control, including but not limited to acts of God, illness, family emergency, or other force majeure events.</p>
+          </div>
+          <div class="contract-section">
+            <div class="contract-section-title">Governing Law</div>
+            <p>This agreement shall be governed by and construed in accordance with the laws of the State of Georgia. Any disputes arising under this contract shall be resolved in Fulton County, Georgia.</p>
+          </div>
+          <div class="contract-section">
+            <div class="contract-section-title">Entire Agreement</div>
+            <p>This contract constitutes the entire agreement between the parties and supersedes all prior discussions, representations, or agreements. Any modifications must be agreed upon in writing by both parties.</p>
+          </div>
+        </div>
+        <p class="contract-scroll-hint" id="scroll-hint">↓ Scroll to read full contract</p>
+      </div>
+    </div>
+
+    <!-- SIGNATURE -->
+    <div class="signature-block">
+      <div class="section-divider"></div>
+      <h2 class="section-title"><em>Electronic</em> Signature</h2>
+      <p class="section-sub" style="margin-bottom: 20px;">Sign below using your mouse or finger. Your signature confirms agreement to all terms above.</p>
+
+      <div class="sig-label-row">
+        <span class="sig-label">Signature *</span>
+        <button type="button" class="sig-clear" id="sig-clear-btn">Clear Signature</button>
+      </div>
+      <canvas id="sig-canvas" width="820" height="160"></canvas>
+      <p class="sig-hint">Draw your signature above using mouse or touch</p>
+
+      <div class="sig-date-row">
+        <span class="sig-date-label">Date:</span>
+        <span class="sig-date-val" id="sig-date"></span>
+      </div>
+    </div>
+
+    <!-- AGREE CHECKBOX -->
+    <div class="agree-row">
+      <input type="checkbox" id="agree-check" name="agree" />
+      <label for="agree-check">
+        <strong>I have read and agree to all terms above.</strong><br>
+        By checking this box and signing above, I acknowledge that I have carefully read the Bridal Makeup Contract in its entirety and agree to all terms and conditions set forth herein. I understand this constitutes a legally binding agreement.
+      </label>
+    </div>
+
+    <!-- SUBMIT -->
+    <div class="submit-wrap">
+      <button type="submit" class="submit-btn" id="submit-btn">Submit Contract &amp; Reserve Date</button>
+      <p class="submit-note">After submitting, you will receive confirmation and instructions to complete your $100 non-refundable deposit via Zelle or Venmo to @makeupbysherryb to fully secure your date.</p>
+    </div>
+
+    <div id="status-msg"></div>
+
+  </form>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Makeup by Sherry B</div>
+  <div class="footer-copy">© 2025 Makeup by Sherry B · Atlanta, Georgia</div>
+</footer>
+
+<script>
+/* ── DATE AUTOFILL ─────────────────────────────────────────────── */
+const today = new Date();
+const dateStr = today.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+document.getElementById('sig-date').textContent = dateStr;
+
+/* ── CONTRACT SCROLL HINT ──────────────────────────────────────── */
+const scrollBox = document.getElementById('contract-scroll');
+const scrollHint = document.getElementById('scroll-hint');
+scrollBox.addEventListener('scroll', () => {
+  if (scrollBox.scrollTop > 60) scrollHint.classList.add('hidden');
+  else scrollHint.classList.remove('hidden');
+});
+
+/* ── SIGNATURE PAD ─────────────────────────────────────────────── */
+const canvas = document.getElementById('sig-canvas');
+const ctx = canvas.getContext('2d');
+let drawing = false;
+let hasSig = false;
+
+function resizeCanvas() {
+  const ratio = window.devicePixelRatio || 1;
+  const rect = canvas.getBoundingClientRect();
+  const imgData = hasSig ? ctx.getImageData(0, 0, canvas.width, canvas.height) : null;
+  canvas.width = rect.width * ratio;
+  canvas.height = rect.height * ratio;
+  ctx.scale(ratio, ratio);
+  ctx.strokeStyle = '#0F0F0F';
+  ctx.lineWidth = 2;
+  ctx.lineCap = 'round';
+  ctx.lineJoin = 'round';
+  if (imgData) ctx.putImageData(imgData, 0, 0);
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+function getPos(e) {
+  const rect = canvas.getBoundingClientRect();
+  const ratio = window.devicePixelRatio || 1;
+  if (e.touches) {
+    return {
+      x: (e.touches[0].clientX - rect.left),
+      y: (e.touches[0].clientY - rect.top)
+    };
+  }
+  return {
+    x: e.clientX - rect.left,
+    y: e.clientY - rect.top
+  };
+}
+
+canvas.addEventListener('mousedown', e => {
+  drawing = true;
+  hasSig = true;
+  const pos = getPos(e);
+  ctx.beginPath();
+  ctx.moveTo(pos.x, pos.y);
+});
+canvas.addEventListener('mousemove', e => {
+  if (!drawing) return;
+  const pos = getPos(e);
+  ctx.lineTo(pos.x, pos.y);
+  ctx.stroke();
+});
+canvas.addEventListener('mouseup', () => { drawing = false; ctx.beginPath(); });
+canvas.addEventListener('mouseleave', () => { drawing = false; ctx.beginPath(); });
+
+canvas.addEventListener('touchstart', e => {
+  e.preventDefault();
+  drawing = true;
+  hasSig = true;
+  const pos = getPos(e);
+  ctx.beginPath();
+  ctx.moveTo(pos.x, pos.y);
+}, { passive: false });
+canvas.addEventListener('touchmove', e => {
+  e.preventDefault();
+  if (!drawing) return;
+  const pos = getPos(e);
+  ctx.lineTo(pos.x, pos.y);
+  ctx.stroke();
+}, { passive: false });
+canvas.addEventListener('touchend', () => { drawing = false; ctx.beginPath(); });
+
+document.getElementById('sig-clear-btn').addEventListener('click', () => {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  hasSig = false;
+  drawing = false;
+});
+
+/* ── FORM SUBMIT ───────────────────────────────────────────────── */
+document.getElementById('booking-form').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const btn = document.getElementById('submit-btn');
+  const statusMsg = document.getElementById('status-msg');
+  statusMsg.className = '';
+  statusMsg.style.display = 'none';
+
+  // Validate required fields
+  const required = ['brideName','mailingAddress','phone','email','weddingDate','venue','venueAddress','gettingReadyAddress','ceremonyTime','receptionTime','recipients','services','totalDue'];
+  let missing = [];
+  required.forEach(id => {
+    const el = document.getElementById(id);
+    if (!el.value.trim()) missing.push(el.previousElementSibling.textContent.replace(' *',''));
+  });
+  if (missing.length) {
+    statusMsg.className = 'error';
+    statusMsg.innerHTML = '<strong>Please complete all required fields:</strong>' + missing.join(', ');
+    statusMsg.style.display = 'block';
+    statusMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
+  if (!hasSig) {
+    statusMsg.className = 'error';
+    statusMsg.innerHTML = '<strong>Signature required.</strong> Please sign in the signature box above.';
+    statusMsg.style.display = 'block';
+    document.getElementById('sig-canvas').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
+  if (!document.getElementById('agree-check').checked) {
+    statusMsg.className = 'error';
+    statusMsg.innerHTML = '<strong>Agreement required.</strong> Please check the box confirming you have read and agree to all contract terms.';
+    statusMsg.style.display = 'block';
+    document.getElementById('agree-check').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
+
+  btn.textContent = 'Generating PDF...';
+  btn.disabled = true;
+
+  // Gather form values
+  const v = id => document.getElementById(id).value.trim();
+  const brideName       = v('brideName');
+  const mailingAddress  = v('mailingAddress');
+  const phone           = v('phone');
+  const email           = v('email');
+  const weddingDate     = v('weddingDate');
+  const venue           = v('venue');
+  const venueAddress    = v('venueAddress');
+  const gettingReadyAddress = v('gettingReadyAddress');
+  const ceremonyTime    = v('ceremonyTime');
+  const receptionTime   = v('receptionTime');
+  const recipients      = v('recipients');
+  const services        = v('services');
+  const totalDue        = v('totalDue');
+  const signatureDate   = dateStr;
+  const sigDataUrl      = canvas.toDataURL('image/png');
+
+  // Generate PDF
+  try {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF({ unit: 'pt', format: 'letter' });
+    const pageW = 612, pageH = 792, margin = 60, contentW = pageW - margin * 2;
+    let y = margin;
+
+    // Header bar
+    doc.setFillColor(15, 15, 15);
+    doc.rect(0, 0, pageW, 80, 'F');
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(20);
+    doc.setTextColor(250, 250, 248);
+    doc.text('MAKEUP BY SHERRY B', margin, 38);
+    doc.setFontSize(8);
+    doc.setTextColor(201, 169, 110);
+    doc.text('BRIDAL MAKEUP CONTRACT', margin, 54);
+    doc.text('makeupbysherryb@gmail.com  ·  (623) 521-0348', margin, 66);
+    y = 100;
+
+    // Gold line
+    doc.setDrawColor(201, 169, 110);
+    doc.setLineWidth(1);
+    doc.line(margin, y, pageW - margin, y);
+    y += 20;
+
+    // CLIENT INFORMATION section
+    doc.setTextColor(201, 169, 110);
+    doc.setFontSize(7);
+    doc.setFont('helvetica', 'bold');
+    doc.text('CLIENT INFORMATION', margin, y);
+    y += 14;
+    doc.setDrawColor(201, 169, 110);
+    doc.setLineWidth(0.5);
+    doc.line(margin, y, margin + 120, y);
+    y += 14;
+
+    const field = (label, value) => {
+      if (y > pageH - 100) { doc.addPage(); y = margin; }
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(7);
+      doc.setTextColor(150, 150, 150);
+      doc.text(label.toUpperCase(), margin, y);
+      y += 12;
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(10);
+      doc.setTextColor(15, 15, 15);
+      const lines = doc.splitTextToSize(value || '—', contentW);
+      doc.text(lines, margin, y);
+      y += lines.length * 13 + 6;
+    };
+
+    field('Bride\'s Full Name', brideName);
+    field('Mailing Address', mailingAddress);
+
+    // Two-column row for phone/email
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(7);
+    doc.setTextColor(150, 150, 150);
+    doc.text('PHONE NUMBER', margin, y);
+    doc.text('EMAIL ADDRESS', margin + contentW/2 + 10, y);
+    y += 12;
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(10);
+    doc.setTextColor(15, 15, 15);
+    doc.text(phone, margin, y);
+    doc.text(email, margin + contentW/2 + 10, y);
+    y += 20;
+
+    y += 10;
+    // WEDDING DETAILS
+    doc.setTextColor(201, 169, 110);
+    doc.setFontSize(7);
+    doc.setFont('helvetica', 'bold');
+    doc.text('WEDDING DETAILS', margin, y);
+    y += 14;
+    doc.setDrawColor(201, 169, 110);
+    doc.setLineWidth(0.5);
+    doc.line(margin, y, margin + 120, y);
+    y += 14;
+
+    // Date and venue on same row
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(7);
+    doc.setTextColor(150, 150, 150);
+    doc.text('WEDDING DATE', margin, y);
+    doc.text('VENUE NAME', margin + contentW/2 + 10, y);
+    y += 12;
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(10);
+    doc.setTextColor(15, 15, 15);
+    doc.text(weddingDate, margin, y);
+    doc.text(venue, margin + contentW/2 + 10, y);
+    y += 20;
+
+    field('Venue Address', venueAddress);
+    field('"Getting Ready" Location Address', gettingReadyAddress);
+
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(7);
+    doc.setTextColor(150, 150, 150);
+    doc.text('CEREMONY START TIME', margin, y);
+    doc.text('RECEPTION START TIME (DESIRED FINISH)', margin + contentW/2 + 10, y);
+    y += 12;
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(10);
+    doc.setTextColor(15, 15, 15);
+    doc.text(ceremonyTime, margin, y);
+    doc.text(receptionTime, margin + contentW/2 + 10, y);
+    y += 24;
+
+    y += 10;
+    // SERVICES
+    doc.setTextColor(201, 169, 110);
+    doc.setFontSize(7);
+    doc.setFont('helvetica', 'bold');
+    doc.text('SERVICES & TOTAL', margin, y);
+    y += 14;
+    doc.setDrawColor(201, 169, 110);
+    doc.setLineWidth(0.5);
+    doc.line(margin, y, margin + 120, y);
+    y += 14;
+
+    field('Wedding Day Makeup Recipients', recipients);
+    field('Services Breakdown', services);
+    field('Total Due', '$' + parseFloat(totalDue).toFixed(2));
+
+    // Page break for contract terms
+    doc.addPage();
+    y = margin;
+
+    // Contract terms
+    doc.setFillColor(15, 15, 15);
+    doc.rect(0, 0, pageW, 50, 'F');
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(11);
+    doc.setTextColor(250, 250, 248);
+    doc.text('CONTRACT TERMS & CONDITIONS', margin, 32);
+    y = 70;
+
+    const terms = [
+      ['BOOKING & DEPOSIT', 'A non-refundable deposit of $100.00 is required to secure your wedding date. This deposit will be applied toward your total balance. Your date is NOT held until the deposit is received and this contract is signed.'],
+      ['PAYMENT', 'The remaining balance is due in full on or before the wedding day. Cash, Zelle, and Venmo are accepted (@makeupbysherryb). Personal checks are not accepted. Client is responsible for all balances, including those of any bridal party members who fail to provide payment.'],
+      ['CANCELLATION POLICY', 'Cancellation 90+ days before: Deposit forfeited, no additional charges. Cancellation 31–89 days before: Deposit forfeited + 25% of remaining balance. Cancellation 15–30 days before: Deposit forfeited + 50% of remaining balance. Cancellation within 14 days: Full balance due. No refunds for party members who miss appointments.'],
+      ['RESCHEDULING', 'One complimentary reschedule with 60+ days notice, subject to availability. Rescheduling within 30 days treated as cancellation.'],
+      ['LATE START', 'A late start fee of $25 per 15 minutes may be applied if artist cannot begin on time due to client delay.'],
+      ['TRAVEL & MILEAGE', 'Travel fees apply outside 20-mile radius of Atlanta, GA. Mileage at current IRS standard rate (round trip). Parking fees are client\'s responsibility.'],
+      ['TRIALS', 'Bridal trials are separate and not included unless stated in writing. Non-refundable.'],
+      ['PHOTO RELEASE', 'Client consents to Makeup by Sherry B using images of completed looks for portfolio, social media, and marketing purposes, unless client opts out in writing prior to event.'],
+      ['LIABILITY', 'Not liable for allergic reactions. Client must disclose allergies prior to appointment. Not liable for force majeure events.'],
+      ['GOVERNING LAW', 'State of Georgia. Disputes in Fulton County, Georgia.']
+    ];
+
+    terms.forEach(([title, text]) => {
+      if (y > pageH - 100) { doc.addPage(); y = margin; }
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(7.5);
+      doc.setTextColor(201, 169, 110);
+      doc.text(title, margin, y);
+      y += 12;
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(9.5);
+      doc.setTextColor(60, 60, 60);
+      const lines = doc.splitTextToSize(text, contentW);
+      doc.text(lines, margin, y);
+      y += lines.length * 12 + 10;
+    });
+
+    // Signature page
+    if (y > pageH - 200) { doc.addPage(); y = margin; }
+    y += 20;
+    doc.setDrawColor(201, 169, 110);
+    doc.setLineWidth(1);
+    doc.line(margin, y, pageW - margin, y);
+    y += 20;
+
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(7);
+    doc.setTextColor(150, 150, 150);
+    doc.text('ELECTRONIC SIGNATURE', margin, y);
+    y += 16;
+
+    // Signature image
+    const sigImg = sigDataUrl;
+    doc.addImage(sigImg, 'PNG', margin, y, contentW, 80);
+    y += 88;
+
+    doc.setDrawColor(100, 100, 100);
+    doc.setLineWidth(0.5);
+    doc.line(margin, y, margin + 280, y);
+    y += 10;
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(9);
+    doc.setTextColor(60, 60, 60);
+    doc.text(brideName + ' (Client)', margin, y);
+    y += 20;
+
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(7);
+    doc.setTextColor(150, 150, 150);
+    doc.text('DATE SIGNED', margin, y);
+    y += 12;
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(10);
+    doc.setTextColor(15, 15, 15);
+    doc.text(signatureDate, margin, y);
+    y += 20;
+
+    // Confirmation note
+    y += 10;
+    doc.setFillColor(248, 245, 240);
+    doc.rect(margin, y, contentW, 50, 'F');
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(8.5);
+    doc.setTextColor(85, 85, 85);
+    const confirmLines = doc.splitTextToSize('By signing above, client confirms they have read and understood all terms of this Bridal Makeup Contract and agrees to be bound by its conditions. This electronic signature is legally binding.', contentW - 20);
+    doc.text(confirmLines, margin + 10, y + 15);
+
+    const pdfBase64 = doc.output('datauristring').split(',')[1];
+
+    btn.textContent = 'Uploading...';
+
+    const payload = {
+      pdfBase64, brideName, email, weddingDate, venue,
+      gettingReadyAddress, ceremonyTime, receptionTime,
+      recipients, services, totalDue, signatureDate
+    };
+
+    const res = await fetch('/api/submit-contract', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+
+    const data = await res.json();
+
+    if (data.success) {
+      statusMsg.className = 'success';
+      statusMsg.innerHTML = '<strong>Contract submitted successfully! 🎉</strong>Your contract has been submitted! Please complete your $100 deposit via Zelle or Venmo to @makeupbysherryb to secure your date. You\'ll receive a confirmation email shortly. We look forward to making your wedding day unforgettable!';
+      statusMsg.style.display = 'block';
+      btn.textContent = 'Submitted ✓';
+      btn.style.background = '#C9A96E';
+      statusMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } else {
+      throw new Error(data.error || 'Submission failed');
+    }
+  } catch (err) {
+    console.error(err);
+    statusMsg.className = 'error';
+    statusMsg.innerHTML = '<strong>Submission failed.</strong> ' + (err.message || 'Please try again or contact makeupbysherryb@gmail.com directly.');
+    statusMsg.style.display = 'block';
+    btn.textContent = 'Submit Contract & Reserve Date';
+    btn.disabled = false;
+    statusMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+});
+</script>
+</body>
+</html>

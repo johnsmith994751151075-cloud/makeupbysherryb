@@ -8,240 +8,353 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet" />
   <style>
-
 /* ── RESET ─────────────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; font-size: 16px; }
 body {
-  background: #faf8f5;
-  color: #1a1a1a;
+  background: #FAFAF8;
+  color: #0F0F0F;
   font-family: 'Jost', sans-serif;
   font-weight: 300;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  cursor: none;
 }
 a { text-decoration: none; color: inherit; }
-img { display: block; width: 100%; object-fit: cover; }
+img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+/* ── CUSTOM CURSOR ─────────────────────────────────────────────── */
+.cursor-dot {
+  position: fixed;
+  width: 6px; height: 6px;
+  background: #C9A96E;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s, height 0.2s, background 0.2s;
+}
+.cursor-ring {
+  position: fixed;
+  width: 36px; height: 36px;
+  border: 1px solid rgba(201,169,110,0.5);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: width 0.35s cubic-bezier(.25,.46,.45,.94),
+              height 0.35s cubic-bezier(.25,.46,.45,.94),
+              border-color 0.3s;
+}
+body:hover .cursor-ring { opacity: 1; }
+a:hover ~ .cursor-ring,
+button:hover ~ .cursor-ring { width: 56px; height: 56px; border-color: #C9A96E; }
+
+/* ── PRELOADER ─────────────────────────────────────────────────── */
+#preloader {
+  position: fixed; inset: 0;
+  background: #0F0F0F;
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+#preloader.done { opacity: 0; visibility: hidden; }
+.preloader-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.6rem;
+  font-weight: 300;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: #FAFAF8;
+  animation: preloader-fade 1.2s ease forwards;
+}
+.preloader-line {
+  width: 0; height: 1px;
+  background: #C9A96E;
+  margin-top: 20px;
+  animation: preloader-line 1s ease 0.3s forwards;
+}
+@keyframes preloader-fade {
+  from { opacity: 0; letter-spacing: 0.6em; }
+  to   { opacity: 1; letter-spacing: 0.35em; }
+}
+@keyframes preloader-line {
+  from { width: 0; }
+  to   { width: 80px; }
+}
+
+/* ── REVEAL ANIMATIONS ─────────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.9s cubic-bezier(.25,.46,.45,.94),
+              transform 0.9s cubic-bezier(.25,.46,.45,.94);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.22s; }
+.reveal-delay-3 { transition-delay: 0.34s; }
+.reveal-delay-4 { transition-delay: 0.46s; }
 
 /* ── NAV ───────────────────────────────────────────────────────── */
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   display: flex; align-items: center; justify-content: space-between;
-  padding: 28px 48px;
-  transition: background 0.4s, padding 0.4s;
+  padding: 30px 52px;
+  transition: background 0.5s, padding 0.4s, border-color 0.5s;
+  border-bottom: 1px solid transparent;
 }
 nav.stuck {
-  background: rgba(250,248,245,0.95);
-  backdrop-filter: blur(12px);
-  padding: 18px 48px;
-  border-bottom: 1px solid #ece8e1;
+  background: rgba(250,250,248,0.94);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 18px 52px;
+  border-bottom-color: #E8E4DC;
 }
 .nav-logo {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 1.05rem;
+  font-size: 1rem;
   font-weight: 400;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: #1a1a1a;
+  color: #0F0F0F;
 }
 .nav-center {
-  display: flex; gap: 48px; list-style: none;
+  display: flex; gap: 52px; list-style: none;
   position: absolute; left: 50%; transform: translateX(-50%);
 }
 .nav-center a {
-  font-size: 0.68rem;
-  letter-spacing: 0.2em;
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   font-weight: 400;
-  color: #888;
+  color: #999;
   transition: color 0.25s;
 }
-.nav-center a:hover { color: #1a1a1a; }
-.nav-right {
-  font-size: 0.68rem;
-  letter-spacing: 0.2em;
+.nav-center a:hover { color: #0F0F0F; }
+.nav-book {
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   font-weight: 400;
-  color: #1a1a1a;
-  border-bottom: 1px solid #1a1a1a;
-  padding-bottom: 2px;
-  transition: color 0.25s, border-color 0.25s;
+  padding: 11px 30px;
+  border: 1px solid #0F0F0F;
+  color: #0F0F0F;
+  transition: background 0.3s, color 0.3s;
 }
-.nav-right:hover { color: #b5896a; border-color: #b5896a; }
+.nav-book:hover { background: #0F0F0F; color: #FAFAF8; }
 
 /* ── HERO ──────────────────────────────────────────────────────── */
 .hero {
   height: 100vh;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 55% 45%;
+  position: relative;
+  overflow: hidden;
 }
 .hero-img {
   position: relative;
-  background: #e8e0d6;
   overflow: hidden;
 }
-.hero-img-inner {
+.hero-img img {
   position: absolute; inset: 0;
-  background: linear-gradient(160deg, #ddd4c8 0%, #c8bdb0 40%, #d4c4b8 100%);
-  display: flex; align-items: center; justify-content: center;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transform: scale(1.08);
+  transition: transform 8s ease;
 }
-.hero-img-placeholder {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 0.75rem;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: rgba(26,26,26,0.2);
+.hero-img img.loaded { transform: scale(1.0); }
+.hero-img-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to right, rgba(15,15,15,0.18) 0%, rgba(15,15,15,0) 100%);
+  z-index: 1;
 }
 .hero-text {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: 0 64px 80px 72px;
-  background: #faf8f5;
+  padding: 0 72px 88px 80px;
+  background: #FAFAF8;
+  position: relative;
 }
-.hero-location {
-  font-size: 0.65rem;
-  letter-spacing: 0.3em;
+.hero-eyebrow {
+  font-size: 0.6rem;
+  letter-spacing: 0.32em;
   text-transform: uppercase;
-  color: #b5896a;
+  color: #C9A96E;
   font-weight: 400;
   margin-bottom: 28px;
 }
 .hero-h1 {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(3.5rem, 5.5vw, 6rem);
+  font-size: clamp(3.2rem, 5vw, 5.6rem);
   font-weight: 300;
   line-height: 1.0;
   letter-spacing: -0.02em;
-  color: #1a1a1a;
+  color: #0F0F0F;
   margin-bottom: 36px;
 }
 .hero-h1 em {
   font-style: italic;
   display: block;
+  color: #0F0F0F;
 }
 .hero-sub {
-  font-size: 0.82rem;
-  line-height: 1.9;
-  color: #888;
-  max-width: 340px;
-  margin-bottom: 48px;
+  font-size: 0.83rem;
+  line-height: 2;
+  color: #999;
+  max-width: 320px;
+  margin-bottom: 52px;
   font-weight: 300;
 }
 .hero-cta {
   display: flex;
-  gap: 32px;
+  gap: 36px;
   align-items: center;
 }
-.btn-dark {
-  font-size: 0.65rem;
-  letter-spacing: 0.2em;
+.btn-primary {
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   font-weight: 400;
-  padding: 14px 36px;
-  background: #1a1a1a;
-  color: #faf8f5;
-  transition: background 0.25s;
+  padding: 15px 40px;
+  background: #0F0F0F;
+  color: #FAFAF8;
+  border: none;
+  cursor: none;
+  transition: background 0.3s, transform 0.3s;
+  display: inline-block;
 }
-.btn-dark:hover { background: #b5896a; }
-.btn-text {
-  font-size: 0.65rem;
-  letter-spacing: 0.2em;
+.btn-primary:hover { background: #C9A96E; transform: translateY(-1px); }
+.btn-ghost {
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   font-weight: 400;
   color: #888;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   transition: color 0.25s;
 }
-.btn-text::after { content: '→'; color: #b5896a; }
-.btn-text:hover { color: #1a1a1a; }
-.hero-scroll {
-  margin-top: auto;
-  padding-top: 48px;
-  font-size: 0.6rem;
-  letter-spacing: 0.25em;
+.btn-ghost-arrow {
+  width: 24px; height: 1px;
+  background: #C9A96E;
+  position: relative;
+  transition: width 0.3s;
+}
+.btn-ghost-arrow::after {
+  content: '';
+  position: absolute;
+  right: 0; top: -3px;
+  width: 7px; height: 7px;
+  border-right: 1px solid #C9A96E;
+  border-bottom: 1px solid #C9A96E;
+  transform: rotate(-45deg);
+}
+.btn-ghost:hover { color: #0F0F0F; }
+.btn-ghost:hover .btn-ghost-arrow { width: 36px; }
+.hero-badge {
+  position: absolute;
+  top: 52px; right: 44px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  opacity: 0.45;
+}
+.hero-badge-ring {
+  width: 56px; height: 56px;
+  border: 1px solid #0F0F0F;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: spin 20s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.hero-badge-text {
+  font-size: 0.52rem;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: #ccc;
+  color: #0F0F0F;
+  white-space: nowrap;
+  font-weight: 400;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  height: 0;
+  overflow: visible;
+  position: absolute;
+}
+.hero-badge-inner {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  font-weight: 300;
+  color: #C9A96E;
+  line-height: 1;
+  text-align: center;
+}
+.hero-badge-star { font-size: 0.55rem; letter-spacing: 0.1em; color: #C9A96E; }
+.hero-scroll {
+  position: absolute;
+  bottom: 40px; left: 80px;
   display: flex;
   align-items: center;
   gap: 16px;
+  font-size: 0.56rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #ccc;
 }
-.hero-scroll::after {
+.hero-scroll-line {
+  width: 40px; height: 1px;
+  background: #ddd;
+  position: relative;
+  overflow: hidden;
+}
+.hero-scroll-line::after {
   content: '';
-  display: block;
-  height: 1px;
-  width: 48px;
-  background: #ccc;
+  position: absolute;
+  inset: 0;
+  background: #C9A96E;
+  animation: scroll-pulse 2s ease infinite;
+}
+@keyframes scroll-pulse {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
 }
 
 /* ── TICKER ────────────────────────────────────────────────────── */
 .ticker {
-  border-top: 1px solid #ece8e1;
-  border-bottom: 1px solid #ece8e1;
+  border-top: 1px solid #E8E4DC;
+  border-bottom: 1px solid #E8E4DC;
   overflow: hidden;
-  padding: 14px 0;
-  background: #faf8f5;
+  padding: 16px 0;
+  background: #FAFAF8;
 }
 .ticker-track {
   display: flex;
   white-space: nowrap;
-  animation: tick 35s linear infinite;
+  animation: tick 40s linear infinite;
 }
 .ticker-item {
   display: inline-flex;
   align-items: center;
-  gap: 28px;
-  padding: 0 28px;
-  font-size: 0.62rem;
-  letter-spacing: 0.25em;
+  gap: 32px;
+  padding: 0 32px;
+  font-size: 0.6rem;
+  letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: #aaa;
+  color: #bbb;
   font-weight: 400;
 }
-.ticker-dot { color: #b5896a; font-size: 0.4rem; }
+.ticker-dot { color: #C9A96E; font-size: 0.35rem; }
 @keyframes tick {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
-}
-
-/* ── FULL-BLEED IMAGE ──────────────────────────────────────────── */
-.full-image {
-  width: 100%;
-  height: 85vh;
-  background: #ddd4c8;
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.full-image-inner {
-  position: absolute; inset: 0;
-  background: linear-gradient(145deg, #d8ccbf 0%, #c4b8a8 50%, #cfc0b0 100%);
-}
-.full-image-caption {
-  position: absolute;
-  bottom: 48px; right: 64px;
-  font-size: 0.62rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: rgba(26,26,26,0.45);
-  font-weight: 400;
-}
-.full-image-text {
-  position: absolute;
-  bottom: 48px; left: 64px;
-}
-.full-image-text h2 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(2.5rem, 5vw, 5rem);
-  font-weight: 300;
-  font-style: italic;
-  color: #faf8f5;
-  line-height: 1.1;
-  text-shadow: 0 2px 40px rgba(0,0,0,0.15);
 }
 
 /* ── ABOUT ─────────────────────────────────────────────────────── */
@@ -250,118 +363,163 @@ nav.stuck {
   grid-template-columns: 1fr 1fr;
 }
 .about-img {
-  height: 680px;
-  background: #e0d8ce;
-  position: relative;
+  height: 720px;
   overflow: hidden;
+  position: relative;
 }
-.about-img-inner {
-  position: absolute; inset: 0;
-  background: linear-gradient(135deg, #ddd4c5 0%, #c8bfb2 100%);
-  display: flex; align-items: center; justify-content: center;
+.about-img img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 0.8s cubic-bezier(.25,.46,.45,.94);
 }
-.about-img-ph {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 0.75rem; letter-spacing: 0.3em;
-  text-transform: uppercase; color: rgba(26,26,26,0.18);
-}
+.about-img:hover img { transform: scale(1.04); }
 .about-text {
-  background: #faf8f5;
+  background: #FAFAF8;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 80px 80px 80px 88px;
+  padding: 88px 88px 88px 96px;
 }
 .label {
-  font-size: 0.62rem;
-  letter-spacing: 0.3em;
+  font-size: 0.6rem;
+  letter-spacing: 0.32em;
   text-transform: uppercase;
-  color: #b5896a;
+  color: #C9A96E;
   font-weight: 400;
   margin-bottom: 24px;
 }
 .about-text h2 {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(2rem, 3.5vw, 3.2rem);
+  font-size: clamp(2.2rem, 3.5vw, 3.4rem);
   font-weight: 300;
-  line-height: 1.15;
-  color: #1a1a1a;
-  margin-bottom: 32px;
+  line-height: 1.12;
+  color: #0F0F0F;
+  margin-bottom: 36px;
 }
 .about-text h2 em { font-style: italic; }
 .about-text p {
-  font-size: 0.88rem;
-  line-height: 1.95;
+  font-size: 0.86rem;
+  line-height: 2;
   color: #888;
   font-weight: 300;
-  margin-bottom: 20px;
-  max-width: 420px;
+  margin-bottom: 22px;
+  max-width: 440px;
 }
-.about-text p strong { color: #1a1a1a; font-weight: 400; }
+.about-text p strong { color: #0F0F0F; font-weight: 400; }
 .sig {
-  margin-top: 36px;
+  margin-top: 40px;
   font-family: 'Cormorant Garamond', serif;
-  font-size: 2rem;
+  font-size: 2.2rem;
   font-style: italic;
   font-weight: 300;
-  color: #b5896a;
+  color: #C9A96E;
 }
 
-/* ── STATS BAR ─────────────────────────────────────────────────── */
+/* ── STATS ─────────────────────────────────────────────────────── */
 .stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  border-top: 1px solid #ece8e1;
-  border-bottom: 1px solid #ece8e1;
+  border-top: 1px solid #E8E4DC;
+  border-bottom: 1px solid #E8E4DC;
 }
 .stat {
-  padding: 56px 0;
+  padding: 64px 0;
   text-align: center;
-  border-right: 1px solid #ece8e1;
+  border-right: 1px solid #E8E4DC;
+  transition: background 0.3s;
 }
+.stat:hover { background: #F5F2EC; }
 .stat:last-child { border-right: none; }
 .stat-num {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 3.5rem;
+  font-size: 4rem;
   font-weight: 300;
-  color: #1a1a1a;
+  color: #0F0F0F;
   line-height: 1;
   margin-bottom: 10px;
 }
 .stat-label {
-  font-size: 0.62rem;
-  letter-spacing: 0.22em;
+  font-size: 0.6rem;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: #aaa;
+  color: #bbb;
+  font-weight: 400;
+}
+
+/* ── FULL BLEED ────────────────────────────────────────────────── */
+.full-bleed {
+  width: 100%;
+  height: 90vh;
+  position: relative;
+  overflow: hidden;
+}
+.full-bleed img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; object-fit: cover;
+  transform: scale(1.06);
+  transition: transform 12s ease;
+}
+.full-bleed img.loaded { transform: scale(1.0); }
+.full-bleed-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(15,15,15,0.62) 0%, rgba(15,15,15,0.15) 50%, rgba(15,15,15,0.0) 100%);
+  z-index: 1;
+}
+.full-bleed-content {
+  position: absolute;
+  bottom: 64px; left: 72px;
+  z-index: 2;
+}
+.full-bleed-content h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.8rem, 5.5vw, 6rem);
+  font-weight: 300;
+  font-style: italic;
+  color: #FAFAF8;
+  line-height: 1.05;
+  text-shadow: 0 4px 40px rgba(0,0,0,0.2);
+  max-width: 700px;
+}
+.full-bleed-content h2 em { color: #C9A96E; font-style: italic; }
+.full-bleed-badge {
+  position: absolute;
+  top: 64px; right: 72px;
+  z-index: 2;
+  text-align: right;
+}
+.full-bleed-badge p {
+  font-size: 0.6rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(250,250,248,0.6);
   font-weight: 400;
 }
 
 /* ── SERVICES ──────────────────────────────────────────────────── */
 .services {
-  padding: 120px 80px;
-  background: #faf8f5;
+  padding: 128px 80px;
+  background: #FAFAF8;
 }
 .services-top {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  margin-bottom: 80px;
+  margin-bottom: 72px;
 }
 .services-top h2 {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(2.5rem, 4vw, 4rem);
+  font-size: clamp(2.5rem, 4vw, 4.2rem);
   font-weight: 300;
-  color: #1a1a1a;
-  line-height: 1.1;
+  color: #0F0F0F;
+  line-height: 1.08;
 }
 .services-top h2 em { font-style: italic; }
 .services-sub {
   font-size: 0.82rem;
-  color: #aaa;
-  line-height: 1.8;
-  max-width: 280px;
+  color: #bbb;
+  line-height: 1.9;
+  max-width: 260px;
   font-weight: 300;
-  padding-bottom: 6px;
+  padding-bottom: 4px;
 }
 .services-grid {
   display: grid;
@@ -369,217 +527,319 @@ nav.stuck {
   gap: 2px;
 }
 .svc {
-  background: #f3efe8;
-  padding: 52px 44px;
-  transition: background 0.3s;
-  cursor: default;
+  background: #F2EEE7;
+  padding: 56px 48px;
+  transition: background 0.35s, transform 0.35s;
+  position: relative;
+  overflow: hidden;
 }
-.svc:hover { background: #ece6dc; }
+.svc::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 0; height: 2px;
+  background: #C9A96E;
+  transition: width 0.4s ease;
+}
+.svc:hover::before { width: 100%; }
+.svc:hover { background: #EDE9E1; transform: translateY(-3px); }
+.svc-line {
+  width: 24px; height: 1px;
+  background: #C9A96E;
+  margin-bottom: 28px;
+}
 .svc-name {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 1.5rem;
+  font-size: 1.55rem;
   font-weight: 300;
-  color: #1a1a1a;
-  margin-bottom: 16px;
+  color: #0F0F0F;
+  margin-bottom: 14px;
   line-height: 1.2;
 }
 .svc-name em { font-style: italic; }
 .svc-desc {
-  font-size: 0.8rem;
-  color: #999;
-  line-height: 1.85;
+  font-size: 0.79rem;
+  color: #aaa;
+  line-height: 1.9;
   font-weight: 300;
-}
-.svc-line {
-  width: 28px; height: 1px;
-  background: #b5896a;
   margin-bottom: 24px;
+}
+.svc-price {
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #C9A96E;
+  font-weight: 400;
 }
 
 /* ── GALLERY ───────────────────────────────────────────────────── */
-.gallery { background: #faf8f5; padding: 120px 80px; }
+.gallery {
+  padding: 128px 80px;
+  background: #F5F2EC;
+}
 .gallery-top {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  margin-bottom: 48px;
+  margin-bottom: 52px;
 }
 .gallery-top h2 {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(2.5rem, 4vw, 4rem);
+  font-size: clamp(2.5rem, 4vw, 4.2rem);
   font-weight: 300;
-  color: #1a1a1a;
-  line-height: 1.1;
+  color: #0F0F0F;
+  line-height: 1.08;
 }
 .gallery-top h2 em { font-style: italic; }
 .gallery-ig {
-  font-size: 0.65rem;
-  letter-spacing: 0.2em;
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   font-weight: 400;
   color: #888;
-  border-bottom: 1px solid #ccc;
-  padding-bottom: 2px;
-  transition: color 0.25s, border-color 0.25s;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: color 0.25s;
 }
-.gallery-ig:hover { color: #b5896a; border-color: #b5896a; }
+.gallery-ig:hover { color: #C9A96E; }
+.gallery-ig-line { width: 24px; height: 1px; background: #C9A96E; }
 .gallery-grid {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr;
-  grid-template-rows: 420px 280px;
+  grid-template-rows: 460px 300px;
   gap: 3px;
 }
 .g {
-  background: #e0d8ce;
   overflow: hidden;
   position: relative;
+  cursor: none;
 }
 .g-1 { grid-column: 1; grid-row: 1/3; }
 .g-2 { grid-column: 2; grid-row: 1; }
 .g-3 { grid-column: 3; grid-row: 1; }
 .g-4 { grid-column: 2; grid-row: 2; }
 .g-5 { grid-column: 3; grid-row: 2; }
-.g-inner {
-  position: absolute; inset: 0;
-  display: flex; align-items: center; justify-content: center;
+.g img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 0.7s cubic-bezier(.25,.46,.45,.94);
 }
-.g:nth-child(1) .g-inner { background: linear-gradient(160deg, #ddd4c5, #c8bfb2); }
-.g:nth-child(2) .g-inner { background: linear-gradient(140deg, #d8cfc5, #c4bcb0); }
-.g:nth-child(3) .g-inner { background: linear-gradient(170deg, #d4cabe, #c0b8ac); }
-.g:nth-child(4) .g-inner { background: linear-gradient(130deg, #cec5bb, #bcb4a8); }
-.g:nth-child(5) .g-inner { background: linear-gradient(150deg, #d8d0c4, #c8c0b4); }
-.g-label {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 0.72rem;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: rgba(26,26,26,0.2);
-}
-.g-hover {
+.g:hover img { transform: scale(1.06); }
+.g-overlay {
   position: absolute; inset: 0;
-  background: rgba(26,26,26,0.32);
-  opacity: 0;
-  transition: opacity 0.35s;
+  background: rgba(15,15,15,0.0);
+  transition: background 0.35s;
   display: flex; align-items: flex-end;
-  padding: 24px 28px;
+  padding: 28px 32px;
+  z-index: 1;
 }
-.g:hover .g-hover { opacity: 1; }
-.g-hover-label {
-  font-size: 0.62rem;
+.g:hover .g-overlay { background: rgba(15,15,15,0.35); }
+.g-label {
+  font-size: 0.6rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: rgba(250,248,245,0.9);
+  color: rgba(250,250,248,0);
   font-weight: 400;
+  transition: color 0.35s;
+}
+.g:hover .g-label { color: rgba(250,250,248,0.85); }
+.g-view {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  opacity: 0;
+  transition: opacity 0.35s;
+}
+.g:hover .g-view { opacity: 1; }
+.g-view-circle {
+  width: 56px; height: 56px;
+  border: 1px solid rgba(250,250,248,0.7);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.55rem;
+  letter-spacing: 0.1em;
+  color: rgba(250,250,248,0.85);
+  text-transform: uppercase;
 }
 
-/* ── QUOTE ─────────────────────────────────────────────────────── */
+/* ── LIGHTBOX ──────────────────────────────────────────────────── */
+#lightbox {
+  display: none;
+  position: fixed; inset: 0;
+  background: rgba(15,15,15,0.95);
+  z-index: 5000;
+  align-items: center;
+  justify-content: center;
+}
+#lightbox.open { display: flex; }
+#lightbox img {
+  max-width: 88vw;
+  max-height: 88vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+#lightbox-close {
+  position: absolute;
+  top: 32px; right: 40px;
+  font-size: 0.6rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(250,250,248,0.5);
+  cursor: none;
+  transition: color 0.2s;
+}
+#lightbox-close:hover { color: #FAFAF8; }
+
+/* ── PULL QUOTE ────────────────────────────────────────────────── */
 .pull-quote {
-  padding: 100px 80px;
-  background: #1a1a1a;
+  padding: 112px 80px;
+  background: #0F0F0F;
   text-align: center;
 }
 .pull-quote blockquote {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(1.8rem, 3.5vw, 3rem);
+  font-size: clamp(1.9rem, 3.5vw, 3.2rem);
   font-weight: 300;
   font-style: italic;
-  color: #f5efe8;
-  line-height: 1.45;
-  max-width: 900px;
-  margin: 0 auto 32px;
+  color: #F0EBE3;
+  line-height: 1.5;
+  max-width: 880px;
+  margin: 0 auto 36px;
 }
-.pull-quote blockquote em { color: #d4a87c; }
+.pull-quote blockquote em { color: #C9A96E; font-style: italic; }
 .pull-quote cite {
-  font-size: 0.65rem;
-  letter-spacing: 0.25em;
+  font-size: 0.6rem;
+  letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: #666;
+  color: #555;
   font-style: normal;
   font-weight: 400;
+}
+.pull-quote-line {
+  width: 40px; height: 1px;
+  background: #C9A96E;
+  margin: 0 auto 40px;
 }
 
 /* ── TESTIMONIALS ──────────────────────────────────────────────── */
 .testimonials {
-  padding: 120px 80px;
-  background: #faf8f5;
+  padding: 128px 80px;
+  background: #FAFAF8;
 }
-.testimonials h2 {
+.testi-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 72px;
+}
+.testi-header h2 {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(2rem, 3.5vw, 3.5rem);
+  font-size: clamp(2.2rem, 3.5vw, 3.8rem);
   font-weight: 300;
-  color: #1a1a1a;
-  margin-bottom: 64px;
-  line-height: 1.1;
+  color: #0F0F0F;
+  line-height: 1.08;
 }
-.testimonials h2 em { font-style: italic; }
-.testi-list { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 64px; }
-.testi { border-top: 1px solid #ece8e1; padding-top: 36px; }
+.testi-header h2 em { font-style: italic; }
+.testi-stars {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 6px;
+  justify-content: flex-end;
+}
+.testi-stars span { color: #C9A96E; font-size: 0.85rem; }
+.testi-avg { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: #bbb; font-weight: 400; }
+.testi-list { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 56px; }
+.testi { border-top: 1px solid #E8E4DC; padding-top: 40px; }
+.testi-quote-mark {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3rem;
+  color: #E8E4DC;
+  line-height: 0.5;
+  margin-bottom: 20px;
+}
 .testi-text {
   font-family: 'Cormorant Garamond', serif;
   font-size: 1.15rem;
   font-style: italic;
   font-weight: 300;
-  color: #444;
-  line-height: 1.75;
+  color: #555;
+  line-height: 1.8;
   margin-bottom: 28px;
 }
-.testi-name { font-size: 0.75rem; font-weight: 400; color: #1a1a1a; letter-spacing: 0.05em; margin-bottom: 4px; }
-.testi-detail { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: #aaa; font-weight: 300; }
+.testi-meta { display: flex; align-items: center; gap: 14px; }
+.testi-avatar {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: #E8E4DC;
+  flex-shrink: 0;
+  overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.9rem;
+  color: #C9A96E;
+}
+.testi-name { font-size: 0.75rem; font-weight: 400; color: #0F0F0F; letter-spacing: 0.05em; }
+.testi-detail { font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: #bbb; font-weight: 300; margin-top: 2px; }
 
 /* ── CONTACT ───────────────────────────────────────────────────── */
 .contact { display: grid; grid-template-columns: 1fr 1fr; }
 .contact-img {
-  background: #e4ddd4;
-  min-height: 700px;
-  position: relative;
+  min-height: 740px;
   overflow: hidden;
+  position: relative;
 }
-.contact-img-inner {
+.contact-img img {
+  width: 100%; height: 100%; object-fit: cover;
   position: absolute; inset: 0;
-  background: linear-gradient(145deg, #ddd5c8 0%, #c8bfb0 100%);
-  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.8s cubic-bezier(.25,.46,.45,.94);
 }
-.contact-img-ph {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 0.72rem; letter-spacing: 0.28em;
-  text-transform: uppercase; color: rgba(26,26,26,0.18);
+.contact-img:hover img { transform: scale(1.04); }
+.contact-img-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to right, rgba(15,15,15,0.0), rgba(15,15,15,0.12));
+  z-index: 1;
 }
 .contact-form-wrap {
-  background: #faf8f5;
-  padding: 88px 88px 88px 80px;
+  background: #FAFAF8;
+  padding: 96px 88px 96px 80px;
   display: flex; flex-direction: column; justify-content: center;
 }
 .contact-form-wrap h2 {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(2rem, 3vw, 3rem);
+  font-size: clamp(2.2rem, 3vw, 3.2rem);
   font-weight: 300;
-  color: #1a1a1a;
-  line-height: 1.15;
-  margin-bottom: 12px;
+  color: #0F0F0F;
+  line-height: 1.12;
+  margin-bottom: 14px;
 }
 .contact-form-wrap h2 em { font-style: italic; }
 .contact-sub {
-  font-size: 0.82rem;
-  color: #aaa;
-  margin-bottom: 48px;
+  font-size: 0.83rem;
+  color: #bbb;
+  margin-bottom: 52px;
   font-weight: 300;
-  line-height: 1.7;
+  line-height: 1.8;
 }
-.cform { display: flex; flex-direction: column; }
+.cform { display: flex; flex-direction: column; gap: 0; }
 .cf-row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
 .cf-field {
-  display: flex; flex-direction: column;
-  border-bottom: 1px solid #ddd8d0;
-  padding: 18px 0;
-  margin-bottom: 0;
+  border-bottom: 1px solid #DDD8D0;
+  padding: 20px 0;
   transition: border-color 0.3s;
 }
-.cf-field:focus-within { border-color: #b5896a; }
+.cf-field:focus-within { border-color: #C9A96E; }
 .cf-field label {
-  font-size: 0.58rem;
-  letter-spacing: 0.25em;
+  display: block;
+  font-size: 0.56rem;
+  letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: #b5896a;
+  color: #C9A96E;
   font-weight: 400;
   margin-bottom: 8px;
 }
@@ -591,154 +851,174 @@ nav.stuck {
   font-family: 'Jost', sans-serif;
   font-size: 0.9rem;
   font-weight: 300;
-  color: #1a1a1a;
+  color: #0F0F0F;
   resize: none;
+  width: 100%;
+  cursor: none;
 }
 .cf-field input::placeholder,
 .cf-field textarea::placeholder { color: #ccc; }
-.cf-field select { color: #999; cursor: pointer; }
-.cf-field select option { background: #faf8f5; }
+.cf-field select { color: #aaa; cursor: none; appearance: none; }
+.cf-field select:focus { color: #0F0F0F; }
 .cf-submit {
-  margin-top: 40px;
-  display: flex; align-items: center; gap: 24px;
+  margin-top: 44px;
+  display: flex; align-items: center; gap: 28px;
 }
 .submit-btn {
   font-family: 'Jost', sans-serif;
-  font-size: 0.65rem;
+  font-size: 0.62rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   font-weight: 400;
-  padding: 15px 44px;
-  background: #1a1a1a;
-  color: #faf8f5;
+  padding: 16px 48px;
+  background: #0F0F0F;
+  color: #FAFAF8;
   border: none;
-  cursor: pointer;
-  transition: background 0.25s;
+  cursor: none;
+  transition: background 0.3s, transform 0.3s;
 }
-.submit-btn:hover { background: #b5896a; }
-.submit-note { font-size: 0.72rem; color: #bbb; font-weight: 300; }
-.cf-success {
-  display: none; padding: 40px 0;
-}
-.cf-success h3 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.8rem; font-weight: 300; font-style: italic;
-  color: #b5896a; margin-bottom: 10px;
-}
-.cf-success p { font-size: 0.82rem; color: #aaa; line-height: 1.8; font-weight: 300; }
+.submit-btn:hover { background: #C9A96E; transform: translateY(-1px); }
+.submit-note { font-size: 0.72rem; color: #ccc; font-weight: 300; }
 
 /* ── FOOTER ────────────────────────────────────────────────────── */
 footer {
-  background: #1a1a1a;
-  padding: 40px 80px;
+  background: #0F0F0F;
+  padding: 44px 80px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.f-logo {
+.footer-logo {
   font-family: 'Cormorant Garamond', serif;
   font-size: 0.95rem;
-  font-weight: 300;
-  letter-spacing: 0.22em;
+  font-weight: 400;
+  letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: #f5efe8;
+  color: rgba(250,250,248,0.7);
 }
-footer p { font-size: 0.65rem; letter-spacing: 0.12em; color: #555; font-weight: 300; }
-.f-links { display: flex; gap: 32px; }
-.f-links a {
-  font-size: 0.62rem;
+.footer-copy {
+  font-size: 0.6rem;
   letter-spacing: 0.18em;
+  color: #444;
+  text-transform: uppercase;
+  font-weight: 300;
+}
+.footer-links { display: flex; gap: 36px; }
+.footer-links a {
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: #555;
   font-weight: 300;
   transition: color 0.25s;
 }
-.f-links a:hover { color: #b5896a; }
+.footer-links a:hover { color: #C9A96E; }
 
-/* ── REVEAL ────────────────────────────────────────────────────── */
-.rv {
-  opacity: 0; transform: translateY(24px);
-  transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1);
-}
-.rv.d1 { transition-delay: 0.1s; }
-.rv.d2 { transition-delay: 0.22s; }
-.rv.d3 { transition-delay: 0.36s; }
-.rv.on { opacity: 1; transform: none; }
-
-/* ── RESPONSIVE ────────────────────────────────────────────────── */
-@media (max-width: 960px) {
-  nav { padding: 20px 24px; }
-  nav.stuck { padding: 14px 24px; }
+/* ── MOBILE ────────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  body { cursor: auto; }
+  .cursor-dot, .cursor-ring { display: none; }
+  nav { padding: 22px 28px; }
+  nav.stuck { padding: 14px 28px; }
   .nav-center { display: none; }
   .hero { grid-template-columns: 1fr; height: auto; }
-  .hero-img { height: 60vw; min-height: 280px; }
-  .hero-text { padding: 48px 32px 64px; }
-  .full-image { height: 55vw; min-height: 260px; }
-  .full-image-text { left: 32px; bottom: 32px; }
-  .full-image-caption { right: 32px; bottom: 32px; }
+  .hero-img { height: 65vh; }
+  .hero-text { padding: 52px 32px 72px; }
+  .hero-badge { display: none; }
   .about { grid-template-columns: 1fr; }
-  .about-img { height: 70vw; }
-  .about-text { padding: 56px 32px; }
-  .stats { grid-template-columns: 1fr; }
-  .stat { border-right: none; border-bottom: 1px solid #ece8e1; padding: 40px 0; }
-  .stat:last-child { border-bottom: none; }
-  .services { padding: 72px 32px; }
-  .services-top { flex-direction: column; align-items: flex-start; gap: 20px; }
+  .about-img { height: 60vw; }
+  .about-text { padding: 52px 32px; }
+  .services { padding: 72px 28px; }
+  .services-top { flex-direction: column; align-items: flex-start; gap: 16px; }
   .services-grid { grid-template-columns: 1fr; }
-  .gallery { padding: 72px 32px; }
-  .gallery-top { flex-direction: column; align-items: flex-start; gap: 20px; }
-  .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: 220px 220px 220px; }
-  .g-1 { grid-column: 1/3; grid-row: 1; }
-  .g-2 { grid-column: 1; grid-row: 2; }
-  .g-3 { grid-column: 2; grid-row: 2; }
-  .g-4 { grid-column: 1; grid-row: 3; }
-  .g-5 { grid-column: 2; grid-row: 3; }
-  .pull-quote { padding: 72px 32px; }
-  .testimonials { padding: 72px 32px; }
+  .gallery { padding: 72px 28px; }
+  .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+  .g-1 { grid-column: 1/3; grid-row: auto; height: 280px; }
+  .g-2, .g-3, .g-4, .g-5 { grid-column: auto; grid-row: auto; height: 200px; }
+  .stats { grid-template-columns: 1fr; }
+  .stat { border-right: none; border-bottom: 1px solid #E8E4DC; }
   .testi-list { grid-template-columns: 1fr; gap: 40px; }
+  .testi-header { flex-direction: column; align-items: flex-start; gap: 16px; }
   .contact { grid-template-columns: 1fr; }
-  .contact-img { min-height: 55vw; }
-  .contact-form-wrap { padding: 56px 32px; }
-  .cf-row { grid-template-columns: 1fr; gap: 0; }
-  footer { flex-direction: column; gap: 20px; text-align: center; padding: 32px 24px; }
+  .contact-img { min-height: 60vw; }
+  .contact-form-wrap { padding: 52px 32px; }
+  .cf-row { grid-template-columns: 1fr; }
+  .pull-quote { padding: 72px 28px; }
+  .testimonials { padding: 72px 28px; }
+  .full-bleed-content { left: 28px; bottom: 40px; }
+  .full-bleed-badge { display: none; }
+  footer { flex-direction: column; gap: 20px; padding: 36px 28px; text-align: center; }
+  .footer-links { justify-content: center; }
 }
   </style>
 </head>
 <body>
 
+<!-- CUSTOM CURSOR -->
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- PRELOADER -->
+<div id="preloader">
+  <div class="preloader-logo">Sherry B</div>
+  <div class="preloader-line"></div>
+</div>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" onclick="closeLightbox()">
+  <span id="lightbox-close">Close &times;</span>
+  <img id="lightbox-img" src="" alt="" />
+</div>
+
 <!-- NAV -->
 <nav id="nav">
-  <div class="nav-logo">Sherry B</div>
+  <a href="#" class="nav-logo">Makeup by Sherry B</a>
   <ul class="nav-center">
     <li><a href="#about">About</a></li>
     <li><a href="#services">Services</a></li>
-    <li><a href="#gallery">Gallery</a></li>
-    <li><a href="#contact">Book</a></li>
+    <li><a href="#gallery">Portfolio</a></li>
+    <li><a href="#contact">Contact</a></li>
   </ul>
-  <a href="#contact" class="nav-right">Inquire</a>
+  <a href="/book" class="nav-book">Book Now</a>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-img">
-    <div class="hero-img-inner">
-      <span class="hero-img-placeholder">Bridal Portrait</span>
-    </div>
+    <img id="hero-img"
+      src="/img/sherry_04.jpg"
+      alt="Bridal makeup artistry by Sherry B"
+      onload="this.classList.add('loaded')" />
+    <div class="hero-img-overlay"></div>
   </div>
   <div class="hero-text">
-    <div class="hero-location">Atlanta · South Asian Bridal Artistry</div>
-    <h1 class="hero-h1">
-      The art of<br/>
-      <em>your face,<br/>your story.</em>
-    </h1>
-    <p class="hero-sub">
-      Specializing in South Asian bridal artistry — traditional, fusion, and everything in between. For the bride who wants to look like herself, elevated.
-    </p>
-    <div class="hero-cta">
-      <a href="#contact" class="btn-dark">Book a Consultation</a>
-      <a href="#gallery" class="btn-text">View the Work</a>
+    <div class="hero-badge">
+      <div class="hero-badge-ring">
+        <div class="hero-badge-inner">
+          ★★★★★<br>
+          <span class="hero-badge-star">5.0</span>
+        </div>
+      </div>
     </div>
-    <div class="hero-scroll">Scroll</div>
+    <p class="hero-eyebrow reveal">Atlanta, Georgia · South Asian Bridal Specialist</p>
+    <h1 class="hero-h1 reveal reveal-delay-1">
+      The art<br>of your face,
+      <em>your story.</em>
+    </h1>
+    <p class="hero-sub reveal reveal-delay-2">
+      Bridal artistry for the woman who wants to feel completely, undeniably herself on the most important day of her life.
+    </p>
+    <div class="hero-cta reveal reveal-delay-3">
+      <a href="/book" class="btn-primary">Book a Consultation</a>
+      <a href="#gallery" class="btn-ghost">
+        View Portfolio
+        <span class="btn-ghost-arrow"></span>
+      </a>
+    </div>
+    <div class="hero-scroll reveal reveal-delay-4">
+      <div class="hero-scroll-line"></div>
+      Scroll
+    </div>
   </div>
 </section>
 
@@ -746,101 +1026,112 @@ footer p { font-size: 0.65rem; letter-spacing: 0.12em; color: #555; font-weight:
 <div class="ticker">
   <div class="ticker-track">
     <span class="ticker-item">South Asian Bridal <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">Traditional & Fusion <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">200+ Brides <span class="ticker-dot">◆</span></span>
     <span class="ticker-item">Atlanta, Georgia <span class="ticker-dot">◆</span></span>
-    <span class="ticker-item">Traditional Artistry <span class="ticker-dot">◆</span></span>
-    <span class="ticker-item">Fusion Looks <span class="ticker-dot">◆</span></span>
-    <span class="ticker-item">Destination Weddings <span class="ticker-dot">◆</span></span>
-    <span class="ticker-item">Mehndi &amp; Sangeet <span class="ticker-dot">◆</span></span>
-    <span class="ticker-item">Pakistani · Indian · Bengali <span class="ticker-dot">◆</span></span>
-    <span class="ticker-item">Airbrush Available <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">Destination Available <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">10+ Years Experience <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">5 Star Rated <span class="ticker-dot">◆</span></span>
     <span class="ticker-item">South Asian Bridal <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">Traditional & Fusion <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">200+ Brides <span class="ticker-dot">◆</span></span>
     <span class="ticker-item">Atlanta, Georgia <span class="ticker-dot">◆</span></span>
-    <span class="ticker-item">Traditional Artistry <span class="ticker-dot">◆</span></span>
-    <span class="ticker-item">Fusion Looks <span class="ticker-dot">◆</span></span>
-    <span class="ticker-item">Destination Weddings <span class="ticker-dot">◆</span></span>
-    <span class="ticker-item">Mehndi &amp; Sangeet <span class="ticker-dot">◆</span></span>
-    <span class="ticker-item">Pakistani · Indian · Bengali <span class="ticker-dot">◆</span></span>
-    <span class="ticker-item">Airbrush Available <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">Destination Available <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">10+ Years Experience <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">5 Star Rated <span class="ticker-dot">◆</span></span>
   </div>
 </div>
 
 <!-- ABOUT -->
 <section class="about" id="about">
-  <div class="about-img">
-    <div class="about-img-inner">
-      <span class="about-img-ph">Artist Portrait</span>
-    </div>
+  <div class="about-img reveal">
+    <img
+      src="/img/sherry_09.jpg"
+      alt="Sherry B, bridal makeup artist" />
   </div>
   <div class="about-text">
-    <div class="label rv">The Artist</div>
-    <h2 class="rv d1">Beauty that<br/><em>belongs to you.</em></h2>
-    <p class="rv d2">I'm Sherry B. I grew up immersed in South Asian celebrations — the weight of a lehenga, the warmth of gold, the way a bride's face should carry every emotion of the day without flinching.</p>
-    <p class="rv d2">Based in Atlanta, I specialize in bridal artistry for South Asian women who want a look that <strong>honors where they come from</strong> and reflects exactly who they are. Traditional. Fusion. Always personal.</p>
-    <div class="sig rv d3">Sherry B</div>
+    <p class="label reveal">The Artist</p>
+    <h2 class="reveal reveal-delay-1">
+      Beauty that starts<br>
+      <em>with knowing you.</em>
+    </h2>
+    <p class="reveal reveal-delay-2">
+      I'm Sherry B — a <strong>South Asian bridal makeup artist</strong> based in Atlanta, Georgia, with over a decade of experience creating looks that feel as good as they photograph. Whether you're walking down the aisle in a lehenga, a sari, or something entirely your own, I approach every bride as a singular work of art.
+    </p>
+    <p class="reveal reveal-delay-3">
+      My work bridges <strong>traditional South Asian techniques</strong> and modern luxury artistry — rich, pigmented bridal looks that last 16+ hours and still feel like <em>you</em>. Not a mask. Not a filter. Just the most beautiful version of yourself.
+    </p>
+    <div class="sig reveal reveal-delay-4">Sherry B.</div>
   </div>
 </section>
 
 <!-- STATS -->
 <div class="stats">
-  <div class="stat rv">
+  <div class="stat reveal">
     <div class="stat-num">200+</div>
     <div class="stat-label">Brides Served</div>
   </div>
-  <div class="stat rv d1">
+  <div class="stat reveal reveal-delay-1">
     <div class="stat-num">10+</div>
-    <div class="stat-label">Years of Artistry</div>
+    <div class="stat-label">Years Experience</div>
   </div>
-  <div class="stat rv d2">
-    <div class="stat-num">5 ★</div>
-    <div class="stat-label">Rated in Atlanta</div>
+  <div class="stat reveal reveal-delay-2">
+    <div class="stat-num">5.0</div>
+    <div class="stat-label">Star Rating</div>
   </div>
 </div>
 
-<!-- FULL BLEED -->
-<div class="full-image">
-  <div class="full-image-inner"></div>
-  <div class="full-image-text">
-    <h2>"Every bride deserves<br/>to feel like herself —<br/><em>just elevated."</em></h2>
+<!-- FULL BLEED IMAGE -->
+<div class="full-bleed">
+  <img
+    src="/img/sherry_11.jpg"
+    alt="Stunning bridal artistry"
+    onload="this.classList.add('loaded')" />
+  <div class="full-bleed-overlay"></div>
+  <div class="full-bleed-content reveal">
+    <h2>Every bride deserves<br><em>to feel extraordinary.</em></h2>
   </div>
-  <div class="full-image-caption">Atlanta · 2024</div>
+  <div class="full-bleed-badge reveal">
+    <p>Makeup by Sherry B</p>
+  </div>
 </div>
 
 <!-- SERVICES -->
 <section class="services" id="services">
   <div class="services-top">
-    <h2 class="rv">Services<br/><em>offered</em></h2>
-    <p class="services-sub rv d1">Every look is built from a consultation. Every face is treated as its own brief.</p>
+    <h2 class="reveal">What I<br><em>offer.</em></h2>
+    <p class="services-sub reveal reveal-delay-1">From your bridal party to your mehndi night — every occasion, covered.</p>
   </div>
   <div class="services-grid">
-    <div class="svc rv">
+    <div class="svc reveal">
       <div class="svc-line"></div>
-      <div class="svc-name">Full <em>Bridal</em></div>
-      <p class="svc-desc">Consultation, trial, and wedding day execution. Your complete look — built over time, perfected on the day.</p>
+      <div class="svc-name"><em>Full Bridal</em></div>
+      <div class="svc-desc">Complete bridal look — trial session included. From first touch to final veil, I'm with you every step.</div>
     </div>
-    <div class="svc rv d1">
+    <div class="svc reveal reveal-delay-1">
       <div class="svc-line"></div>
-      <div class="svc-name">Mehndi &amp; <em>Sangeet</em></div>
-      <p class="svc-desc">Vibrant, coordinated looks for the events leading up to your wedding. Joyful, intentional, photograph-ready.</p>
+      <div class="svc-name"><em>Mehndi & Sangeet</em></div>
+      <div class="svc-desc">Statement-worthy looks for the nights before. Bold, festive, and made to dance in.</div>
     </div>
-    <div class="svc rv d2">
+    <div class="svc reveal reveal-delay-2">
       <div class="svc-line"></div>
-      <div class="svc-name"><em>Traditional</em> Artistry</div>
-      <p class="svc-desc">Rich pigments, precise eye work, and finishes that hold across every lighting condition. Pakistani, Indian, Bengali, and more.</p>
+      <div class="svc-name"><em>Bridal Party</em></div>
+      <div class="svc-desc">Cohesive, camera-ready looks for your bridesmaids and family. Everyone glows together.</div>
     </div>
-    <div class="svc rv">
+    <div class="svc reveal reveal-delay-1">
       <div class="svc-line"></div>
-      <div class="svc-name">Fusion &amp; <em>Contemporary</em></div>
-      <p class="svc-desc">East-meets-West looks that feel current, never costume. For the bride who moves between two worlds naturally.</p>
+      <div class="svc-name"><em>Bridal Trial</em></div>
+      <div class="svc-desc">Test drive your look before the big day. We refine until it's exactly right — no surprises on your wedding morning.</div>
     </div>
-    <div class="svc rv d1">
+    <div class="svc reveal reveal-delay-2">
       <div class="svc-line"></div>
-      <div class="svc-name">Bridal <em>Party</em></div>
-      <p class="svc-desc">Everyone beside you looks intentional. Cohesive without being matching. Elevated without overshadowing.</p>
+      <div class="svc-name"><em>Editorial & Events</em></div>
+      <div class="svc-desc">Photoshoots, galas, milestone moments. Looks engineered for camera and life.</div>
     </div>
-    <div class="svc rv d2">
+    <div class="svc reveal reveal-delay-3">
       <div class="svc-line"></div>
-      <div class="svc-name"><em>Destination</em> Weddings</div>
-      <p class="svc-desc">Atlanta-based. Available everywhere. I travel for weddings that happen in extraordinary places.</p>
+      <div class="svc-name"><em>Destination</em></div>
+      <div class="svc-desc">Taking your wedding beyond Atlanta? I travel. Destination weddings are a specialty — let's talk.</div>
     </div>
   </div>
 </section>
@@ -848,57 +1139,97 @@ footer p { font-size: 0.65rem; letter-spacing: 0.12em; color: #555; font-weight:
 <!-- GALLERY -->
 <section class="gallery" id="gallery">
   <div class="gallery-top">
-    <h2 class="rv">Selected<br/><em>Work</em></h2>
-    <a href="https://instagram.com" target="_blank" class="gallery-ig rv">Follow on Instagram</a>
+    <h2 class="reveal">The<br><em>portfolio.</em></h2>
+    <a href="https://www.instagram.com/makeupbysherryb" target="_blank" class="gallery-ig reveal reveal-delay-1">
+      <span class="gallery-ig-line"></span>
+      @makeupbysherryb
+    </a>
   </div>
   <div class="gallery-grid">
-    <div class="g g-1">
-      <div class="g-inner"><span class="g-label">Featured</span></div>
-      <div class="g-hover"><span class="g-hover-label">Full Bridal</span></div>
+    <div class="g g-1" onclick="openLightbox('/img/sherry_12.jpg')">
+      <img src="/img/sherry_12.jpg" alt="Bridal portrait" loading="lazy" />
+      <div class="g-overlay"><span class="g-label">Bridal Portrait</span></div>
+      <div class="g-view"><div class="g-view-circle">View</div></div>
     </div>
-    <div class="g g-2">
-      <div class="g-inner"><span class="g-label">Traditional</span></div>
-      <div class="g-hover"><span class="g-hover-label">Traditional</span></div>
+    <div class="g g-2" onclick="openLightbox('/img/sherry_06.jpg')">
+      <img src="/img/sherry_06.jpg" alt="Bridal makeup detail" loading="lazy" />
+      <div class="g-overlay"><span class="g-label">Bridal Glam</span></div>
+      <div class="g-view"><div class="g-view-circle">View</div></div>
     </div>
-    <div class="g g-3">
-      <div class="g-inner"><span class="g-label">Fusion</span></div>
-      <div class="g-hover"><span class="g-hover-label">Fusion</span></div>
+    <div class="g g-3" onclick="openLightbox('/img/sherry_02.jpg')">
+      <img src="/img/sherry_02.jpg" alt="Wedding day" loading="lazy" />
+      <div class="g-overlay"><span class="g-label">Wedding Day</span></div>
+      <div class="g-view"><div class="g-view-circle">View</div></div>
     </div>
-    <div class="g g-4">
-      <div class="g-inner"><span class="g-label">Mehndi</span></div>
-      <div class="g-hover"><span class="g-hover-label">Mehndi Night</span></div>
+    <div class="g g-4" onclick="openLightbox('/img/sherry_05.jpg')">
+      <img src="/img/sherry_05.jpg" alt="Ceremony moment" loading="lazy" />
+      <div class="g-overlay"><span class="g-label">Ceremony</span></div>
+      <div class="g-view"><div class="g-view-circle">View</div></div>
     </div>
-    <div class="g g-5">
-      <div class="g-inner"><span class="g-label">Bridal Party</span></div>
-      <div class="g-hover"><span class="g-hover-label">Bridal Party</span></div>
+    <div class="g g-5" onclick="openLightbox('/img/sherry_07.jpg')">
+      <img src="/img/sherry_07.jpg" alt="Glamour look" loading="lazy" />
+      <div class="g-overlay"><span class="g-label">Evening Glam</span></div>
+      <div class="g-view"><div class="g-view-circle">View</div></div>
     </div>
   </div>
 </section>
 
 <!-- PULL QUOTE -->
-<div class="pull-quote">
-  <blockquote>"I don't apply a formula. I build a look that belongs to <em>the person wearing it.</em>"</blockquote>
-  <cite>— Sherry B, Makeup Artist · Atlanta</cite>
-</div>
+<section class="pull-quote">
+  <div class="pull-quote-line reveal"></div>
+  <blockquote class="reveal reveal-delay-1">
+    "Beauty is not about perfection. It's about <em>presence</em> — walking into the room and feeling completely, powerfully yourself."
+  </blockquote>
+  <cite class="reveal reveal-delay-2">Sherry B · Makeup Artist · Atlanta, Georgia</cite>
+</section>
 
 <!-- TESTIMONIALS -->
-<section class="testimonials">
-  <h2 class="rv">What brides<br/><em>are saying</em></h2>
+<section class="testimonials" id="testimonials">
+  <div class="testi-header">
+    <h2 class="reveal">
+      What brides<br>
+      <em>are saying.</em>
+    </h2>
+    <div class="reveal reveal-delay-1">
+      <div class="testi-stars">
+        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+      </div>
+      <div class="testi-avg">5.0 · 200+ reviews</div>
+    </div>
+  </div>
   <div class="testi-list">
-    <div class="testi rv d1">
-      <p class="testi-text">"Sherry understood exactly what I wanted — a look that was traditional but still felt like me. I cried when I saw myself. She made my whole morning feel calm."</p>
-      <div class="testi-name">Priya M.</div>
-      <div class="testi-detail">Pakistani-American Bride · Atlanta</div>
+    <div class="testi reveal">
+      <div class="testi-quote-mark">"</div>
+      <p class="testi-text">Sherry understood my vision before I even finished describing it. My bridal look was everything — traditional enough for my family, modern enough for me. I cried when I saw myself. Happy tears.</p>
+      <div class="testi-meta">
+        <div class="testi-avatar">P</div>
+        <div>
+          <div class="testi-name">Priya M.</div>
+          <div class="testi-detail">South Asian Bride · Atlanta</div>
+        </div>
+      </div>
     </div>
-    <div class="testi rv d2">
-      <p class="testi-text">"I had a very specific vision and she nailed it on the first try. Incredibly skilled — and just a warm, grounding presence on a day that could easily become overwhelming."</p>
-      <div class="testi-name">Ananya K.</div>
-      <div class="testi-detail">Indian-American Bride · Atlanta</div>
+    <div class="testi reveal reveal-delay-1">
+      <div class="testi-quote-mark">"</div>
+      <p class="testi-text">I was nervous about being in photos all day — my makeup usually fades by noon. Sherry's work lasted through 8 hours of dancing, crying, and an outdoor ceremony in July. Flawless.</p>
+      <div class="testi-meta">
+        <div class="testi-avatar">A</div>
+        <div>
+          <div class="testi-name">Aisha R.</div>
+          <div class="testi-detail">Bride · Destination Wedding</div>
+        </div>
+      </div>
     </div>
-    <div class="testi rv d3">
-      <p class="testi-text">"I flew Sherry in for my destination wedding. She did my bridal look, Mehndi look, and my mother's — everything was perfect. Our photos are genuinely stunning."</p>
-      <div class="testi-name">Sara A.</div>
-      <div class="testi-detail">Bride · Cancún Destination Wedding</div>
+    <div class="testi reveal reveal-delay-2">
+      <div class="testi-quote-mark">"</div>
+      <p class="testi-text">She did makeup for me, my three bridesmaids, and my mom — all on the morning of the wedding. Not a single person was rushed. Every look was perfection. She's the one you want in your corner.</p>
+      <div class="testi-meta">
+        <div class="testi-avatar">N</div>
+        <div>
+          <div class="testi-name">Nadia K.</div>
+          <div class="testi-detail">Bride · Bridal Party of 4</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -906,93 +1237,184 @@ footer p { font-size: 0.65rem; letter-spacing: 0.12em; color: #555; font-weight:
 <!-- CONTACT -->
 <section class="contact" id="contact">
   <div class="contact-img">
-    <div class="contact-img-inner">
-      <span class="contact-img-ph">Bridal Portrait</span>
-    </div>
+    <img
+      src="/img/sherry_10.jpg"
+      alt="Makeup artistry detail"
+      loading="lazy" />
+    <div class="contact-img-overlay"></div>
   </div>
   <div class="contact-form-wrap">
-    <div class="label rv">Get in Touch</div>
-    <h2 class="rv d1">Tell me about<br/><em>your day.</em></h2>
-    <p class="contact-sub rv d2">I respond within 24 hours. Peak dates book 6–12 months in advance.</p>
-    <form action="https://formspree.io/f/xpwzgqob" method="POST" class="cform" id="contactForm">
+    <p class="label reveal">Get in Touch</p>
+    <h2 class="reveal reveal-delay-1">
+      Let's create<br>
+      <em>your look.</em>
+    </h2>
+    <p class="contact-sub reveal reveal-delay-2">
+      Share a few details and I'll be in touch within 48 hours. Bridal dates book fast — don't wait.
+    </p>
+    <form class="cform reveal reveal-delay-3" action="https://formspree.io/f/xpwzgqob" method="POST" id="contact-form">
       <div class="cf-row">
         <div class="cf-field">
-          <label>Your Name</label>
-          <input type="text" name="name" placeholder="Priya Sharma" required />
+          <label for="name">Your Name</label>
+          <input type="text" id="name" name="name" placeholder="First & Last" required />
         </div>
         <div class="cf-field">
-          <label>Email</label>
-          <input type="email" name="email" placeholder="priya@email.com" required />
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="you@email.com" required />
         </div>
       </div>
       <div class="cf-row">
         <div class="cf-field">
-          <label>Wedding Date</label>
-          <input type="text" name="date" placeholder="November 2026" />
+          <label for="phone">Phone</label>
+          <input type="tel" id="phone" name="phone" placeholder="(404) 000-0000" />
         </div>
         <div class="cf-field">
-          <label>Service</label>
-          <select name="service">
-            <option value="">Select one</option>
-            <option>Full Bridal Package</option>
-            <option>Mehndi / Sangeet</option>
-            <option>Bridal Party</option>
-            <option>Destination Wedding</option>
-            <option>Other</option>
-          </select>
+          <label for="date">Wedding Date</label>
+          <input type="date" id="date" name="date" />
         </div>
       </div>
       <div class="cf-field">
-        <label>Tell me about your wedding</label>
-        <textarea name="message" rows="3" placeholder="Location, cultural background, the look you're imagining..."></textarea>
+        <label for="service">Service</label>
+        <select id="service" name="service">
+          <option value="" disabled selected>Select a service</option>
+          <option>Full Bridal Package</option>
+          <option>Mehndi / Sangeet</option>
+          <option>Bridal Party</option>
+          <option>Bridal Trial Only</option>
+          <option>Editorial / Event</option>
+          <option>Destination Wedding</option>
+        </select>
+      </div>
+      <div class="cf-field">
+        <label for="message">Tell Me About Your Vision</label>
+        <textarea id="message" name="message" rows="3" placeholder="Style, inspiration, anything you want me to know..."></textarea>
       </div>
       <div class="cf-submit">
         <button type="submit" class="submit-btn">Send Inquiry</button>
-        <span class="submit-note">Response within 24 hours</span>
+        <span class="submit-note">Typically responds within 48 hours</span>
       </div>
     </form>
-    <div class="cf-success" id="cfSuccess">
-      <h3>Message received.</h3>
-      <p>Thank you for reaching out. I'll review your inquiry and be in touch within 24 hours.</p>
-    </div>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <div class="f-logo">Makeup by Sherry B</div>
-  <p>© 2026 · Atlanta, Georgia</p>
-  <div class="f-links">
-    <a href="#about">About</a>
-    <a href="#services">Services</a>
-    <a href="#gallery">Gallery</a>
-    <a href="#contact">Book</a>
+  <div class="footer-logo">Makeup by Sherry B</div>
+  <div class="footer-copy">© 2025 Makeup by Sherry B · Atlanta, Georgia</div>
+  <div class="footer-links">
+    <a href="https://www.instagram.com/makeupbysherryb" target="_blank">Instagram</a>
+    <a href="#contact">Book Now</a>
+    <a href="mailto:hello@makeupbysherryb.com">Email</a>
   </div>
 </footer>
 
 <script>
-  // Sticky nav
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => nav.classList.toggle('stuck', scrollY > 60));
+/* ── PRELOADER ─────────────────────────────────────────────────── */
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.getElementById('preloader').classList.add('done');
+  }, 1600);
+});
 
-  // Reveal
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('on'); });
-  }, { threshold: 0.08 });
-  document.querySelectorAll('.rv').forEach(el => io.observe(el));
+/* ── CUSTOM CURSOR ─────────────────────────────────────────────── */
+const dot = document.getElementById('cursorDot');
+const ring = document.getElementById('cursorRing');
+let mx = 0, my = 0, rx = 0, ry = 0;
 
-  // Form
-  const form = document.getElementById('contactForm');
-  form && form.addEventListener('submit', async e => {
-    e.preventDefault();
-    const btn = form.querySelector('.submit-btn');
-    btn.textContent = 'Sending...'; btn.disabled = true;
-    try {
-      const r = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' }});
-      if (r.ok) { form.style.display = 'none'; document.getElementById('cfSuccess').style.display = 'block'; }
-      else { btn.textContent = 'Send Inquiry'; btn.disabled = false; }
-    } catch { btn.textContent = 'Send Inquiry'; btn.disabled = false; }
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  dot.style.left = mx + 'px';
+  dot.style.top  = my + 'px';
+});
+
+function animateCursor() {
+  rx += (mx - rx) * 0.12;
+  ry += (my - ry) * 0.12;
+  ring.style.left = rx + 'px';
+  ring.style.top  = ry + 'px';
+  requestAnimationFrame(animateCursor);
+}
+animateCursor();
+
+document.querySelectorAll('a, button, .g, .svc, .stat').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    dot.style.width = '10px'; dot.style.height = '10px';
+    ring.style.width = '56px'; ring.style.height = '56px';
+    ring.style.borderColor = '#C9A96E';
   });
+  el.addEventListener('mouseleave', () => {
+    dot.style.width = '6px'; dot.style.height = '6px';
+    ring.style.width = '36px'; ring.style.height = '36px';
+    ring.style.borderColor = 'rgba(201,169,110,0.5)';
+  });
+});
+
+/* ── NAV STICKY ────────────────────────────────────────────────── */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('stuck', window.scrollY > 60);
+});
+
+/* ── SCROLL REVEAL ─────────────────────────────────────────────── */
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12 });
+reveals.forEach(el => observer.observe(el));
+
+/* ── LIGHTBOX ──────────────────────────────────────────────────── */
+function openLightbox(src) {
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeLightbox();
+});
+
+/* ── PARALLAX HERO ─────────────────────────────────────────────── */
+const heroImg = document.getElementById('hero-img');
+window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  if (y < window.innerHeight) {
+    heroImg.style.transform = `scale(1.0) translateY(${y * 0.18}px)`;
+  }
+}, { passive: true });
+
+/* ── FORM ──────────────────────────────────────────────────────── */
+document.getElementById('contact-form').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const btn = this.querySelector('.submit-btn');
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+  try {
+    const res = await fetch(this.action, {
+      method: 'POST',
+      body: new FormData(this),
+      headers: { Accept: 'application/json' }
+    });
+    if (res.ok) {
+      btn.textContent = 'Message Sent ✓';
+      btn.style.background = '#C9A96E';
+      this.reset();
+    } else {
+      btn.textContent = 'Error — Try Again';
+      btn.disabled = false;
+    }
+  } catch {
+    btn.textContent = 'Error — Try Again';
+    btn.disabled = false;
+  }
+});
 </script>
 </body>
 </html>
