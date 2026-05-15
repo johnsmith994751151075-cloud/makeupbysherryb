@@ -2,11 +2,5 @@
   "rewrites": [
     {"source":"/contract","destination":"/book.html"},
     {"source":"/mileage","destination":"/mileage.html"}
-  ],
-  "functions": {
-    "api/contact.js": { "maxDuration": 10 },
-    "api/get-mileage.js": { "maxDuration": 10 },
-    "api/log-mileage.js": { "maxDuration": 10 },
-    "api/submit-contract.js": { "maxDuration": 10 }
-  }
+  ]
 }
