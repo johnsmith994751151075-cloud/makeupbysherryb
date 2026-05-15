@@ -1,5 +1,4 @@
 {
-  "nodeVersion": "20.x",
   "rewrites": [
     {"source":"/contract","destination":"/book.html"},
     {"source":"/mileage","destination":"/mileage.html"}
