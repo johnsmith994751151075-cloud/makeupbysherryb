@@ -3,6 +3,6 @@
   "version": "1.0.0",
   "description": "Makeup by Sherry B — bridal makeup artist website",
   "engines": {
-    "node": "24.x"
+    "node": "20.x"
   }
 }
