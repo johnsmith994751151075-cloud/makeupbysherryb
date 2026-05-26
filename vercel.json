@@ -1,6 +1,7 @@
 {
   "rewrites": [
     {"source":"/contract","destination":"/book.html"},
-    {"source":"/mileage","destination":"/mileage.html"}
+    {"source":"/mileage","destination":"/mileage.html"},
+    {"source":"/privacy","destination":"/privacy.html"}
   ]
 }
