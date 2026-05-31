@@ -11,108 +11,43 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; font-size: 16px; }
-    body {
-      background: #FAFAF8;
-      color: #0F0F0F;
-      font-family: 'Jost', sans-serif;
-      font-weight: 300;
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-    }
+    body { background: #FAFAF8; color: #0F0F0F; font-family: 'Jost', sans-serif; font-weight: 300; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
     a { text-decoration: none; color: inherit; }
 
+    /* SKIP LINK */
+    .skip-link { position: absolute; top: -40px; left: 0; background: #0F0F0F; color: #FAFAF8; padding: 8px 16px; z-index: 10000; font-size: 0.875rem; transition: top 0.2s; text-decoration: none; }
+    .skip-link:focus { top: 0; }
+
     /* NAV */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 22px 52px;
-      background: rgba(250,250,248,0.96);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid #E8E4DC;
-    }
-    .nav-logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1rem; font-weight: 400;
-      letter-spacing: 0.28em; text-transform: uppercase;
-    }
-    .nav-book {
-      font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase;
-      font-weight: 400; padding: 11px 30px; border: 1px solid #0F0F0F;
-      transition: background 0.3s, color 0.3s;
-    }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 22px 52px; background: rgba(250,250,248,0.96); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid #E8E4DC; }
+    .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 400; letter-spacing: 0.28em; text-transform: uppercase; }
+    .nav-book { font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 400; padding: 11px 30px; border: 1px solid #0F0F0F; transition: background 0.3s, color 0.3s; }
     .nav-book:hover { background: #0F0F0F; color: #FAFAF8; }
 
     /* PAGE */
-    .privacy-page {
-      max-width: 740px;
-      margin: 0 auto;
-      padding: 140px 32px 100px;
-    }
-    .privacy-eyebrow {
-      font-size: 0.6rem; letter-spacing: 0.32em; text-transform: uppercase;
-      color: #C9A96E; font-weight: 400; margin-bottom: 20px;
-    }
-    .privacy-page h1 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.2rem, 4vw, 3.2rem);
-      font-weight: 300; line-height: 1.1;
-      margin-bottom: 12px;
-    }
-    .privacy-meta {
-      font-size: 0.72rem; color: #bbb; letter-spacing: 0.08em;
-      margin-bottom: 52px;
-    }
-    .privacy-page h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.35rem; font-weight: 400;
-      color: #0F0F0F; margin-top: 44px; margin-bottom: 14px;
-      padding-bottom: 10px; border-bottom: 1px solid #E8E4DC;
-    }
-    .privacy-page p, .privacy-page li {
-      font-size: 0.86rem; line-height: 2; color: #666; font-weight: 300;
-      margin-bottom: 12px;
-    }
+    .privacy-page { max-width: 740px; margin: 0 auto; padding: 140px 32px 100px; }
+    .privacy-eyebrow { font-size: 0.6rem; letter-spacing: 0.32em; text-transform: uppercase; color: #C9A96E; font-weight: 400; margin-bottom: 20px; }
+    .privacy-page h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 4vw, 3.2rem); font-weight: 300; line-height: 1.1; margin-bottom: 12px; }
+    .privacy-meta { font-size: 0.72rem; color: #bbb; letter-spacing: 0.08em; margin-bottom: 52px; }
+    .privacy-page h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 400; color: #0F0F0F; margin-top: 44px; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid #E8E4DC; }
+    .privacy-page p, .privacy-page li { font-size: 0.86rem; line-height: 2; color: #666; font-weight: 300; margin-bottom: 12px; }
     .privacy-page ul, .privacy-page ol { padding-left: 18px; margin-bottom: 16px; }
     .privacy-page li { margin-bottom: 6px; }
     .privacy-page a { color: #C9A96E; border-bottom: 1px solid rgba(201,169,110,0.4); transition: border-color 0.2s; }
     .privacy-page a:hover { border-bottom-color: #C9A96E; }
     .privacy-page strong { color: #0F0F0F; font-weight: 400; }
 
-    .notice-box {
-      background: #F5F2EC;
-      border-left: 2px solid #C9A96E;
-      padding: 18px 22px;
-      margin: 20px 0 40px;
-    }
+    .notice-box { background: #F5F2EC; border-left: 2px solid #C9A96E; padding: 18px 22px; margin: 20px 0 40px; }
     .notice-box p { margin: 0; font-size: 0.83rem; color: #555; }
 
-    .rights-grid {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 10px; margin: 16px 0;
-    }
-    .right-card {
-      background: #F5F2EC;
-      border: 1px solid #E8E4DC;
-      padding: 14px 16px;
-    }
+    .rights-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 16px 0; }
+    .right-card { background: #F5F2EC; border: 1px solid #E8E4DC; padding: 14px 16px; }
     .right-card strong { display: block; font-size: 0.78rem; margin-bottom: 4px; color: #0F0F0F; font-weight: 400; }
     .right-card span { font-size: 0.75rem; color: #888; line-height: 1.6; }
 
     /* FOOTER */
-    footer {
-      background: #0F0F0F;
-      padding: 44px 80px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .footer-logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 0.95rem; font-weight: 400;
-      letter-spacing: 0.28em; text-transform: uppercase;
-      color: rgba(250,250,248,0.7);
-    }
+    footer { background: #0F0F0F; padding: 44px 80px; display: flex; align-items: center; justify-content: space-between; }
+    .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 0.95rem; font-weight: 400; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(250,250,248,0.7); }
     .footer-copy { font-size: 0.6rem; letter-spacing: 0.18em; color: #444; text-transform: uppercase; font-weight: 300; }
     .footer-links { display: flex; gap: 36px; }
     .footer-links a { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: #555; font-weight: 300; transition: color 0.25s; border-bottom: none; }
@@ -123,11 +58,13 @@
       .privacy-page { padding: 120px 24px 80px; }
       .rights-grid { grid-template-columns: 1fr; }
       footer { flex-direction: column; gap: 20px; padding: 36px 28px; text-align: center; }
-      .footer-links { justify-content: center; }
+      .footer-links { justify-content: center; flex-wrap: wrap; }
     }
   </style>
 </head>
 <body>
+
+  <a class="skip-link" href="#main-content">Skip to main content</a>
 
   <!-- NAV -->
   <nav>
@@ -135,164 +72,120 @@
     <a href="/#contact" class="nav-book">Book Now</a>
   </nav>
 
-  <div class="privacy-page">
+  <div class="privacy-page" id="main-content">
 
     <p class="privacy-eyebrow">Legal</p>
     <h1>Privacy Policy</h1>
-    <p class="privacy-meta">MakeupbySherryb LLC &nbsp;·&nbsp; Last updated: May 25, 2026 &nbsp;·&nbsp; Effective: May 25, 2026</p>
+    <p class="privacy-meta">MakeupbySherryb LLC &nbsp;·&nbsp; Effective: June 1, 2026 &nbsp;·&nbsp; Last updated: June 1, 2026</p>
 
     <div class="notice-box">
-      <p>This Privacy Policy describes how <strong>MakeupbySherryb LLC</strong> ("we," "us," or "our") collects, uses, and protects personal information submitted through this website (makeupbysherryb.com). We respect your privacy and are committed to compliance with the EU General Data Protection Regulation (GDPR), the California Consumer Privacy Act (CCPA/CPRA), and applicable global privacy laws.</p>
+      <p><strong>MakeupbySherryb LLC</strong> ("we," "us," or "our") respects your privacy. This policy explains how we collect, use, and protect personal information submitted through makeupbysherryb.com. We are committed to compliance with applicable U.S. privacy laws, including the California Consumer Privacy Act (CCPA/CPRA) and the CAN-SPAM Act.</p>
     </div>
 
-    <h2>1. Who We Are (Data Controller)</h2>
-    <p>The data controller for personal information collected through this website is:</p>
+    <h2>1. Who We Are</h2>
+    <p>The data controller for information collected through this website is:</p>
     <ul>
       <li><strong>Business:</strong> MakeupbySherryb LLC</li>
       <li><strong>Location:</strong> Atlanta, Georgia, United States</li>
       <li><strong>Website:</strong> makeupbysherryb.com</li>
-      <li><strong>Privacy contact:</strong> <a href="mailto:hello@makeupbysherryb.com">hello@makeupbysherryb.com</a></li>
+      <li><strong>Contact:</strong> <a href="mailto:info@makeupbysherryb.com">info@makeupbysherryb.com</a></li>
     </ul>
-    <p>For any privacy-related questions or rights requests, please email <a href="mailto:hello@makeupbysherryb.com">hello@makeupbysherryb.com</a>. We will respond to verified requests within 30 days.</p>
 
-    <h2>2. Information We Collect</h2>
-    <p>We collect personal information only when you voluntarily submit it through our booking inquiry form. We do not use advertising trackers or sell your data.</p>
-
-    <p><strong>Booking Inquiry Form — we may collect:</strong></p>
+    <h2>2. Information We Collect via Contact &amp; Booking Form</h2>
+    <p>We collect personal information only when you voluntarily submit it through our inquiry or booking form. We may collect:</p>
     <ul>
-      <li>First and last name</li>
-      <li>Email address</li>
-      <li>Phone number (optional)</li>
-      <li>Wedding or event date</li>
-      <li>Requested ready-by time</li>
-      <li>Venue or location name</li>
-      <li>Service type requested</li>
-      <li>Vision or message you provide (optional)</li>
+      <li><strong>Name</strong> (first and last)</li>
+      <li><strong>Email address</strong></li>
+      <li><strong>Phone number</strong></li>
+      <li><strong>Wedding or event date</strong></li>
+      <li><strong>Venue / location</strong></li>
+      <li><strong>Vision / style notes</strong> you choose to share</li>
+      <li><strong>Service type</strong> requested</li>
     </ul>
+    <p><strong>Purpose:</strong> To respond to your inquiry, assess availability, and provide the makeup artistry services you've requested.<br>
+    <strong>Legal basis:</strong> Your consent (you submit the form voluntarily) and the steps necessary to enter a service agreement.</p>
 
-    <p><strong>Automatically Collected Technical Data:</strong></p>
-    <p>When you visit this website, third-party services (described in Section 6) may automatically collect limited technical information such as your IP address, browser type, and referring URL as part of their standard operation. We do not independently collect or store server access logs.</p>
-
-    <h2>3. How We Use Your Information</h2>
-    <p>We use your information exclusively for:</p>
+    <h2>3. Third-Party Tools</h2>
+    <p>Your form data may be processed by the following third-party tools we use to operate our business:</p>
     <ul>
-      <li><strong>Responding to booking inquiries:</strong> To contact you about your submission, typically within 48 hours.</li>
-      <li><strong>Scheduling and coordination:</strong> To coordinate availability, date holds, and service details for your event.</li>
-      <li><strong>Service delivery:</strong> To provide the makeup artistry services you have requested or contracted.</li>
-      <li><strong>Follow-up communications:</strong> To send information relevant to your booked or inquired service (e.g., trial reminders, preparation tips).</li>
+      <li><strong>Email client (Gmail):</strong> Inquiry responses are sent and managed through Gmail. Your submitted data may pass through Google's servers. See <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google's Privacy Policy</a>.</li>
+      <li><strong>Booking tools (HoneyBook, Calendly, or equivalent):</strong> If applicable, booking confirmations and contract management may be handled via a third-party booking platform. These processors are bound by their own privacy policies.</li>
+      <li><strong>Google Fonts &amp; OpenStreetMap:</strong> These services load on our website and may receive your IP address as part of standard operation.</li>
     </ul>
-    <p>We will not add you to any mailing list or send you promotional communications without your explicit consent.</p>
+    <p><strong>We do not sell, rent, or share your personal information with any third party for marketing or commercial purposes. Ever.</strong></p>
 
-    <h2>4. Legal Basis for Processing (GDPR)</h2>
-    <p>For individuals in the EEA or United Kingdom, we process your personal data under the following lawful bases:</p>
+    <h2>4. Marketing Communications &amp; CAN-SPAM</h2>
+    <p>If you provide your email address, we may send follow-up information about our services relevant to your inquiry. We comply with the <strong>CAN-SPAM Act</strong>:</p>
     <ul>
-      <li><strong>Pre-contractual steps (Article 6(1)(b)):</strong> Processing necessary to respond to your inquiry and take steps toward a service agreement at your request.</li>
-      <li><strong>Contract performance (Article 6(1)(b)):</strong> Processing necessary to perform a contract for services you have engaged us to provide.</li>
-      <li><strong>Legitimate interests (Article 6(1)(f)):</strong> Responding to direct inquiries submitted by you. We have assessed that our legitimate interest does not override your rights.</li>
-      <li><strong>Consent (Article 6(1)(a)):</strong> For any optional communications (e.g., promotional emails), we will obtain your separate, explicit consent first.</li>
+      <li>Every marketing email includes our business name and contact information.</li>
+      <li>Every marketing email includes a clear and easy way to opt out.</li>
+      <li>You may opt out at any time by replying "unsubscribe" to any email or contacting us at <a href="mailto:info@makeupbysherryb.com">info@makeupbysherryb.com</a>.</li>
+      <li>We will honor opt-out requests within 10 business days.</li>
     </ul>
+    <p>We will not add you to any mailing list or send promotional communications without your consent.</p>
 
     <h2>5. Data Retention</h2>
-    <p>We retain inquiry and client records for up to <strong>3 years</strong> following your inquiry or the date of services rendered (whichever is later). This period is necessary for business record-keeping, dispute resolution, and any applicable tax or legal requirements.</p>
-    <p>If you request deletion of your data before this period expires, we will comply within 30 days except where retention is required by applicable law.</p>
-
-    <h2>6. Third-Party Services and Data Sharing</h2>
-    <p>We share your data only with the minimal set of service providers necessary to operate this website and deliver services. We do not sell or rent your data to any third party.</p>
     <ul>
-      <li>
-        <strong>Google Fonts:</strong> This website loads typefaces from Google Fonts, which causes your browser to make requests to Google servers. Google may log your IP address as part of this process. See <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google's Privacy Policy</a>.
-      </li>
-      <li>
-        <strong>OpenStreetMap Nominatim (venue autocomplete):</strong> When you type a venue or location into the booking form, the website makes requests to the OpenStreetMap Nominatim geocoding service. This involves your typed search query and your IP address being sent to OpenStreetMap servers. See the <a href="https://osmfoundation.org/wiki/Privacy_Policy" target="_blank" rel="noopener noreferrer">OSM Foundation Privacy Policy</a>.
-      </li>
-      <li>
-        <strong>Instagram (portfolio link):</strong> Our website links to our Instagram profile (@makeupbysherryb). Clicking that link takes you to Instagram's platform, subject to <a href="https://privacycenter.instagram.com/policy" target="_blank" rel="noopener noreferrer">Instagram's Privacy Policy</a>. We do not embed Instagram feeds that load content from Instagram servers automatically.
-      </li>
+      <li><strong>Inquiry data:</strong> Retained for up to <strong>2 years</strong> for business purposes, or until you request deletion.</li>
+      <li><strong>Booking and contract records:</strong> May be retained longer as required by Georgia law for tax and accounting purposes.</li>
+      <li>You may request deletion of your data at any time by contacting us (subject to legal retention requirements).</li>
     </ul>
 
-    <h2>7. International Data Transfers</h2>
-    <p>We are based in the United States. If you are located in the EEA, UK, or another jurisdiction with data transfer restrictions, your data may be processed in the US, which may not offer equivalent data protection to your home jurisdiction.</p>
-    <p>For EEA/UK residents, where transfers occur we rely on appropriate safeguards such as <strong>Standard Contractual Clauses (SCCs)</strong>. Our service providers (Google, OpenStreetMap) each maintain their own transfer compliance mechanisms. You may contact us for details.</p>
-
-    <h2>8. Cookies and Tracking</h2>
-    <p>We do not set any first-party cookies on this website, and we do not use cookies for analytics or advertising tracking.</p>
-    <p>Third-party services (such as Google Fonts and OpenStreetMap) may set cookies or use browser fingerprinting as part of their own operations. You can manage third-party cookies in your browser settings. Since we do not use non-essential cookies ourselves, we have not implemented a cookie consent banner — but we will do so if our use of third-party services changes.</p>
-
-    <h2>9. Your Rights</h2>
+    <h2>6. Your Rights — Georgia &amp; CCPA</h2>
     <div class="rights-grid">
       <div class="right-card">
-        <strong>Right of Access (GDPR / CCPA)</strong>
-        <span>Request a copy of personal data we hold about you.</span>
+        <strong>Right to Know</strong>
+        <span>Request disclosure of what personal information we hold about you and how it is used.</span>
       </div>
       <div class="right-card">
-        <strong>Right to Rectification (GDPR)</strong>
-        <span>Request correction of inaccurate or incomplete data.</span>
+        <strong>Right to Delete</strong>
+        <span>Request deletion of your personal data, subject to any legal retention requirements.</span>
       </div>
       <div class="right-card">
-        <strong>Right to Erasure (GDPR / CCPA)</strong>
-        <span>Request deletion of your personal data, subject to legal exceptions.</span>
+        <strong>Right to Correct</strong>
+        <span>Request correction of inaccurate personal information we hold.</span>
       </div>
       <div class="right-card">
-        <strong>Right to Restriction (GDPR)</strong>
-        <span>Request restricted processing in certain circumstances.</span>
+        <strong>Opt Out of Sale</strong>
+        <span>We do not sell your data. No opt-out action is required.</span>
       </div>
       <div class="right-card">
-        <strong>Right to Portability (GDPR)</strong>
-        <span>Receive your data in a structured, machine-readable format.</span>
-      </div>
-      <div class="right-card">
-        <strong>Right to Object (GDPR)</strong>
-        <span>Object to processing based on legitimate interests.</span>
-      </div>
-      <div class="right-card">
-        <strong>No Sale of Data (CCPA)</strong>
-        <span>We do not sell your data. No opt-out mechanism is required.</span>
-      </div>
-      <div class="right-card">
-        <strong>Non-Discrimination (CCPA)</strong>
+        <strong>Non-Discrimination</strong>
         <span>Exercising your rights will not affect the quality of our services.</span>
       </div>
+      <div class="right-card">
+        <strong>Opt Out of Marketing</strong>
+        <span>Reply "unsubscribe" to any email or email us directly at any time.</span>
+      </div>
     </div>
+    <p>To exercise any right, contact us at <a href="mailto:info@makeupbysherryb.com">info@makeupbysherryb.com</a>. We will respond within 30 days (or 45 days for CCPA requests). We may verify your identity before fulfilling requests.</p>
+    <p><strong>California residents</strong> (CCPA/CPRA): Categories of personal information we collect — Identifiers (name, email, phone), commercial information (services requested, event date), and internet activity (IP address via third-party services). Purpose: booking inquiry response and service delivery. We do not sell personal information.</p>
 
-    <p>To exercise any right, email <a href="mailto:hello@makeupbysherryb.com">hello@makeupbysherryb.com</a> with your request. We will respond within 30 days (GDPR) or 45 days (CCPA). We may need to verify your identity before fulfilling your request.</p>
+    <h2>7. Children's Privacy</h2>
+    <p>Our services are intended for adults (18+) or minors booking with parental or guardian consent. We do not knowingly collect personal information from anyone under 18 without consent from a parent or legal guardian. If you believe we have inadvertently received data from a minor, please contact us at <a href="mailto:info@makeupbysherryb.com">info@makeupbysherryb.com</a> and we will delete it promptly.</p>
 
-    <p><strong>EEA/UK residents</strong> may also lodge a complaint with their national data protection authority. Visit <a href="https://edpb.europa.eu/about-edpb/about-edpb/members_en" target="_blank" rel="noopener noreferrer">edpb.europa.eu</a> for a list of EEA authorities, or the <a href="https://ico.org.uk" target="_blank" rel="noopener noreferrer">ICO</a> for UK residents.</p>
+    <h2>8. Data Security</h2>
+    <p>All data submitted through our website is transmitted over encrypted HTTPS connections. We apply appropriate technical and organizational measures to protect your personal information. Access to client data is limited strictly to the business owner.</p>
 
-    <h2>10. California Residents (CCPA / CPRA)</h2>
-    <p>If you are a California resident, you have the following rights under the CCPA/CPRA:</p>
+    <h2>9. DMCA / Copyright</h2>
+    <p>All portfolio images and content on this site are owned by MakeupbySherryb LLC or used with explicit permission from the photographer or subject. If you believe any content on this site infringes your copyright, please contact us at <a href="mailto:info@makeupbysherryb.com">info@makeupbysherryb.com</a> with:</p>
     <ul>
-      <li><strong>Right to Know:</strong> Request disclosure of categories and specific pieces of personal information collected about you, sources, business purposes, and third parties involved.</li>
-      <li><strong>Right to Delete:</strong> Request deletion of personal information we hold about you.</li>
-      <li><strong>Right to Correct:</strong> Request correction of inaccurate personal information.</li>
-      <li><strong>Right to Opt-Out of Sale or Sharing:</strong> We do not sell or share personal information for cross-context behavioral advertising.</li>
-      <li><strong>Right to Non-Discrimination:</strong> We will not deny, charge differently, or provide a different level of service based on you exercising these rights.</li>
+      <li>Your contact information</li>
+      <li>A description of the copyrighted work you believe is infringed</li>
+      <li>The URL of the allegedly infringing content</li>
+      <li>A statement of good faith belief that the use is not authorized</li>
     </ul>
 
-    <p><strong>Categories of personal information collected in the last 12 months:</strong></p>
+    <h2>10. Changes to This Policy</h2>
+    <p>We may update this Privacy Policy periodically. Changes will be indicated by a revised "Last updated" date. Continued use of our website following any update constitutes acceptance. We encourage you to review this page periodically.</p>
+
+    <h2>11. Contact</h2>
     <ul>
-      <li>Identifiers (name, email, phone) — via booking inquiry form</li>
-      <li>Event and scheduling information (wedding date, venue, time) — via booking inquiry form</li>
-      <li>Internet activity (IP address) — indirectly via third-party services</li>
-    </ul>
-    <p><strong>Purpose:</strong> Booking inquiry response and service delivery. We do not sell any personal information to third parties.</p>
-
-    <h2>11. Children's Privacy</h2>
-    <p>Our services are intended for adults (18+) or minors booking with parental/guardian consent. We do not knowingly collect personal information from children under 13 (or under 16 for EEA/UK residents). If you believe we have inadvertently received data from a child, please contact us at <a href="mailto:hello@makeupbysherryb.com">hello@makeupbysherryb.com</a> and we will delete it promptly.</p>
-
-    <h2>12. Data Security</h2>
-    <p>All data submitted through our website is transmitted over encrypted HTTPS connections. We apply appropriate organizational and technical security measures to protect your personal information from unauthorized access, loss, or disclosure. Access to client data is limited strictly to the business owner.</p>
-    <p>No transmission method over the internet is completely secure. While we take reasonable precautions, we cannot guarantee absolute security and encourage you to be mindful of what you share online.</p>
-
-    <h2>13. Changes to This Policy</h2>
-    <p>We may update this Privacy Policy periodically to reflect changes in our practices or legal requirements. Changes will be indicated by a new "Last updated" date at the top of this page. We encourage you to review this page periodically. Continued use of our website following any changes constitutes acceptance of the updated policy.</p>
-
-    <h2>14. Contact</h2>
-    <p>For privacy-related inquiries, rights requests, or concerns:</p>
-    <ul>
-      <li><strong>Email:</strong> <a href="mailto:hello@makeupbysherryb.com">hello@makeupbysherryb.com</a></li>
+      <li><strong>MakeupbySherryb LLC</strong></li>
       <li><strong>Location:</strong> Atlanta, Georgia, United States</li>
+      <li><strong>Email:</strong> <a href="mailto:info@makeupbysherryb.com">info@makeupbysherryb.com</a></li>
     </ul>
-    <p>We aim to respond within <strong>5 business days</strong> for general inquiries and within the legally required timeframe for rights requests.</p>
+    <p>We aim to respond to all privacy inquiries within <strong>5 business days</strong>.</p>
 
   </div>
 
@@ -303,10 +196,20 @@
     <div class="footer-links">
       <a href="https://www.instagram.com/makeupbysherryb" target="_blank">Instagram</a>
       <a href="/#contact">Contact</a>
-      <a href="mailto:hello@makeupbysherryb.com">Email</a>
+      <a href="mailto:info@makeupbysherryb.com">Email</a>
       <a href="/privacy">Privacy Policy</a>
+      <a href="/terms">Terms &amp; Conditions</a>
     </div>
   </footer>
+
+  <!-- COOKIE BANNER -->
+  <div id="cookie-banner" role="dialog" aria-label="Cookie consent" aria-live="polite" style="position:fixed;bottom:0;left:0;right:0;z-index:9999;display:none;background:#0F0F0F;border-top:1px solid rgba(201,169,110,0.25);padding:1rem 52px;align-items:center;justify-content:space-between;gap:1.5rem;font-family:'Jost',sans-serif;font-size:0.72rem;color:rgba(250,250,248,0.5);flex-wrap:wrap;">
+    <p style="margin:0;flex:1;min-width:200px;">We use essential cookies to ensure this site works. By continuing, you accept our <a href="/privacy" style="color:#C9A96E;border-bottom:1px solid rgba(201,169,110,0.4);">Privacy Policy</a>.</p>
+    <button id="cookie-accept" aria-label="Accept cookies" style="background:#C9A96E;color:#0F0F0F;border:none;padding:0.6rem 1.5rem;font-family:'Jost',sans-serif;font-size:0.6rem;font-weight:400;letter-spacing:0.22em;text-transform:uppercase;cursor:pointer;white-space:nowrap;flex-shrink:0;">Accept</button>
+  </div>
+  <script>
+    (function(){var b=document.getElementById('cookie-banner');if(localStorage.getItem('cookieConsent')!=='accepted'){b.style.display='flex';}document.getElementById('cookie-accept').addEventListener('click',function(){localStorage.setItem('cookieConsent','accepted');b.style.display='none';});})();
+  </script>
 
 </body>
 </html>
