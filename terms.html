@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <title>Terms & Conditions — MakeupbySherryb LLC</title>
-  <meta name="description" content="Terms and Conditions for MakeupbySherryb LLC." />
+  <title>Terms &amp; Conditions — MakeupbySherryb LLC</title>
+  <meta name="description" content="Terms and Conditions for MakeupbySherryb LLC — booking, cancellation, deposit, and service policies." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet" />
   <style>
@@ -14,13 +14,11 @@
     body { background: #FAFAF8; color: #0F0F0F; font-family: 'Jost', sans-serif; font-weight: 300; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
     a { text-decoration: none; color: inherit; }
 
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 22px 52px;
-      background: rgba(250,250,248,0.96); backdrop-filter: blur(16px);
-      border-bottom: 1px solid #E8E4DC;
-    }
+    /* SKIP LINK */
+    .skip-link { position: absolute; top: -40px; left: 0; background: #0F0F0F; color: #FAFAF8; padding: 8px 16px; z-index: 10000; font-size: 0.875rem; transition: top 0.2s; text-decoration: none; }
+    .skip-link:focus { top: 0; }
+
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 22px 52px; background: rgba(250,250,248,0.96); backdrop-filter: blur(16px); border-bottom: 1px solid #E8E4DC; }
     .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 400; letter-spacing: 0.28em; text-transform: uppercase; }
     .nav-book { font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 400; padding: 11px 30px; border: 1px solid #0F0F0F; transition: background 0.3s, color 0.3s; }
     .nav-book:hover { background: #0F0F0F; color: #FAFAF8; }
@@ -29,16 +27,15 @@
     .eyebrow { font-size: 0.6rem; letter-spacing: 0.32em; text-transform: uppercase; color: #C9A96E; font-weight: 400; margin-bottom: 20px; }
     h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 4vw, 3.2rem); font-weight: 300; line-height: 1.1; margin-bottom: 12px; }
     .meta { font-size: 0.72rem; color: #bbb; letter-spacing: 0.08em; margin-bottom: 52px; }
-
     .notice { background: #F5F2EC; border-left: 2px solid #C9A96E; padding: 18px 22px; margin-bottom: 40px; }
     .notice p { font-size: 0.83rem; color: #555; margin: 0; line-height: 1.8; }
-
     h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 400; color: #0F0F0F; margin-top: 44px; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid #E8E4DC; }
     p, li { font-size: 0.86rem; line-height: 2; color: #666; font-weight: 300; margin-bottom: 10px; }
     ul { padding-left: 18px; margin-bottom: 14px; }
     li { margin-bottom: 5px; }
     strong { color: #0F0F0F; font-weight: 400; }
     a.inline { color: #C9A96E; border-bottom: 1px solid rgba(201,169,110,0.4); }
+    .placeholder { background: #F5F2EC; border: 1px dashed #C9A96E; padding: 2px 8px; font-size: 0.8rem; color: #C9A96E; font-style: italic; }
 
     footer { background: #0F0F0F; padding: 44px 80px; display: flex; align-items: center; justify-content: space-between; }
     .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 0.95rem; font-weight: 400; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(250,250,248,0.7); }
@@ -57,63 +54,101 @@
 </head>
 <body>
 
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
   <nav>
     <a href="/" class="nav-logo">Makeup by Sherry B</a>
     <a href="/#contact" class="nav-book">Book Now</a>
   </nav>
 
-  <div class="page">
+  <div class="page" id="main-content">
 
     <p class="eyebrow">Legal</p>
-    <h1>Terms & Conditions</h1>
-    <p class="meta">MakeupbySherryb LLC &nbsp;·&nbsp; Last updated: May 25, 2026 &nbsp;·&nbsp; Effective: May 25, 2026</p>
+    <h1>Terms &amp; Conditions</h1>
+    <p class="meta">MakeupbySherryb LLC &nbsp;·&nbsp; Effective: June 1, 2026 &nbsp;·&nbsp; Last updated: June 1, 2026</p>
 
     <div class="notice">
-      <p>Please read these Terms and Conditions carefully before submitting an inquiry or booking services with <strong>MakeupbySherryb LLC</strong>. By using this website or submitting an inquiry form, you agree to be bound by these terms.</p>
+      <p>Please read these Terms and Conditions carefully before submitting an inquiry or booking services with <strong>MakeupbySherryb LLC</strong>. By using this website or submitting an inquiry, you agree to be bound by these Terms.</p>
     </div>
 
-    <h2>1. About Us</h2>
-    <p><strong>MakeupbySherryb LLC</strong> is a professional makeup artistry business based in Atlanta, Georgia, specializing in South Asian bridal and event makeup. Contact: <a href="mailto:hello@makeupbysherryb.com" class="inline">hello@makeupbysherryb.com</a></p>
+    <h2>1. Acceptance of Terms</h2>
+    <p>By accessing this website or submitting a booking inquiry, you agree to these Terms and Conditions. These Terms constitute a legally binding agreement between you and <strong>MakeupbySherryb LLC</strong> (Atlanta, Georgia). We may update these Terms at any time; continued use constitutes acceptance.</p>
 
-    <h2>2. Inquiries Are Not Confirmed Bookings</h2>
-    <p><strong>Submitting the inquiry form on this website does not constitute a confirmed booking.</strong> Your date is not held or reserved until:</p>
+    <h2>2. Inquiries vs. Confirmed Bookings</h2>
+    <p><strong>Submitting the contact or inquiry form on this website is an inquiry only — it does not constitute a confirmed booking and does not create any contractual obligation.</strong></p>
+    <p>A booking is considered confirmed only when <strong>both</strong> of the following conditions are met:</p>
     <ul>
-      <li>You have received a written confirmation from MakeupbySherryb LLC, and</li>
-      <li>A signed contract and deposit have been received (for bridal bookings)</li>
+      <li>Both parties have agreed in writing to the services, date, and terms; <strong>and</strong></li>
+      <li>A non-refundable deposit has been received and confirmed.</li>
     </ul>
-    <p>We will respond to inquiries within 48 hours on business days. Availability is subject to change until a booking is confirmed.</p>
+    <p>Until both conditions are met, your date remains available to other clients. We respond to inquiries within 48 hours on business days.</p>
 
-    <h2>3. Booking & Deposits</h2>
-    <p>Deposit amounts, payment schedules, and booking terms are outlined in your individual service contract. Please refer to your signed contract for all deposit and payment details.</p>
+    <h2>3. Booking Confirmation Process</h2>
+    <p>Upon receipt of your inquiry, we will contact you to discuss availability, services, and pricing. To secure your date, the following steps are required:</p>
+    <ul>
+      <li>Review and sign a written service agreement.</li>
+      <li>Submit the required non-refundable deposit.</li>
+    </ul>
+    <p>Only after both steps are completed will your date be officially held.</p>
 
-    <h2>4. Cancellation & Rescheduling</h2>
-    <p>All cancellations must be submitted in writing via email to <a href="mailto:hello@makeupbysherryb.com" class="inline">hello@makeupbysherryb.com</a>. Verbal cancellations are not accepted.</p>
+    <h2>4. Deposit &amp; Payment Terms</h2>
+    <ul>
+      <li><strong>Non-refundable deposit:</strong> A deposit of <span class="placeholder">[X% or $X — to be specified in your service agreement]</span> is required to secure your date. This deposit is applied toward your total balance and is non-refundable under any circumstances.</li>
+      <li><strong>Remaining balance:</strong> Due <span class="placeholder">[X days]</span> prior to the event date, as specified in your service agreement.</li>
+      <li><strong>Payment methods accepted:</strong> <span class="placeholder">[cash, Zelle, or as specified in your service agreement]</span>.</li>
+      <li>Client is responsible for all balances, including those of bridal party members who fail to pay.</li>
+    </ul>
 
-    <h2>5. Trial Sessions</h2>
-    <p>Bridal trials are a separate paid service and must be booked and paid in advance. Trial fees are non-refundable and do not apply toward the final booking balance unless otherwise stated in your service contract.</p>
+    <h2>5. Cancellation &amp; Rescheduling</h2>
+    <p>All cancellations must be submitted in writing to <a href="mailto:info@makeupbysherryb.com" class="inline">info@makeupbysherryb.com</a>. Verbal cancellations are not accepted.</p>
+    <ul>
+      <li><strong>Cancellations made more than <span class="placeholder">[X days]</span> before the event:</strong> Deposit is forfeited; no further charges apply.</li>
+      <li><strong>Cancellations within <span class="placeholder">[X days]</span> of the event:</strong> The full contracted amount may be due, as the date cannot be rebooked on short notice.</li>
+      <li><strong>Rescheduling:</strong> Subject to availability. Deposits may be applied to a new date at our sole discretion. Rescheduling must be requested in writing.</li>
+    </ul>
 
-    <h2>6. Allergies & Skin Conditions</h2>
-    <p>It is the client's responsibility to disclose any known allergies, skin conditions, or sensitivities to products prior to the service. MakeupbySherryb LLC will take reasonable precautions but cannot be held liable for reactions to products when client has not disclosed relevant medical or skin history. If you have concerns, please request a patch test in advance.</p>
+    <h2>6. Travel Fees</h2>
+    <p>Services are based in the <strong>Atlanta, Georgia metro area</strong>. The following travel policies apply:</p>
+    <ul>
+      <li>A travel fee may apply for locations outside the immediate Atlanta metro area. This fee will be disclosed in your service agreement.</li>
+      <li>Destination events (outside approximately <span class="placeholder">[X miles]</span> radius) may incur additional travel costs, including airfare, hotel accommodation, and per diem. These will be itemized and agreed upon in writing before booking confirmation.</li>
+      <li>Parking fees at the event location are the client's responsibility unless otherwise agreed.</li>
+    </ul>
 
-    <h2>7. Punctuality & Access</h2>
-    <p>Please ensure that the agreed-upon location is accessible at the scheduled start time. Delays caused by the client that exceed 15 minutes may result in a reduced service time or additional charges. MakeupbySherryb LLC will make every effort to complete services within the scheduled time regardless of minor delays.</p>
+    <h2>7. Portfolio &amp; Photo Usage</h2>
+    <p><strong>MakeupbySherryb LLC</strong> reserves the right to use photographs taken of completed work for portfolio, website, and social media (including Instagram) purposes.</p>
+    <ul>
+      <li>If you wish to restrict or prohibit photo usage, please notify us <strong>in writing before your event date</strong>. We will honor all such requests.</li>
+      <li>All photographs remain the copyright of MakeupbySherryb LLC unless a separate written agreement is made with the photographer.</li>
+      <li>Your notification to restrict usage does not affect any other term of your service agreement.</li>
+    </ul>
 
-    <h2>8. Photography & Portfolio Use</h2>
-    <p>MakeupbySherryb LLC may photograph completed work for portfolio and promotional purposes (including Instagram and the website). If you prefer your images not to be used, please notify us in writing prior to the service date. We will always respect your request.</p>
+    <h2>8. Service Fulfillment &amp; Force Majeure</h2>
+    <p>We are committed to fulfilling every booking. In the unlikely event that we are unable to fulfill a confirmed booking due to sudden illness, family emergency, or circumstances genuinely beyond our control:</p>
+    <ul>
+      <li>We will make every reasonable effort to provide a qualified substitute artist at no additional cost to the client.</li>
+      <li>If no suitable substitute is available and the service cannot be performed, a full refund of all payments made will be issued.</li>
+      <li>MakeupbySherryb LLC shall not be liable for any additional losses, costs, or damages beyond a full refund of fees paid in such circumstances.</li>
+    </ul>
 
-    <h2>9. Limitation of Liability</h2>
-    <p>MakeupbySherryb LLC's total liability for any claim arising from services rendered shall not exceed the total fees paid for those specific services. We are not liable for indirect, incidental, or consequential damages of any kind.</p>
-    <p>We are not responsible for circumstances beyond our control including but not limited to severe weather, traffic delays, venue restrictions, or other force majeure events. In such cases, we will work in good faith to reschedule or find a suitable resolution.</p>
+    <h2>9. Allergies, Skin Conditions &amp; Liability</h2>
+    <p>It is the client's responsibility to disclose any known allergies, skin conditions, or sensitivities before services begin. MakeupbySherryb LLC will take reasonable precautions but cannot be held liable for adverse reactions when the client has not disclosed relevant health information. Patch tests are available upon request.</p>
 
-    <h2>10. Governing Law</h2>
-    <p>These Terms and Conditions are governed by the laws of the <strong>State of Georgia, United States</strong>. Any disputes arising under these terms shall be subject to the exclusive jurisdiction of the courts located in Georgia.</p>
+    <h2>10. Georgia State Law &amp; Jurisdiction</h2>
+    <p>These Terms and Conditions are governed by the laws of the <strong>State of Georgia, United States</strong>. Any disputes arising under these Terms shall be subject to the exclusive jurisdiction of the courts located in <strong>Fulton County, Georgia</strong>.</p>
 
-    <h2>11. Changes to These Terms</h2>
-    <p>We may update these Terms and Conditions from time to time. The updated version will be posted on this page with a revised date. Continued use of the website or services following any update constitutes acceptance of the revised terms.</p>
+    <h2>11. Limitation of Liability</h2>
+    <p>MakeupbySherryb LLC's total liability for any claim arising from services rendered shall not exceed the <strong>total fees paid</strong> for those specific services. We are not liable for any indirect, incidental, special, or consequential damages of any kind, including but not limited to emotional distress, consequential financial loss, or damages from circumstances beyond our control.</p>
 
-    <h2>12. Contact</h2>
-    <p>For any questions regarding these terms, please contact:<br>
-    <a href="mailto:hello@makeupbysherryb.com" class="inline">hello@makeupbysherryb.com</a></p>
+    <h2>12. DMCA / Copyright</h2>
+    <p>See our <a href="/privacy" class="inline">Privacy Policy</a> for DMCA contact information and copyright infringement procedures. All portfolio content on this site is owned by MakeupbySherryb LLC or used with permission.</p>
+
+    <h2>13. Contact</h2>
+    <ul>
+      <li><strong>MakeupbySherryb LLC</strong></li>
+      <li><strong>Location:</strong> Atlanta, Georgia, United States</li>
+      <li><strong>Email:</strong> <a href="mailto:info@makeupbysherryb.com" class="inline">info@makeupbysherryb.com</a></li>
+    </ul>
 
   </div>
 
@@ -123,11 +158,20 @@
     <div class="footer-links">
       <a href="https://www.instagram.com/makeupbysherryb" target="_blank">Instagram</a>
       <a href="/#contact">Contact</a>
-      <a href="mailto:hello@makeupbysherryb.com">Email</a>
+      <a href="mailto:info@makeupbysherryb.com">Email</a>
       <a href="/privacy">Privacy Policy</a>
-      <a href="/terms">Terms & Conditions</a>
+      <a href="/terms">Terms &amp; Conditions</a>
     </div>
   </footer>
+
+  <!-- COOKIE BANNER -->
+  <div id="cookie-banner" role="dialog" aria-label="Cookie consent" aria-live="polite" style="position:fixed;bottom:0;left:0;right:0;z-index:9999;display:none;background:#0F0F0F;border-top:1px solid rgba(201,169,110,0.25);padding:1rem 52px;align-items:center;justify-content:space-between;gap:1.5rem;font-family:'Jost',sans-serif;font-size:0.72rem;color:rgba(250,250,248,0.5);flex-wrap:wrap;">
+    <p style="margin:0;flex:1;min-width:200px;">We use essential cookies to ensure this site works. By continuing, you accept our <a href="/privacy" style="color:#C9A96E;border-bottom:1px solid rgba(201,169,110,0.4);">Privacy Policy</a>.</p>
+    <button id="cookie-accept" aria-label="Accept cookies" style="background:#C9A96E;color:#0F0F0F;border:none;padding:0.6rem 1.5rem;font-family:'Jost',sans-serif;font-size:0.6rem;font-weight:400;letter-spacing:0.22em;text-transform:uppercase;cursor:pointer;white-space:nowrap;flex-shrink:0;">Accept</button>
+  </div>
+  <script>
+    (function(){var b=document.getElementById('cookie-banner');if(localStorage.getItem('cookieConsent')!=='accepted'){b.style.display='flex';}document.getElementById('cookie-accept').addEventListener('click',function(){localStorage.setItem('cookieConsent','accepted');b.style.display='none';});})();
+  </script>
 
 </body>
 </html>
