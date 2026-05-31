@@ -22,6 +22,10 @@ body {
 }
 a { text-decoration: none; color: inherit; }
 
+/* ── SKIP LINK */
+.skip-link { position: absolute; top: -40px; left: 0; background: #0F0F0F; color: #FAFAF8; padding: 8px 16px; z-index: 10000; font-size: 0.875rem; transition: top 0.2s; text-decoration: none; }
+.skip-link:focus { top: 0; }
+
 /* ── NAV ───────────────────────────────────────────────────────── */
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
@@ -456,6 +460,7 @@ footer {
 <body>
 
 <!-- NAV -->
+<a class="skip-link" href="#main-content">Skip to main content</a>
 <nav>
   <a href="/" class="nav-logo">Makeup by Sherry B</a>
   <a href="/" class="nav-back">
@@ -465,7 +470,7 @@ footer {
 </nav>
 
 <!-- PAGE HEADER -->
-<div class="page-header">
+<div class="page-header" id="main-content">
   <p class="label">Bridal Booking & Contract</p>
   <h1>Reserve your date.<br><em>Sign your contract.</em></h1>
   <p>Complete the form below to lock in your wedding date. Your signature below constitutes a binding agreement. Please read all terms carefully before signing.</p>
@@ -478,7 +483,7 @@ footer {
   <div class="deposit-callout">
     <div class="deposit-callout-icon">$100</div>
     <div class="deposit-callout-text">
-      A <strong>non-refundable $100 deposit</strong> is required to fully secure your date. After submitting this contract, please send your deposit via <strong>Zelle or Venmo to @makeupbysherryb</strong>. Your date is not held until both the signed contract and deposit are received.
+      A <strong>non-refundable $100 deposit</strong> is required to fully secure your date. After submitting this contract, please send your deposit via <strong>cash or Zelle</strong>. Your date is not held until both the signed contract and deposit are received.
     </div>
   </div>
 
@@ -532,11 +537,7 @@ footer {
           <input type="text" id="gettingReadyAddress" name="gettingReadyAddress" placeholder="Hotel, home, or getting ready venue address" required />
         </div>
         <div class="field">
-          <label for="ceremonyTime">Ceremony Start Time *</label>
-          <input type="time" id="ceremonyTime" name="ceremonyTime" required />
-        </div>
-        <div class="field">
-          <label for="receptionTime">Reception Start Time (desired finish) *</label>
+          <label for="receptionTime">Desired Finish Time *</label>
           <input type="time" id="receptionTime" name="receptionTime" required />
         </div>
       </div>
@@ -581,23 +582,15 @@ footer {
           </div>
           <div class="contract-section">
             <div class="contract-section-title">Payment</div>
-            <p>The remaining balance is due in full on or before the wedding day. Cash, Zelle, and Venmo are accepted (@makeupbysherryb). Personal checks are not accepted. Client is responsible for all balances, including those of any bridal party members who fail to provide payment.</p>
+            <p>The remaining balance is due in full on or before the wedding day. Cash and Zelle accepted. Personal checks are not accepted. Client is responsible for all balances, including those of any bridal party members who fail to provide payment.</p>
           </div>
           <div class="contract-section">
             <div class="contract-section-title">Cancellation Policy</div>
-            <p>Cancellation 90+ days before event: Deposit forfeited, no additional charges. Cancellation 31–89 days before: Deposit forfeited + 25% of remaining balance. Cancellation 15–30 days before: Deposit forfeited + 50% of remaining balance. Cancellation within 14 days: Full balance due. No refunds for party members who miss appointments.</p>
+            <p>All deposits are non-refundable. Cancellations 30+ days before the event: deposit forfeited, no additional charges. Cancellations within 30 days: full balance is due. No refunds for party members who miss their appointment.</p>
           </div>
           <div class="contract-section">
-            <div class="contract-section-title">Rescheduling</div>
-            <p>One complimentary reschedule is permitted with 60+ days notice, subject to availability. Rescheduling requests within 30 days of the event will be treated as a cancellation under the cancellation policy above.</p>
-          </div>
-          <div class="contract-section">
-            <div class="contract-section-title">Late Start</div>
-            <p>A late start fee of $25.00 per 15-minute increment may be applied if the artist is unable to begin services on time due to delays caused by the client or client's party.</p>
-          </div>
-          <div class="contract-section">
-            <div class="contract-section-title">Travel &amp; Mileage</div>
-            <p>Travel fees apply for locations outside a 20-mile radius of Atlanta, GA. Mileage is calculated at the current IRS standard rate (round trip). Parking fees, tolls, and other travel-related costs are the client's responsibility.</p>
+            <div class="contract-section-title">Travel &amp; Parking</div>
+            <p>A travel fee applies for all locations and will be communicated at the time of booking. Parking fees are the client's responsibility.</p>
           </div>
           <div class="contract-section">
             <div class="contract-section-title">Trials</div>
@@ -608,16 +601,16 @@ footer {
             <p>Client consents to Makeup by Sherry B using photographs and images of completed makeup looks for professional portfolio, social media, and marketing purposes, unless the client opts out in writing prior to the event date.</p>
           </div>
           <div class="contract-section">
-            <div class="contract-section-title">Liability</div>
-            <p>Makeup by Sherry B is not liable for allergic reactions to any products used. It is the client's responsibility to disclose all known allergies and skin sensitivities prior to the appointment. Makeup by Sherry B is not liable for failure to perform due to circumstances beyond reasonable control, including but not limited to acts of God, illness, family emergency, or other force majeure events.</p>
+            <div class="contract-section-title">Health &amp; Sensitivities</div>
+            <p>Please let Sherry know in advance of any skin sensitivities or allergies so she can tailor the products used for you. In the rare event of an unforeseen circumstance — illness, family emergency, or something outside anyone's control — we'll work together to find the best path forward.</p>
           </div>
           <div class="contract-section">
-            <div class="contract-section-title">Governing Law</div>
-            <p>This agreement shall be governed by and construed in accordance with the laws of the State of Georgia. Any disputes arising under this contract shall be resolved in Fulton County, Georgia.</p>
+            <div class="contract-section-title">Jurisdiction</div>
+            <p>This agreement is made in the State of Georgia and any questions about it will be handled here.</p>
           </div>
           <div class="contract-section">
-            <div class="contract-section-title">Entire Agreement</div>
-            <p>This contract constitutes the entire agreement between the parties and supersedes all prior discussions, representations, or agreements. Any modifications must be agreed upon in writing by both parties.</p>
+            <div class="contract-section-title">Our Agreement</div>
+            <p>This contract covers everything we've discussed and agreed to. Any changes along the way just need to be confirmed by both of us in writing — a quick text or email is fine.</p>
           </div>
         </div>
         <p class="contract-scroll-hint" id="scroll-hint">↓ Scroll to read full contract</p>
@@ -648,14 +641,14 @@ footer {
       <input type="checkbox" id="agree-check" name="agree" />
       <label for="agree-check">
         <strong>I have read and agree to all terms above.</strong><br>
-        By checking this box and signing above, I acknowledge that I have carefully read the Bridal Makeup Contract in its entirety and agree to all terms and conditions set forth herein. I understand this constitutes a legally binding agreement.
+        By signing, I confirm I've read through this agreement and I'm on board with everything — let's make your day beautiful.
       </label>
     </div>
 
     <!-- SUBMIT -->
     <div class="submit-wrap">
       <button type="submit" class="submit-btn" id="submit-btn">Submit Contract &amp; Reserve Date</button>
-      <p class="submit-note">After submitting, you will receive confirmation and instructions to complete your $100 non-refundable deposit via Zelle or Venmo to @makeupbysherryb to fully secure your date.</p>
+      <p class="submit-note">After submitting, you will receive confirmation and instructions to complete your $100 non-refundable deposit via cash or Zelle to fully secure your date.</p>
     </div>
 
     <div id="status-msg"></div>
@@ -666,8 +659,15 @@ footer {
 <!-- FOOTER -->
 <footer>
   <div class="footer-logo">Makeup by Sherry B</div>
-  <div class="footer-copy">© 2025 Makeup by Sherry B · Atlanta, Georgia</div>
+  <div class="footer-copy">© 2026 Makeup by Sherry B · Atlanta, Georgia &nbsp;·&nbsp; <a href="/privacy" style="color:#C9A96E;">Privacy Policy</a> &nbsp;·&nbsp; <a href="/terms" style="color:#C9A96E;">Terms of Service</a></div>
 </footer>
+
+<!-- Cookie Banner -->
+<div id="cookie-banner" role="dialog" aria-label="Cookie consent" aria-live="polite" style="position:fixed;bottom:0;left:0;right:0;z-index:9999;display:none;background:#0F0F0F;border-top:1px solid rgba(201,169,110,0.25);padding:1rem 52px;align-items:center;justify-content:space-between;gap:1.5rem;font-family:'Jost',sans-serif;font-size:0.72rem;color:rgba(250,250,248,0.5);flex-wrap:wrap;">
+  <p style="margin:0;flex:1;min-width:200px;">We use essential cookies to ensure this site works. By continuing, you accept our <a href="/privacy" style="color:#C9A96E;border-bottom:1px solid rgba(201,169,110,0.4);">Privacy Policy</a>.</p>
+  <button id="cookie-accept" aria-label="Accept cookies" style="background:#C9A96E;color:#0F0F0F;border:none;padding:0.6rem 1.5rem;font-family:'Jost',sans-serif;font-size:0.6rem;font-weight:400;letter-spacing:0.22em;text-transform:uppercase;cursor:pointer;white-space:nowrap;flex-shrink:0;">Accept</button>
+</div>
+<script>(function(){var b=document.getElementById('cookie-banner');if(localStorage.getItem('cookieConsent')!=='accepted'){b.style.display='flex';}document.getElementById('cookie-accept').addEventListener('click',function(){localStorage.setItem('cookieConsent','accepted');b.style.display='none';});})();</script>
 
 <script>
 /* ── DATE AUTOFILL ─────────────────────────────────────────────── */
@@ -768,7 +768,7 @@ document.getElementById('booking-form').addEventListener('submit', async functio
   statusMsg.style.display = 'none';
 
   // Validate required fields
-  const required = ['brideName','mailingAddress','phone','email','weddingDate','venue','venueAddress','gettingReadyAddress','ceremonyTime','receptionTime','recipients','services','totalDue'];
+  const required = ['brideName','mailingAddress','phone','email','weddingDate','venue','venueAddress','gettingReadyAddress','receptionTime','recipients','services','totalDue'];
   let missing = [];
   required.forEach(id => {
     const el = document.getElementById(id);
@@ -809,7 +809,6 @@ document.getElementById('booking-form').addEventListener('submit', async functio
   const venue           = v('venue');
   const venueAddress    = v('venueAddress');
   const gettingReadyAddress = v('gettingReadyAddress');
-  const ceremonyTime    = v('ceremonyTime');
   const receptionTime   = v('receptionTime');
   const recipients      = v('recipients');
   const services        = v('services');
@@ -918,14 +917,12 @@ document.getElementById('booking-form').addEventListener('submit', async functio
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(7);
     doc.setTextColor(150, 150, 150);
-    doc.text('CEREMONY START TIME', margin, y);
-    doc.text('RECEPTION START TIME (DESIRED FINISH)', margin + contentW/2 + 10, y);
+    doc.text('DESIRED FINISH TIME', margin, y);
     y += 12;
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(10);
     doc.setTextColor(15, 15, 15);
-    doc.text(ceremonyTime, margin, y);
-    doc.text(receptionTime, margin + contentW/2 + 10, y);
+    doc.text(receptionTime, margin, y);
     y += 24;
 
     y += 10;
@@ -959,15 +956,14 @@ document.getElementById('booking-form').addEventListener('submit', async functio
 
     const terms = [
       ['BOOKING & DEPOSIT', 'A non-refundable deposit of $100.00 is required to secure your wedding date. This deposit will be applied toward your total balance. Your date is NOT held until the deposit is received and this contract is signed.'],
-      ['PAYMENT', 'The remaining balance is due in full on or before the wedding day. Cash, Zelle, and Venmo are accepted (@makeupbysherryb). Personal checks are not accepted. Client is responsible for all balances, including those of any bridal party members who fail to provide payment.'],
-      ['CANCELLATION POLICY', 'Cancellation 90+ days before: Deposit forfeited, no additional charges. Cancellation 31–89 days before: Deposit forfeited + 25% of remaining balance. Cancellation 15–30 days before: Deposit forfeited + 50% of remaining balance. Cancellation within 14 days: Full balance due. No refunds for party members who miss appointments.'],
-      ['RESCHEDULING', 'One complimentary reschedule with 60+ days notice, subject to availability. Rescheduling within 30 days treated as cancellation.'],
-      ['LATE START', 'A late start fee of $25 per 15 minutes may be applied if artist cannot begin on time due to client delay.'],
-      ['TRAVEL & MILEAGE', 'Travel fees apply outside 20-mile radius of Atlanta, GA. Mileage at current IRS standard rate (round trip). Parking fees are client\'s responsibility.'],
+      ['PAYMENT', 'The remaining balance is due in full on or before the wedding day. Cash and Zelle accepted. Personal checks are not accepted. Client is responsible for all balances, including those of any bridal party members who fail to provide payment.'],
+      ['CANCELLATION POLICY', 'All deposits are non-refundable. Cancellations 30+ days before the event: deposit forfeited, no additional charges. Cancellations within 30 days: full balance is due. No refunds for party members who miss their appointment.'],
+
+      ['TRAVEL & PARKING', 'A travel fee applies for all locations and will be communicated at the time of booking. Parking fees are the client\'s responsibility.'],
       ['TRIALS', 'Bridal trials are separate and not included unless stated in writing. Non-refundable.'],
       ['PHOTO RELEASE', 'Client consents to Makeup by Sherry B using images of completed looks for portfolio, social media, and marketing purposes, unless client opts out in writing prior to event.'],
-      ['LIABILITY', 'Not liable for allergic reactions. Client must disclose allergies prior to appointment. Not liable for force majeure events.'],
-      ['GOVERNING LAW', 'State of Georgia. Disputes in Fulton County, Georgia.']
+      ['HEALTH & SENSITIVITIES', 'Please inform Sherry of any skin sensitivities or allergies in advance. In the event of an unforeseen circumstance, we will work together to find the best resolution.'],
+      ['JURISDICTION', 'This agreement is made in the State of Georgia.']
     ];
 
     terms.forEach(([title, text]) => {
@@ -1032,7 +1028,7 @@ document.getElementById('booking-form').addEventListener('submit', async functio
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(8.5);
     doc.setTextColor(85, 85, 85);
-    const confirmLines = doc.splitTextToSize('By signing above, client confirms they have read and understood all terms of this Bridal Makeup Contract and agrees to be bound by its conditions. This electronic signature is legally binding.', contentW - 20);
+    const confirmLines = doc.splitTextToSize('By signing, client confirms they have read and agreed to the terms of this contract.', contentW - 20);
     doc.text(confirmLines, margin + 10, y + 15);
 
     const pdfBase64 = doc.output('datauristring').split(',')[1];
@@ -1041,7 +1037,7 @@ document.getElementById('booking-form').addEventListener('submit', async functio
 
     const payload = {
       pdfBase64, brideName, email, weddingDate, venue,
-      gettingReadyAddress, ceremonyTime, receptionTime,
+      gettingReadyAddress, receptionTime,
       recipients, services, totalDue, signatureDate
     };
 
@@ -1055,7 +1051,7 @@ document.getElementById('booking-form').addEventListener('submit', async functio
 
     if (data.success) {
       statusMsg.className = 'success';
-      statusMsg.innerHTML = '<strong>Contract submitted successfully! 🎉</strong>Your contract has been submitted! Please complete your $100 deposit via Zelle or Venmo to @makeupbysherryb to secure your date. You\'ll receive a confirmation email shortly. We look forward to making your wedding day unforgettable!';
+      statusMsg.innerHTML = '<strong>Contract submitted successfully! 🎉</strong>Your contract has been submitted! Please complete your $100 deposit via cash or Zelle to secure your date. You\'ll receive a confirmation email shortly. We look forward to making your wedding day unforgettable!';
       statusMsg.style.display = 'block';
       btn.textContent = 'Submitted ✓';
       btn.style.background = '#C9A96E';
