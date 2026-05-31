@@ -24,6 +24,10 @@ body {
 a { text-decoration: none; color: inherit; }
 img { display: block; width: 100%; height: 100%; object-fit: cover; }
 
+/* ── SKIP LINK ─────────────────────────────────────────────────── */
+.skip-link { position: absolute; top: -40px; left: 0; background: #0F0F0F; color: #FAFAF8; padding: 8px 16px; z-index: 10000; font-size: 0.875rem; transition: top 0.2s; text-decoration: none; }
+.skip-link:focus { top: 0; }
+
 /* ── CUSTOM CURSOR ─────────────────────────────────────────────── */
 .cursor-dot {
   position: fixed;
@@ -957,6 +961,8 @@ footer {
 </head>
 <body>
 
+<a class="skip-link" href="#main-content">Skip to main content</a>
+
 <!-- CUSTOM CURSOR -->
 <div class="cursor-dot" id="cursorDot"></div>
 <div class="cursor-ring" id="cursorRing"></div>
@@ -986,7 +992,7 @@ footer {
 </nav>
 
 <!-- HERO -->
-<section class="hero">
+<section class="hero" id="main-content">
   <div class="hero-img">
     <img id="hero-img"
       src="/img/sherry_04.jpg"
@@ -1469,5 +1475,15 @@ document.getElementById('contact-form').addEventListener('submit', async functio
   });
 })();
 </script>
+
+<!-- COOKIE BANNER -->
+<div id="cookie-banner" role="dialog" aria-label="Cookie consent" aria-live="polite" style="position:fixed;bottom:0;left:0;right:0;z-index:9999;display:none;background:#0F0F0F;border-top:1px solid rgba(201,169,110,0.25);padding:1rem 52px;align-items:center;justify-content:space-between;gap:1.5rem;font-family:'Jost',sans-serif;font-size:0.72rem;color:rgba(250,250,248,0.5);flex-wrap:wrap;">
+  <p style="margin:0;flex:1;min-width:200px;">We use essential cookies to ensure this site works. By continuing, you accept our <a href="/privacy" style="color:#C9A96E;border-bottom:1px solid rgba(201,169,110,0.4);">Privacy Policy</a>.</p>
+  <button id="cookie-accept" aria-label="Accept cookies" style="background:#C9A96E;color:#0F0F0F;border:none;padding:0.6rem 1.5rem;font-family:'Jost',sans-serif;font-size:0.6rem;font-weight:400;letter-spacing:0.22em;text-transform:uppercase;cursor:pointer;white-space:nowrap;flex-shrink:0;">Accept</button>
+</div>
+<script>
+  (function(){var b=document.getElementById('cookie-banner');if(localStorage.getItem('cookieConsent')!=='accepted'){b.style.display='flex';}document.getElementById('cookie-accept').addEventListener('click',function(){localStorage.setItem('cookieConsent','accepted');b.style.display='none';});})();
+</script>
+
 </body>
 </html>
