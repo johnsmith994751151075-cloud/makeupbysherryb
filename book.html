@@ -483,7 +483,7 @@ footer {
   <div class="deposit-callout">
     <div class="deposit-callout-icon">$100</div>
     <div class="deposit-callout-text">
-      A <strong>non-refundable $100 deposit</strong> is required to fully secure your date. After submitting this contract, please send your deposit via <strong>cash or Zelle</strong>. Your date is not held until both the signed contract and deposit are received.
+      A <strong>non-refundable $100 deposit</strong> is required to fully secure your date. After submitting this contract, please send your deposit via <strong>electronic transfer</strong>. Your date is not held until both the signed contract and deposit are received.
     </div>
   </div>
 
@@ -582,7 +582,7 @@ footer {
           </div>
           <div class="contract-section">
             <div class="contract-section-title">Payment</div>
-            <p>The remaining balance is due in full on or before the wedding day. Cash and Zelle accepted. Personal checks are not accepted. Client is responsible for all balances, including those of any bridal party members who fail to provide payment.</p>
+            <p>The remaining balance is due in full on or before the wedding day. Electronic transfer accepted. Personal checks are not accepted. Client is responsible for all balances, including those of any bridal party members who fail to provide payment.</p>
           </div>
           <div class="contract-section">
             <div class="contract-section-title">Cancellation Policy</div>
@@ -648,7 +648,7 @@ footer {
     <!-- SUBMIT -->
     <div class="submit-wrap">
       <button type="submit" class="submit-btn" id="submit-btn">Submit Contract &amp; Reserve Date</button>
-      <p class="submit-note">After submitting, you will receive confirmation and instructions to complete your $100 non-refundable deposit via cash or Zelle to fully secure your date.</p>
+      <p class="submit-note">After submitting, you will receive confirmation and instructions to complete your $100 non-refundable deposit via electronic transfer to fully secure your date.</p>
     </div>
 
     <div id="status-msg"></div>
@@ -956,7 +956,7 @@ document.getElementById('booking-form').addEventListener('submit', async functio
 
     const terms = [
       ['BOOKING & DEPOSIT', 'A non-refundable deposit of $100.00 is required to secure your wedding date. This deposit will be applied toward your total balance. Your date is NOT held until the deposit is received and this contract is signed.'],
-      ['PAYMENT', 'The remaining balance is due in full on or before the wedding day. Cash and Zelle accepted. Personal checks are not accepted. Client is responsible for all balances, including those of any bridal party members who fail to provide payment.'],
+      ['PAYMENT', 'The remaining balance is due in full on or before the wedding day. Electronic transfer accepted. Personal checks are not accepted. Client is responsible for all balances, including those of any bridal party members who fail to provide payment.'],
       ['CANCELLATION POLICY', 'All deposits are non-refundable. Cancellations 30+ days before the event: deposit forfeited, no additional charges. Cancellations within 30 days: full balance is due. No refunds for party members who miss their appointment.'],
 
       ['TRAVEL & PARKING', 'A travel fee applies for all locations and will be communicated at the time of booking. Parking fees are the client\'s responsibility.'],
@@ -1051,7 +1051,7 @@ document.getElementById('booking-form').addEventListener('submit', async functio
 
     if (data.success) {
       statusMsg.className = 'success';
-      statusMsg.innerHTML = '<strong>Contract submitted successfully! 🎉</strong>Your contract has been submitted! Please complete your $100 deposit via cash or Zelle to secure your date. You\'ll receive a confirmation email shortly. We look forward to making your wedding day unforgettable!';
+      statusMsg.innerHTML = '<strong>Contract submitted successfully! 🎉</strong>Your contract has been submitted! Please complete your $100 deposit via electronic transfer to secure your date. You\'ll receive a confirmation email shortly. We look forward to making your wedding day unforgettable!';
       statusMsg.style.display = 'block';
       btn.textContent = 'Submitted ✓';
       btn.style.background = '#C9A96E';
