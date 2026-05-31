@@ -27,6 +27,8 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 /* ── SKIP LINK ─────────────────────────────────────────────────── */
 .skip-link { position: absolute; top: -40px; left: 0; background: #0F0F0F; color: #FAFAF8; padding: 8px 16px; z-index: 10000; font-size: 0.875rem; transition: top 0.2s; text-decoration: none; }
 .skip-link:focus { top: 0; }
+    :focus-visible { outline: 2px solid #C9A96E; outline-offset: 3px; }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; } html { scroll-behavior: auto; } }
 
 /* ── CUSTOM CURSOR ─────────────────────────────────────────────── */
 .cursor-dot {
@@ -980,7 +982,7 @@ footer {
 </div>
 
 <!-- NAV -->
-<nav id="nav">
+<nav id="nav" aria-label="Main navigation">
   <a href="#" class="nav-logo">Makeup by Sherry B</a>
   <ul class="nav-center">
     <li><a href="#about">About</a></li>
@@ -1322,6 +1324,7 @@ footer {
     <a href="mailto:hello@makeupbysherryb.com">Email</a>
     <a href="/privacy">Privacy Policy</a>
     <a href="/terms">Terms &amp; Conditions</a>
+    <a href="/accessibility">Accessibility</a>
   </div>
 </footer>
 
